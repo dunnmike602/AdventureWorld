@@ -1,0 +1,771 @@
+﻿<Window x:Class="DiagramDesigner.ConversationDesigner.ConversationDesigner" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:symbols="clr-namespace:DiagramDesigner.Symbols"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:controls="clr-namespace:DiagramDesigner.Controls"
+        Height="800" Width="1400" Icon="/Resources/Images/Conversation.png" Closing="ConversationDesignerOnClosing">
+    <Window.Resources>
+        <Storyboard x:Key="WaitStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="WaitSpinner"
+                Storyboard.TargetProperty="(TextBlock.RenderTransform).(RotateTransform.Angle)"
+                From="0"
+                To="360"
+                Duration="0:0:2"
+                RepeatBehavior="Forever" />
+        </Storyboard>
+        <ContextMenu x:Key="DesignerCanvasContextMenu">
+            <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Images/Paste.png" Width="16"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Select All" Command="{Binding }"/>
+        </ContextMenu>
+    </Window.Resources>
+
+    <Grid Margin="10" x:Name="RootWindow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="142"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="4">
+            <StackPanel  Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0 10 0 0">
+                <Button ToolTip="Save the conversation. This also cause the main project to be saved as well."  Content="Save"
+                        Style="{StaticResource AppButtonStyle}" Command="{Binding SaveConversationCommand}"  Width="100">
+                </Button>
+                <Button Padding="3" ToolTip="Close the Conversation Designer"  Width="100" Content="Close"
+                        Style="{StaticResource AppButtonStyle}" Click="Cancel" Margin="10 0 0 0">
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Menu Grid.Row="0" Background="{StaticResource ToolbarBrush}" Name="MainMenu" Padding="0 5 0 5">
+            <MenuItem Header="E_dit">
+                <MenuItem Header="Cut"  Command="{x:Static ApplicationCommands.Cut}" CommandTarget="{Binding ElementName=Designer}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/Cut.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Paste"  Command="{x:Static ApplicationCommands.Paste}" CommandTarget="{Binding ElementName=Designer}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/PasteBig.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Copy"  Command="{x:Static ApplicationCommands.Copy}" CommandTarget="{Binding ElementName=Designer}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/Copy.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Delete"  Command="{x:Static ApplicationCommands.Delete}" CommandTarget="{Binding ElementName=Designer}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/Images/Delete.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Format">
+                <MenuItem Header="_Alignment">
+                    <MenuItem Header="Align Left" ToolTip="Align objects at the left" Command="{x:Static symbols:DesignerCanvas.AlignLeft}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/AlignObjectsLeft.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Centers Horizontally" ToolTip="Align Objects at centres horizontally" Command="{x:Static symbols:DesignerCanvas.AlignHorizontalCenters}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/AlignObjectsCenteredHorizontal.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Right" ToolTip="Align Objects Right" Command="{x:Static symbols:DesignerCanvas.AlignRight}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/AlignObjectsRight.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Top" ToolTip="Align objects at the top" Command="{x:Static symbols:DesignerCanvas.AlignTop}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/AlignObjectsTop.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Centers Vertically" ToolTip="Align objects at the centres vertically" Command="{x:Static symbols:DesignerCanvas.AlignTop}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/AlignObjectsCenteredVertical.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Bottom" ToolTip="Align objects at the top" Command="{x:Static symbols:DesignerCanvas.AlignBottom}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/AlignObjectsBottom.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Distr_ibute &amp; Size">
+                    <MenuItem Header="Distribute Horizontally" ToolTip="Distribute shapes Horizontally" Command="{x:Static symbols:DesignerCanvas.DistributeHorizontal}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/DistributeObjectsHorizontal.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Distribute Vertically" ToolTip="Distribute shapes Vertically" Command="{x:Static symbols:DesignerCanvas.DistributeVertical}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/DistributeObjectsVertical.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Same Widths" ToolTip="Make Objects Same Widths" Command="{x:Static symbols:DesignerCanvas.SameWidth}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="ArrowsH"  Width="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Same Heights" ToolTip="Make Objects Same Heights" Command="{x:Static symbols:DesignerCanvas.SameHeight}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="ArrowsV"  Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Same Size" ToolTip="Make Objects Same Size" Command="{x:Static symbols:DesignerCanvas.SameSize}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="ArrowsAlt"  Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Arran_ge">
+                    <MenuItem Header="Group" ToolTip="Group shapes together" Command="{x:Static symbols:DesignerCanvas.Group}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/Group.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Ungroup" ToolTip="Ungroup shapes" Command="{x:Static symbols:DesignerCanvas.Ungroup}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/Ungroup.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Bring Forward" ToolTip="Bring shapes forward" Command="{x:Static symbols:DesignerCanvas.BringForward}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/BringForward.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Send Backward" ToolTip="Send shapes backward" Command="{x:Static symbols:DesignerCanvas.SendBackward}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/SendBackward.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Bring To Front" ToolTip="Bring Shapes to Front" Command="{x:Static symbols:DesignerCanvas.BringToFront}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/BringToFront.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Send to Back" ToolTip="Send Shapes to Back" Command="{x:Static symbols:DesignerCanvas.SendToBack}" CommandTarget="{Binding ElementName=Designer}">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/Images/SendToBack.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+
+        <ContentControl Grid.Row="1">
+            <ToolBar Margin="0,5,0,0">
+
+                <!--Edit-->
+                <GroupBox Header="Edit" Style="{StaticResource ToolbarGroup}" Margin="3">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="0,2,0,2">
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left"  Name="CmdCut"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static ApplicationCommands.Cut}"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/Cut.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Cut" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdCopy" 
+                            Command="{x:Static ApplicationCommands.Copy}"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/Copy.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Copy" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdPaste" 
+                                    Command="{x:Static ApplicationCommands.Paste}"
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/Paste.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Paste" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,2,0,2">
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left" Name="CmdSelectAll"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.SelectAll}"
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome Icon="HandPointerOutline"  Width="14"  ToolTip="Select all objects in current designer"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Select All" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left" Name="CmdDelete"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static ApplicationCommands.Delete}"
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/Delete.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Delete" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Tool Box" Style="{StaticResource ToolbarGroup}"  Margin="0,3" HorizontalContentAlignment="Center"
+                          Content="{StaticResource ConversationStencils}"  />
+
+                <GroupBox Header="Tools" Style="{StaticResource ToolbarGroup}" Margin="0,3">
+
+                    <StackPanel Orientation="Vertical" Margin="0,2,0,2">
+                        <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"  ToolTip="Check the current game model"
+                            Style="{StaticResource ToolBarButtonBaseStyle}" x:Name="CheckModelButton"
+                            Command="{Binding CheckCommand}">
+                            <Button.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="/Resources/Images/check.png" Width="16"/>
+                                    <TextBlock Margin="3,0,3,0" Text="Validate Model" VerticalAlignment="Center"  Grid.Column="1"/>
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+
+                    </StackPanel>
+                </GroupBox>
+                <!--Alignment-->
+                <GroupBox Header="Alignment" Style="{StaticResource ToolbarGroup}" Margin="3">
+
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignLeft}" Name="CmdAlignHorizontalCenters" 
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                    <Button.Content>
+                                        <Image Source="/Resources/Images/AlignObjectsLeft.png" Width="16" ToolTip="Align objects at the left"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdAlignObjectsCenteredHorizontal" ToolTip="Align Objects at centres horizontally"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignHorizontalCenters}"
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                    <Button.Content>
+                                        <Image Source="/Resources/Images/AlignObjectsCenteredHorizontal.png"  Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdAlignObjectsRight"  ToolTip="Align Objects Right"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignRight}"
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                    <Button.Content>
+                                        <Image Source="/Resources/Images/AlignObjectsRight.png" Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignTop}"
+                                    Name="CmdAlignObjectsTop"
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                    <Button.Content>
+                                        <Image Source="/Resources/Images/AlignObjectsTop.png" Width="16" ToolTip="Align objects at the top"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignVerticalCenters}"
+                                    CommandTarget="{Binding ElementName=Designer}"  Name="CmdAlignObjectsCenteredVertical">
+                                    <Button.Content>
+                                        <Image Source="/Resources/Images/AlignObjectsCenteredVertical.png" ToolTip="Align objects at the centres vertically" Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignBottom}"
+                                    Name="CmdAlignObjectsBottom"
+                                    CommandTarget="{Binding ElementName=Designer}">
+                                    <Button.Content>
+                                        <Image Source="/Resources/Images/AlignObjectsBottom.png" ToolTip="Align objects at the bottom" Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Size -->
+                <GroupBox Header="Distribute &amp; Size" Style="{StaticResource ToolbarGroup}" Margin="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5,0,0,0">
+                            <Button Margin="3" Padding="5" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Name="CmdDistributeHorizontal"
+                            Command="{x:Static symbols:DesignerCanvas.DistributeHorizontal}" ToolTip="Distribute shapes Horizontally"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/DistributeObjectsHorizontal.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Horizontal" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.DistributeVertical}"
+                            Name="CmdDistributeVertical"
+                            CommandTarget="{Binding ElementName=Designer}" ToolTip="Distribute shapes Vertically.">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/DistributeObjectsVertical.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Vertical" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5 0 0 0">
+                            <Button Margin="2" Padding="0" Style="{StaticResource ToolBarButtonBaseStyle}"  Name="CmdMakeSameWidths"
+                                Command="{x:Static symbols:DesignerCanvas.SameWidth}"
+                                CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <fa:ImageAwesome Icon="ArrowsH"  Width="18" Height="18" ToolTip="Make Objects Same Widths"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="2" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdMakeSameHeight"
+                                Command="{x:Static symbols:DesignerCanvas.SameHeight}"
+                                CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <fa:ImageAwesome Icon="ArrowsV"  Width="18" Height="18" ToolTip="Make Objects Same Heights"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Padding="2" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdMakeSameSize"
+                                Command="{x:Static symbols:DesignerCanvas.SameSize}"
+                                CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <fa:ImageAwesome Icon="ArrowsAlt"  Width="18" Height="18" ToolTip="Make Objects Same Size"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Arrange" Style="{StaticResource ToolbarGroup}" Margin="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel >
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.Group}"
+                            Name="CmdGroup"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/Group.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Group" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.Ungroup}"
+                            Name="CmdUnGroup"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/Ungroup.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Ungroup" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="7,0,0,0">
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.BringForward}"
+                            Name="CmdForward"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/BringForward.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Forward" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.BringToFront}"
+                            Name="CmdToFront"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/BringToFront.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="To Front" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <Line Stroke="{StaticResource ToolbarBorderBrush}" 
+                      StrokeThickness="1" X1="0" Y1="0" X2="0" Y2="20" 
+                      Stretch="Fill" HorizontalAlignment="Left"
+                      Grid.Column="1" Margin="3,0,0,0"/>
+                        <StackPanel Grid.Column="2">
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Name="CmdBackward"        
+                            Command="{x:Static symbols:DesignerCanvas.SendBackward}"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/SendBackward.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Backward" VerticalAlignment="Center"  Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.SendToBack}"
+                            Name="CmdToBack"
+                            CommandTarget="{Binding ElementName=Designer}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Resources/Images/SendToBack.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="To Back" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </ToolBar>
+        </ContentControl>
+
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="2.8*"/>
+            </Grid.ColumnDefinitions>
+
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"  Background="Transparent"/>
+
+            <Grid Grid.Column="0" Margin="0,0,5,1" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+                <syncfusion:TabControlExt  AllowDrop="False" x:Name="ConversationObjectExplorer" Margin="0 0 0 0" VerticalAlignment="Stretch" 
+                                           HorizontalAlignment="Stretch" IsNewButtonEnabled="False"
+                                           EnableLabelEdit="False" CloseButtonType="Hide" Background="Transparent">
+                    <syncfusion:TabItemExt Header="Property Explorer">
+                        <xctk:PropertyGrid  x:Name="ObjectProperties"  ShowSummary="True" ShowSortOptions ="False" ShowAdvancedOptions="False" ShowTitle="True"
+                                    ShowSearchBox="True" IsCategorized="True" ShowPreview="False"  BorderBrush="Black" 
+                                    AutoGenerateProperties="true" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FilterWatermark="">
+
+                        </xctk:PropertyGrid>
+                    </syncfusion:TabItemExt>
+                    <syncfusion:TabItemExt Header="Errors">
+                        <DataGrid x:Name="ErrorList" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" BorderBrush="Blue" HorizontalContentAlignment="Left"
+                        CanUserSortColumns="True"   RowHeaderWidth="0"  CanUserReorderColumns="False" CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"
+                          ItemsSource="{Binding ConversationTree.ValidationItems,Mode=OneWay}"  VerticalAlignment="Stretch"  SelectionMode="Single" CanUserResizeColumns="False">
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseLeftButtonUp" Handler="ValidationGridClick"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="30" IsReadOnly="True" CanUserSort="True" SortMemberPath="Severity" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Width="18" ToolTip="{Binding Severity}" Source="{Binding SeverityImage,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="240" IsReadOnly="True"  CanUserSort="True" SortMemberPath="Description" Header="Description">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock ToolTip="{Binding Description}" Text="{Binding Description,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" IsReadOnly="True"  CanUserSort="True" SortMemberPath="ValidationCategory" Header="Type">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock ToolTip="{Binding ValidationCategory}" Text="{Binding ValidationCategory,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" IsReadOnly="True"  CanUserSort="True" SortMemberPath="Name" Header="Name">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock ToolTip="{Binding Name}" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </syncfusion:TabItemExt>
+                </syncfusion:TabControlExt>
+            </Grid>
+            <syncfusion:TabControlExt Grid.Column="2" x:Name="MainScreenTabs" Margin="0 0 0 0" HorizontalAlignment="Stretch"  Background="Transparent"
+                       VerticalAlignment="Stretch" EnableLabelEdit="False" IsNewButtonEnabled="False"  CloseButtonType="Hide" SelectedIndexChanged="MainScreenTabsOnSelectedIndexChanged" >
+                <syncfusion:TabItemExt Header="Conversation Designer" BorderBrush="Transparent">
+                    <Grid Margin="0,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.75*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"  Background="Transparent"/>
+                        <!-- Designer -->
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" x:Name="ScrollConversations"  BorderBrush="Transparent" VerticalScrollBarVisibility="Auto">
+                                <symbols:DesignerCanvas Focusable="true" x:Name="ConDesigner" CanHaveConnectors="true"  AllowDrop="True"
+                                                            Background="{StaticResource SnappingGridBrush_Ponits}" Margin="10" FocusVisualStyle="{x:Null}"
+                            ContextMenu="{StaticResource DesignerCanvasContextMenu}">
+                                    <symbols:DesignerCanvas.LayoutTransform>
+                                        <ScaleTransform  ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
+                                    </symbols:DesignerCanvas.LayoutTransform>
+                                </symbols:DesignerCanvas>
+                            </ScrollViewer>
+
+                            <Grid Width="{Binding ActualWidth, ElementName=MapGroup}"   Grid.Row="1"  Background="AliceBlue">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20 5 5 5" HorizontalAlignment="Right">
+                                    <Button Padding="3" ToolTip="Arrange all the objects to fill available space." 
+                                            Style="{StaticResource ToolBarButtonBaseStyleAlt}" Click="ArrangeAllObjectsClick" Margin="0 0 5 0">
+                                        <Button.Content>
+                                            <fa:ImageAwesome Icon="Th" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5" >
+                                    <RepeatButton Cursor="Hand"  HorizontalAlignment="Left" ToolTip="Zoom In" Background="Transparent" VerticalAlignment="Center" ClickMode="Press" Click="ZoomOutClick">
+                                        <fa:ImageAwesome Icon="SearchPlus" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                    </RepeatButton>
+                                    <RepeatButton Cursor="Hand" Margin="5 0 0 0" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Left" ToolTip="Zoom Out" Click="ZoomInClick">
+                                        <fa:ImageAwesome Icon="SearchMinus" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                    </RepeatButton>
+                                    <Button Cursor="Hand"  x:Name="CmdZoomRoomsDefault" Style="{StaticResource AppButtonStyle}" VerticalAlignment="Center" Margin="5 0 0 0"  Width="50" MinWidth="0" Content="100%"  Height="20" Click="CmdZoomDefaultClick" />
+                                    <Button Cursor="Hand"  x:Name="CmdZoomToFit" Style="{StaticResource AppButtonStyle}" VerticalAlignment="Center" Margin="5 0 5 0"  Width="50" MinWidth="0" Content="Fit"  Height="20" Click="ZoomToFit" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt Header="Script Explorer">
+                    <controls:ScriptWindow x:Name="ScriptExplorer" SaveCommand="{Binding ElementName=RootWindow, Path=DataContext.SaveCurrentProjectCommand}"  
+                        UpdateContract="ConversationScriptContract"/>
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt Header="Conversation Explorer">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"  Background="Black" Foreground="White" FontFamily="Courier New" Text="{Binding ConversationText}" TextWrapping="Wrap"></TextBlock>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <syncfusion:ComboBoxAdv  HorizontalAlignment="Left" Width="175" Height="30" VerticalAlignment="Top" Margin="5"
+                                                    Background="Transparent"  ItemsSource="{Binding ConversationTree.Conversations}" SelectedItem="{Binding SelectedConversation}">
+                                <syncfusion:ComboBoxAdv.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Text="{Binding BaseName}" ></TextBlock>
+                                    </DataTemplate>
+                                </syncfusion:ComboBoxAdv.ItemTemplate>
+                            </syncfusion:ComboBoxAdv>
+                            <Button  ToolTip="Runs the conversation from the start."  Width="100" Content="Run" Height="30" VerticalAlignment="Top" Margin="5"
+                            Style="{StaticResource AppButtonStyle}" Command="{Binding RunConversationCommand}">
+                            </Button>
+                            <ItemsControl ItemsSource="{Binding CurrentResponses}" Name="ResponseList"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button  ToolTip="Click here to select this reponse." MinWidth="50"  Width="50" Content="{Binding}" Height="25" VerticalAlignment="Top" Margin="5"
+                                                Style="{StaticResource AppButtonStyle}"  CommandParameter="{Binding}"
+                                                Command="{Binding ElementName=ResponseList, Path=DataContext.RunSelectResponseCommand}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" 
+                                                   HorizontalAlignment="Stretch"
+                                                   VerticalAlignment="Stretch">
+                                        </WrapPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Grid>
+                </syncfusion:TabItemExt>
+            </syncfusion:TabControlExt>
+        </Grid>
+
+        <syncfusion:RibbonStatusBar Grid.Row="3" Padding="0 10 10 0">
+            <StackPanel Orientation="Horizontal"  VerticalAlignment="Stretch" Margin="10 0 0 0">
+                <TextBlock Margin="0 0 5 0" FontWeight="Bold" VerticalAlignment="Center">STATUS:</TextBlock>
+                <TextBlock Margin="0 0 10 0" x:Name="Status" VerticalAlignment="Center"></TextBlock>
+                <fa:ImageAwesome Icon="Spinner" Visibility="Collapsed" Margin="0 0 10 0" x:Name="WaitSpinner" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" RenderTransformOrigin="0.5, 0.5">
+                    <fa:ImageAwesome.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </fa:ImageAwesome.RenderTransform>
+                </fa:ImageAwesome>
+            </StackPanel>
+        </syncfusion:RibbonStatusBar>
+    </Grid>
+</Window>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

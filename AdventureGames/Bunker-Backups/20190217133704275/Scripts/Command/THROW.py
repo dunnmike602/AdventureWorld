@@ -1,0 +1,128 @@
+# The THROW command allows the player to throw objects around
+from System.Collections.Generic import List
+from System import String
+
+import clr
+clr.AddReference("System.Core")
+import System
+clr.ImportExtensions(System.Linq)
+
+def ThrowItemThroughExit(objectToThrow, directionToThrow):
+
+	# Check is the item is available to throw and run its script if so
+	itemIsAvailable = AWApi.IsItemAvailableToExamine(objectToThrow)
+	
+	if not itemIsAvailable:
+		ConsoleApi.FormattedWrite("{0}: You can't see that here.".format(objectToThrow.Name))
+		return False
+		
+	elif not objectToThrow.IsHeld:
+		ConsoleApi.FormattedWrite("{0}: You are not holding that.".format(objectToThrow.Name))
+		return False
+				
+	if not directionToThrow.upper() in MoveValueLimits:
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(directionToThrow.upper()))
+		return False
+			
+	exit = GetExitFromDirection(CurrentLocation, directionToThrow)
+
+	# We can't throw this way
+	if exit == None:
+		ConsoleApi.FormattedWrite("I can't throw the {0} that way.".format(objectToThrow.Name))
+		return False
+		
+	# We next check if the exit is locked (and not visible of course)
+	if not CheckExitLocked(exit):
+		return False
+		
+	# Finally we can perform the operation
+	AWApi.ThrowToRoom(objectToThrow, exit.RoomName)
+
+	# Give the chance for customisations to run and bail out of default actions if required.
+	preProcessResult = Preprocess(exit)
+			
+	if not preProcessResult:
+		return False
+		
+	ConsoleApi.FormattedWrite("You throw the {0} {1}.".format(objectToThrow.Name.upper(), directionToThrow.lower()))
+	
+	return True
+
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+	
+	# An allowable parameter is a direction so we must remove this from the list of objects before checking them
+	objects = AWApi.GetObjectsFromNames(adventureCommand.GetParametersWithoutStopWords(List[String](MoveValueLimits)), 70.0, True)
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	# Check for directions
+	throwDirection = None
+	
+	if adventureCommand.GetParametersWithoutStopWords().Count > 1:
+		# Only last word can be a direction
+		directionList = List[String]()
+		potentialThrowDirection = adventureCommand.GetParametersWithoutStopWords().Last().Word
+	
+		directionList.Add(potentialThrowDirection)
+	
+		unknownDirections = set(directionList).difference(set(MoveValueLimits))
+		
+		# Must specify a known direction
+		if unknownDirections.Count == 0:
+			throwDirection = potentialThrowDirection
+
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite(DontKnowWord.format(invalidObjects[0].Name.upper()))
+		return False
+
+	if validObjects.Count > 1:
+		ConsoleApi.FormattedWrite("One thing at a time please!")
+		return False
+	
+	if invalidObjects.Count + validObjects.Count == 0:
+		ConsoleApi.FormattedWrite("I can't throw that!")
+		return False
+		
+	# Valid Drop Object phrases
+	currentThrowObjectsPhrases = []
+	
+	currentThrowObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].WordThatMatchedThis)])
+	currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis)])
+
+	currentThrowObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].Name)])
+	currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name)])
+	
+	if throwDirection <> None:
+		currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, validObjects[0].WordThatMatchedThis, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis, toWord, theWord, throwDirection)])
+		
+		currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, validObjects[0].Name, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name, toWord, theWord, throwDirection)])
+
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentThrowObjectsPhrases):
+		# We can't throw anything
+		if validObjects.Count == 0:
+			ConsoleApi.FormattedWrite("There isn't anything to throw!")
+			return True
+	
+		objectToThrow = validObjects[0]
+	
+		if(throwDirection == None):
+				# Same as drop in the room
+				return ProcessObjectListForDrop(validObjects, "thrown")
+		else:	
+			# Otherwise we attempt to throw the item through the exit
+			return ThrowItemThroughExit(objectToThrow, throwDirection)
+		
+	return SentenceNotRecognised()		

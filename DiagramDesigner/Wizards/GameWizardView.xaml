@@ -1,0 +1,952 @@
+﻿<Window x:Class="DiagramDesigner.Wizards.GameWizardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Adventure Game Wizard" Height="820" Width="900">
+    <Window.Resources>
+        <Style x:Key="HeaderStyle" TargetType="syncfusion:GridHeaderCellControl">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="{x:Type syncfusion:ComboBoxAdv}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Name="ControlRoot">
+        <xctk:Wizard FinishButtonClosesWindow="True" HelpButtonVisibility="Hidden" >
+            <xctk:WizardPage x:Name="Intro" Description="This wizard allows you to create a runnable Adventure Game in a series of simple steps." PageType="Exterior"
+                             Title="Game Features">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type CheckBox}">
+                            <Setter Property="Margin" Value="0,0,0,4" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="Margin" Value="0,0,0,4" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                        </Style>
+                    </Grid.Resources>
+                    <Label Content="Firstly select the Game Features You Want" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <Label Content="Enable Titles" Grid.Row="1" Grid.Column="0" />
+                    <CheckBox IsChecked="{Binding Path=GameFeaturesViewModel.EnableTitles, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" />
+                    <Label Content="Enable Inventory Size" Grid.Row="2" Grid.Column="0" />
+                    <CheckBox IsChecked="{Binding Path=GameFeaturesViewModel.EnableInventorySize, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" />
+                    <Label Content="Enable Player Lost" Grid.Row="3" Grid.Column="0" />
+                    <CheckBox IsChecked="{Binding Path=GameFeaturesViewModel.EnablePlayerLost, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" />
+                    <Label Content="Enable Score" Grid.Row="4" Grid.Column="0" />
+                    <CheckBox IsChecked="{Binding Path=GameFeaturesViewModel.EnableScore, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" />
+                    <Label Content="Enable Exit Descriptions" Grid.Row="5" Grid.Column="0" />
+                    <CheckBox IsChecked="{Binding Path=GameFeaturesViewModel.EnableExitDescriptions, Mode=TwoWay}" Grid.Column="1" Grid.Row="5" />
+                    <Label Content="Enable Show Items In Room" Grid.Row="6" Grid.Column="0" />
+                    <CheckBox IsChecked="{Binding Path=GameFeaturesViewModel.EnableShowItemsInRoom, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" />
+                </Grid>
+
+            </xctk:WizardPage>
+
+            <xctk:WizardPage x:Name="Basic" Description="Add basic information to the game." PageType="Interior"
+                    Title="Basic Information" Margin="0" Padding="0" CanSelectNextPage="{Binding GameWizardBasicViewModel.BasicInfoIsValid}">
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <ToolBar Height="30">
+                                <Button  VerticalAlignment="Center" Width="24" Height="24"  Command="{Binding GameWizardBasicViewModel.PopulateAllFieldsWithLorem}" ToolTip="Populate all items with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" />
+                                </Button>
+                                <Button  FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Margin="2 0 0 0" Width="24" Height="24" Command="{Binding GameWizardBasicViewModel.PopulateAllFields}" ToolTip="Populate all items with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" />
+                                </Button>
+                            </ToolBar>
+                        </DockPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="117"/>
+                                <ColumnDefinition Width="83"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Margin" Value="0,3,0,3" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="true">
+                                            <Setter Property="ToolTip"
+                                                    Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Setter Property="Margin" Value="0,3,0,3" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                                </Style>
+                                <Style TargetType="{x:Type xctk:IntegerUpDown}">
+                                    <Setter Property="Margin" Value="0,3,0,3" />
+                                    <Setter Property="Width" Value="100" />
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                                </Style>
+                            </Grid.Resources>
+                            <Label Content="Game Properties" FontWeight="Bold" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="3" />
+
+                            <Label Height="34" Content="Title*" Grid.Row="1"  Grid.Column="0"  Visibility="{Binding GameFeaturesViewModel.EnableTitles, Converter={StaticResource BooleanVisibilityConverter}}" Grid.ColumnSpan="2"/>
+                            <TextBox Height="34"  VerticalAlignment="Stretch" Visibility="{Binding GameFeaturesViewModel.EnableTitles, Converter={StaticResource BooleanVisibilityConverter}}" 
+                                 Text="{Binding Path=GameWizardBasicViewModel.Title, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                 Grid.Column="2" Grid.Row="1">
+                            </TextBox>
+
+                            <StackPanel Height="34" Visibility="{Binding GameFeaturesViewModel.EnableTitles, Converter={StaticResource BooleanVisibilityConverter}}"  Grid.Row="1" Grid.Column="3"
+                                     Orientation="Horizontal">
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateTitleWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateTitle}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <Label Height="60" Content="Introduction*" Grid.Row="2"  Padding="4 0 0 0" VerticalAlignment="Top" Visibility="{Binding GameFeaturesViewModel.EnableTitles, Converter={StaticResource BooleanVisibilityConverter}}" Grid.Column="0" Grid.ColumnSpan="2" />
+
+                            <TextBox Height="60" TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top" Visibility="{Binding GameFeaturesViewModel.EnableTitles, Converter={StaticResource BooleanVisibilityConverter}}"  
+                                  Text="{Binding Path=GameWizardBasicViewModel.Introduction, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Grid.Column="2" 
+                                  Grid.Row="2" x:Name="Introduction" VerticalScrollBarVisibility="Auto" />
+
+                            <StackPanel Height="60" Visibility="{Binding GameFeaturesViewModel.EnableTitles, Converter={StaticResource BooleanVisibilityConverter}}" Grid.Row="2" Grid.Column="3" Orientation="Horizontal"  VerticalAlignment="Center" >
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateIntroductionWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateIntroduction}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                                <Button  VerticalAlignment="Center"  Margin="0 0 4 0" Command="{Binding GameWizardBasicViewModel.OpenTextEditorForIntroduction}" ToolTip="Open the field in the text editor" >
+                                    <Image Source="/Resources/Images/OpenFolder.png" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal"  VerticalAlignment="Center" Visibility="{Binding GameFeaturesViewModel.EnablePlayerLost, Converter={StaticResource BooleanVisibilityConverter}}">
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulatePlayerLostWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulatePlayerLost}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                                <Button  VerticalAlignment="Center"  Margin="0 0 4 0" Command="{Binding GameWizardBasicViewModel.OpenTextEditorForPlayerLost}" ToolTip="Open the field in the text editor" >
+                                    <Image Source="/Resources/Images/OpenFolder.png" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Visibility="{Binding GameFeaturesViewModel.EnableScore, Converter={StaticResource BooleanVisibilityConverter}}" Grid.Row="6" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" >
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateWonMessageWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateWonMessage}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                                <Button  VerticalAlignment="Center"  Margin="0 0 4 0" Command="{Binding GameWizardBasicViewModel.OpenTextEditorForWonMessage}" ToolTip="Open the field in the text editor" >
+                                    <Image Source="/Resources/Images/OpenFolder.png" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="7" Grid.Column="3" Orientation="Horizontal"  VerticalAlignment="Center" >
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateAnotherGameWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateAnotherGame}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                                <Button  VerticalAlignment="Center"  Margin="0 0 4 0" Command="{Binding GameWizardBasicViewModel.OpenTextEditorForAnotherGame}" ToolTip="Open the field in the text editor" >
+                                    <Image Source="/Resources/Images/OpenFolder.png" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="8" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" >
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateAnotherGameYesWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateAnotherGameYes}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="9" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" >
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateCommandPromptWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateCommandPrompt}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="11" Grid.Column="3" Orientation="Horizontal"  VerticalAlignment="Center" >
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateGameNameWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateGameName}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Row="12" Grid.Column="3" Orientation="Horizontal"  VerticalAlignment="Center" >
+                                <Button  VerticalAlignment="Center"  Margin="4 0 4 0" Command="{Binding GameWizardBasicViewModel.PopulateGameDescriptionWithLorem}" ToolTip="Populate this field with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" Width="20" Height="20" />
+                                </Button>
+                                <Button  FontWeight="Bold"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 4 0" 
+                                     Command="{Binding GameWizardBasicViewModel.PopulateGameDescription}" ToolTip="Populate this field with sample English text" >
+                                    <fa:ImageAwesome Icon="Paste" Width="20" Height="20" />
+                                </Button>
+                                <Button  VerticalAlignment="Center"  Margin="0 0 4 0" Command="{Binding GameWizardBasicViewModel.OpenTextEditorForGameDescription}" ToolTip="Open the field in the text editor" >
+                                    <Image Source="/Resources/Images/OpenFolder.png" Width="20" Height="20" />
+                                </Button>
+                            </StackPanel>
+
+                            <Label Content="Maximum Score" Grid.Row="3" Grid.Column="0" Visibility="{Binding GameFeaturesViewModel.EnableScore, Converter={StaticResource BooleanVisibilityConverter}}" Grid.ColumnSpan="2" />
+                            <xctk:IntegerUpDown Grid.Column="2" Minimum="1" Grid.Row="3" x:Name="MaximumScore" Visibility="{Binding GameFeaturesViewModel.EnableScore, Converter={StaticResource BooleanVisibilityConverter}}" Value="{Binding Path=GameWizardBasicViewModel.MaximumScore, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></xctk:IntegerUpDown>
+                            <Label Content="Maximum Inventory Size" Grid.Row="4" Grid.Column="0" Visibility="{Binding GameFeaturesViewModel.EnableInventorySize, Converter={StaticResource BooleanVisibilityConverter}}" Grid.ColumnSpan="2"/>
+                            <xctk:IntegerUpDown Grid.Column="2" Minimum="1" Grid.Row="4" x:Name="MaximumInventorySize" Visibility="{Binding GameFeaturesViewModel.EnableInventorySize, Converter={StaticResource BooleanVisibilityConverter}}" Value="{Binding Path=GameWizardBasicViewModel.MaximumInventorySize, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"></xctk:IntegerUpDown>
+
+                            <Label Content="Player Lost Message*" Grid.Row="5" Visibility="{Binding GameFeaturesViewModel.EnablePlayerLost, Converter={StaticResource BooleanVisibilityConverter}}"  Padding="4 0 0 0" VerticalAlignment="Top" Grid.Column="0" Grid.ColumnSpan="2" />
+                            <TextBox Visibility="{Binding GameFeaturesViewModel.EnablePlayerLost, Converter={StaticResource BooleanVisibilityConverter}}" TextWrapping="Wrap" AcceptsReturn="True" Height="60" VerticalContentAlignment="Top" Text="{Binding Path=GameWizardBasicViewModel.PlayerLostMessage, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                 Grid.Column="2" Grid.Row="5" x:Name="PlayerLostMessage"  VerticalScrollBarVisibility="Auto"/>
+
+                            <Label Content="Won Game Message*" Grid.Row="6"  Padding="4 0 0 0" VerticalAlignment="Top" Grid.Column="0" Grid.ColumnSpan="2" Visibility="{Binding GameFeaturesViewModel.EnableScore, Converter={StaticResource BooleanVisibilityConverter}}" />
+                            <TextBox TextWrapping="Wrap" AcceptsReturn="True" Visibility="{Binding GameFeaturesViewModel.EnableScore, Converter={StaticResource BooleanVisibilityConverter}}" Height="60" VerticalContentAlignment="Top"  VerticalScrollBarVisibility="Auto" Text="{Binding Path=GameWizardBasicViewModel.WonGameMessage, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Grid.Column="2" Grid.Row="6" x:Name="WonGameMessage" />
+                            <Label Content="Another Game Text*" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Padding="4 0 0 0"  Grid.ColumnSpan="2" />
+                            <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="60" VerticalContentAlignment="Top" Text="{Binding Path=GameWizardBasicViewModel.AnotherGameText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Grid.Column="2" Grid.Row="7" x:Name="AnotherGameText" />
+                            <Label Content="Another Game Yes Response*" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" />
+                            <TextBox TextWrapping="Wrap" Height="34" AcceptsReturn="True" VerticalContentAlignment="Center" Text="{Binding Path=GameWizardBasicViewModel.AnotherGameYesResponse, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Grid.Column="2" Grid.Row="8" x:Name="AnotherGameYesResponse" />
+                            <Label Content="Command Prompt Text*" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" />
+                            <TextBox Height="34" Text="{Binding Path=GameWizardBasicViewModel.CommandPromptText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Grid.Column="2" Grid.Row="9" x:Name="CommandPromptText" />
+                            <Label Content="Publishing Properties" Grid.Row="10" Grid.Column="0"  Grid.ColumnSpan="3" FontWeight="Bold"/>
+                            <Label Content="Game Name*" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" />
+                            <TextBox Height="34" Text="{Binding Path=GameWizardBasicViewModel.GameName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Grid.Column="2" Grid.Row="11" x:Name="GameName" />
+                            <Label Content="Game Description*" Grid.Row="12"  Padding="4 0 0 0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                            <TextBox Height="60" TextWrapping="Wrap" AcceptsReturn="True"  VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top" Text="{Binding Path=GameWizardBasicViewModel.GameDescription, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Grid.Column="2" Grid.Row="12" x:Name="GameDescription" />
+                        
+                            HWEW
+                            
+                       </Grid>
+
+                    </Grid>
+                </AdornerDecorator>
+            </xctk:WizardPage>
+
+            <xctk:WizardPage x:Name="Rooms" Description="Add Rooms to the game. These are the locations in your game world." PageType="Interior" 
+                             DataContext="{Binding RoomsViewModel}"
+                             Title="Add Rooms" Margin="0" Padding="0" CanSelectNextPage="{Binding RoomInfoIsValid}">
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Grid.Row="0">
+                            <ToolBar Height="40" VerticalContentAlignment="Center">
+                                <Button Style="{StaticResource AppButtonStyle}" Margin="5" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding AddNewRow}" 
+                                        ToolTip="Add a new Room." >
+                                    Add Room
+                                </Button>
+                                <TextBlock Margin="15 5 5 5" FontWeight="Bold" Text="Start Room*" VerticalAlignment="Center"></TextBlock>
+                                <syncfusion:ComboBoxAdv HorizontalAlignment="Left" Margin="15 5 5 5" Width="100" VerticalAlignment="Center"
+                                                    Background="Transparent" 
+                                                    ItemsSource="{Binding Rooms}" 
+                                                    SelectedItem="{Binding SelectedRoom, Mode=TwoWay}">
+                                    <syncfusion:ComboBoxAdv.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock  Text="{Binding BaseName}"></TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </syncfusion:ComboBoxAdv.ItemTemplate>
+                                </syncfusion:ComboBoxAdv>
+
+                                <Button  VerticalAlignment="Center" Width="24" Height="24" Margin="15 5 5 5"  Command="{Binding PopulateAllFieldsWithLorem}" 
+                                         ToolTip="Populate all items with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" />
+                                </Button>
+                            </ToolBar>
+                        </DockPanel>
+                        <syncfusion:SfDataGrid Grid.Row="1" HeaderStyle="{StaticResource HeaderStyle}" SelectedItem="{Binding GridSelectedRoom}"  x:Name="RoomGrid" AllowDeleting="True" AllowEditing="True" AutoGenerateColumnsMode="None" AllowSorting="True"
+                       AllowResizingColumns="True" GridValidationMode="InView" ItemsSource="{Binding Rooms, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding Path=RowClickedCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <syncfusion:SfDataGrid.Columns>
+                                <syncfusion:GridTemplateColumn Width="80" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" >
+                                                <Button  Width="20" Height="20" Margin="0 0 5 0" VerticalAlignment="Center" Command="{Binding ElementName=Rooms, Path=DataContext.PopulateRoomWithLorem}" 
+                                             ToolTip="Populate this record with sample Lorem Ipsum text"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Book"  />
+                                                </Button>
+                                                <Button Width="20" Height="20" Margin="0 0 5 0" FontWeight="Bold"  CommandParameter="{Binding}"  
+                                                    VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 Command="{Binding ElementName=Rooms, Path=DataContext.PopulateRoom}" ToolTip="Populate this record with sample English text" >
+                                                    <fa:ImageAwesome Icon="Paste" />
+                                                </Button>
+                                                <Button  Width="20" Height="20"  VerticalAlignment="Center" Command="{Binding ElementName=Rooms, Path=DataContext.Delete}" 
+                                                     ToolTip="Delete this record"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Trash" Foreground="Red" />
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+                                <syncfusion:GridTextColumn Width="180" HeaderText="Name" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Left" MappingName="BaseName"
+                                                           TextAlignment="Left" TextTrimming="CharacterEllipsis" ShowToolTip="True">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Identifier of the object that can be used by the player to interact with it."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                    <syncfusion:GridTextColumn.ToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding BaseName}"  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+
+                                <syncfusion:GridTextColumn VerticalAlignment="Center" ShowHeaderToolTip="True" ColumnSizer="AutoWithLastColumnFill"  
+                                               HeaderText="Description" AllowSorting="False" MappingName="Descriptions" TextTrimming="CharacterEllipsis"
+                                               DisplayBinding="{Binding Descriptions, Converter={StaticResource MultilineConverter}}" 
+                                               HorizontalHeaderContentAlignment="Left"  AllowEditing="False" TextAlignment="Left">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="List of possible descriptions for an game entity. By default the game engine will show the first one, they can be set programatically to represent different states."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+                                <syncfusion:GridTemplateColumn  Width="30"  HeaderText="" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button  VerticalAlignment="Center" Width="20" Height="20"  Command="{Binding ElementName=Rooms, Path=DataContext.OpenTextEditorForRoomDescriptions}" 
+                                                    CommandParameter="{Binding}" ToolTip="Open the field in the text editor" >
+                                                <Image Source="/Resources/Images/OpenFolder.png"  />
+                                            </Button>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Dark" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center"
+                                                               MappingName="IsDark"
+                                                           TextAlignment="Left" >
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the room is currently dark."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                            </syncfusion:SfDataGrid.Columns>
+                        </syncfusion:SfDataGrid>
+                    </Grid>
+                </AdornerDecorator>
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="PlaceableObjects" Description="Add Objects to the game. These are items players can interact with." 
+                             PageType="Interior" DataContext="{Binding PlaceableObjectsViewModel}"
+                             Title="Add Objects (Optional)" Margin="0" Padding="0" CanSelectNextPage="{Binding PlaceableObjectInfoIsValid}">
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Grid.Row="0">
+                            <ToolBar Height="40" VerticalContentAlignment="Center">
+                                <Button Style="{StaticResource AppButtonStyle}" Margin="5" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding AddNewRow}" 
+                                        ToolTip="Add a new Placeable Object." >
+                                    Add Object
+                                </Button>
+                                <TextBlock Margin="15 5 5 5" FontWeight="Bold" Text="Show Additional Columns" VerticalAlignment="Center"></TextBlock>
+
+                                <Grid>
+                                    <CheckBox Margin="15 5 5 5" VerticalAlignment="Center" IsChecked="{Binding HideAdditionalInformation, 
+                                    Converter={StaticResource ReverseBooleanConverter}}" ></CheckBox>
+                                </Grid>
+                                <Button  VerticalAlignment="Center" Width="24" Height="24" Margin="15 5 5 5"  Command="{Binding PopulateAllFieldsWithLorem}" 
+                                         ToolTip="Populate all items with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" />
+                                </Button>
+                            </ToolBar>
+                        </DockPanel>
+
+                        <syncfusion:SfDataGrid Grid.Row="1"  HeaderStyle="{StaticResource HeaderStyle}" SelectedItem="{Binding GridSelectedObject}"  x:Name="ObjectGrid" 
+                         AllowDeleting="True" AllowEditing="True" AutoGenerateColumnsMode="None" AllowSorting="True"
+                       AllowResizingColumns="True" GridValidationMode="InView" ItemsSource="{Binding PlaceableObjects, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding Path=RowClickedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <syncfusion:SfDataGrid.Columns>
+                                <syncfusion:GridTemplateColumn Width="80" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" >
+                                                <Button  Width="20" Height="20" Margin="0 0 5 0" VerticalAlignment="Center" Command="{Binding ElementName=PlaceableObjects, Path=DataContext.PopulatePlaceableObjectWithLorem}" 
+                                             ToolTip="Populate this record with sample Lorem Ipsum text"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Book"  />
+                                                </Button>
+                                                <Button Width="20" Height="20" Margin="0 0 5 0" FontWeight="Bold"  CommandParameter="{Binding}"  
+                                                    VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 Command="{Binding ElementName=PlaceableObjects, Path=DataContext.PopulatePlaceableObject}" ToolTip="Populate this record with sample English text" >
+                                                    <fa:ImageAwesome Icon="Paste" />
+                                                </Button>
+                                                <Button  Width="20" Height="20"  VerticalAlignment="Center" Command="{Binding ElementName=PlaceableObjects, Path=DataContext.Delete}" 
+                                                     ToolTip="Delete this record"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Trash" Foreground="Red" />
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+                                <syncfusion:GridTextColumn Width="180" HeaderText="Name" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Left" MappingName="BaseName"
+                                                           TextAlignment="Left" TextTrimming="CharacterEllipsis"  ShowToolTip="True">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Identifier of the object that can be used by the player to interact with it."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                    <syncfusion:GridTextColumn.ToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding BaseName}"  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+
+                                <syncfusion:GridTextColumn Width="180" HeaderText="Inventory Description" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Left" MappingName="InventoryDescription"
+                                                           TextAlignment="Left" TextTrimming="CharacterEllipsis"  ShowToolTip="True">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Description used when the player inventory is listed by the game engine. If not specified then the name of the object is used."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                    <syncfusion:GridTextColumn.ToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding InventoryDescription}"  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+
+                                <syncfusion:GridTextColumn VerticalAlignment="Center" ShowHeaderToolTip="True" Width="{Binding DescriptionWidth}" ColumnSizer="{Binding DescriptionSizer}"  
+                                               HeaderText="Description" AllowSorting="False" MappingName="Descriptions" TextTrimming="CharacterEllipsis"
+                                               DisplayBinding="{Binding Descriptions, Converter={StaticResource MultilineConverter}}" ShowToolTip="True"
+                                               HorizontalHeaderContentAlignment="Left"  AllowEditing="False" TextAlignment="Left">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="List of possible descriptions for an game entity. By default the game engine will show the first one, they can be set programatically to represent different states."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+                                <syncfusion:GridTemplateColumn  Width="30"  HeaderText="" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button  VerticalAlignment="Center" Width="20" Height="20"  Command="{Binding ElementName=PlaceableObjects, Path=DataContext.OpenTextEditorForObjectDescriptions}" 
+                                                    CommandParameter="{Binding}" ToolTip="Open the field in the text editor" >
+                                                <Image Source="/Resources/Images/OpenFolder.png"  />
+                                            </Button>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+
+                                <!-- Optional Columns -->
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Visible" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsVisible"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object is visible or not by default."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="120" HeaderText="Is Light Source" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLightSource"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object can be used as a light source."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Lit" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLit"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object is currently lit."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Fixed" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="Fixed"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object can be picked up. For example a lamp may be fixed to the wall."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="150" HeaderText="Hide From Autolist" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="HideFromAutoList"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object will be automatically listed when a room is described. Useful for Fixed objects, that can be described as part of the room description and not shown in the list."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+
+                            </syncfusion:SfDataGrid.Columns>
+                        </syncfusion:SfDataGrid>
+
+                    </Grid>
+
+                </AdornerDecorator>
+            </xctk:WizardPage>
+
+            <xctk:WizardPage x:Name="Containers" Description="Add Containers to the game. These are items players can interact with and can contain other objects." 
+                             PageType="Interior" DataContext="{Binding ContainersViewModel}"
+                             Title="Add Container Objects (Optional)" Margin="0" Padding="0" CanSelectNextPage="{Binding ContainerInfoIsValid}">
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Grid.Row="0">
+                            <ToolBar Height="40" VerticalContentAlignment="Center">
+                                <Button Style="{StaticResource AppButtonStyle}" Margin="5" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding AddNewRow}" 
+                                        ToolTip="Add a new Container." >
+                                    Add Container
+                                </Button>
+                                <TextBlock Margin="15 5 5 5" FontWeight="Bold" Text="Show Additional Columns" VerticalAlignment="Center"></TextBlock>
+
+                                <Grid>
+                                    <CheckBox Margin="15 5 5 5" VerticalAlignment="Center" IsChecked="{Binding HideAdditionalInformation, 
+                                    Converter={StaticResource ReverseBooleanConverter}}" ></CheckBox>
+                                </Grid>
+                                <Button  VerticalAlignment="Center" Width="24" Height="24" Margin="15 5 5 5"  Command="{Binding PopulateAllFieldsWithLorem}" 
+                                         ToolTip="Populate all items with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" />
+                                </Button>
+                            </ToolBar>
+                        </DockPanel>
+
+                        <syncfusion:SfDataGrid Grid.Row="1"  HeaderStyle="{StaticResource HeaderStyle}" SelectedItem="{Binding GridSelectedContainer}"  x:Name="ContainerGrid" 
+                         AllowDeleting="True" AllowEditing="True" AutoGenerateColumnsMode="None" AllowSorting="True"
+                       AllowResizingColumns="True" GridValidationMode="InView" ItemsSource="{Binding Containers, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding Path=RowClickedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <syncfusion:SfDataGrid.Columns>
+                                <syncfusion:GridTemplateColumn Width="80" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" >
+                                                <Button  Width="20" Height="20" Margin="0 0 5 0" VerticalAlignment="Center" Command="{Binding ElementName=Containers, Path=DataContext.PopulateContainersWithLorem}" 
+                                             ToolTip="Populate this record with sample Lorem Ipsum text"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Book"  />
+                                                </Button>
+                                                <Button Width="20" Height="20" Margin="0 0 5 0" FontWeight="Bold"  CommandParameter="{Binding}"  
+                                                    VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 Command="{Binding ElementName=Containers, Path=DataContext.PopulateContainer}" ToolTip="Populate this record with sample English text" >
+                                                    <fa:ImageAwesome Icon="Paste" />
+                                                </Button>
+                                                <Button  Width="20" Height="20"  VerticalAlignment="Center" Command="{Binding ElementName=Containers, Path=DataContext.Delete}" 
+                                                     ToolTip="Delete this record"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Trash" Foreground="Red" />
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+                                <syncfusion:GridTextColumn Width="180" HeaderText="Name" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Left" MappingName="BaseName"
+                                                           TextAlignment="Left" TextTrimming="CharacterEllipsis"  ShowToolTip="True">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Identifier of the container that can be used by the player to interact with it."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                    <syncfusion:GridTextColumn.ToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding BaseName}"  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+
+                                <syncfusion:GridTextColumn Width="180" HeaderText="Inventory Description" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Left" MappingName="InventoryDescription"
+                                                           TextAlignment="Left" TextTrimming="CharacterEllipsis"  ShowToolTip="True">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Description used when the player inventory is listed by the game engine. If not specified then the name of the object is used."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                    <syncfusion:GridTextColumn.ToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding InventoryDescription}"  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+
+                                <syncfusion:GridTextColumn VerticalAlignment="Center" ShowHeaderToolTip="True" Width="{Binding DescriptionWidth}" ColumnSizer="{Binding DescriptionSizer}"  
+                                               HeaderText="Description" AllowSorting="False" MappingName="Descriptions" TextTrimming="CharacterEllipsis"
+                                               DisplayBinding="{Binding Descriptions, Converter={StaticResource MultilineConverter}}" ShowToolTip="True"
+                                               HorizontalHeaderContentAlignment="Left"  AllowEditing="False" TextAlignment="Left">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="List of possible descriptions for an game entity. By default the game engine will show the first one, they can be set programatically to represent different states."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+                                <syncfusion:GridTemplateColumn  Width="30"  HeaderText="" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button  VerticalAlignment="Center" Width="20" Height="20"  Command="{Binding ElementName=Containers, Path=DataContext.OpenTextEditorForContainerDescriptions}" 
+                                                    CommandParameter="{Binding}" ToolTip="Open the field in the text editor" >
+                                                <Image Source="/Resources/Images/OpenFolder.png"  />
+                                            </Button>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+
+                                <!-- Optional Columns -->
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Visible" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsVisible"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object is visible or not by default."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="120" HeaderText="Is Light Source" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLightSource"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object can be used as a light source."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Lit" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLit"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object is currently lit."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Fixed" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="Fixed"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object can be picked up. For example a lamp may be fixed to the wall."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="150" HeaderText="Hide From Autolist" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="HideFromAutoList"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object will be automatically listed when a room is described. Useful for Fixed objects, that can be described as part of the room description and not shown in the list."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Open" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsOpen"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="If the object is a container indicates whether it is Open or Closed."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Locked" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLocked"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="If the object is a container indicates whether it is Locked or Unlocked."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                            </syncfusion:SfDataGrid.Columns>
+                        </syncfusion:SfDataGrid>
+
+                    </Grid>
+
+                </AdornerDecorator>
+            </xctk:WizardPage>
+
+            <xctk:WizardPage x:Name="Npcs" Description="Add NPC's to the game. These are Characters that the player can interact with." 
+                             PageType="Interior" DataContext="{Binding NpcsViewModel}"
+                             Title="Add NPCs (Optional)" Margin="0" Padding="0" CanSelectNextPage="{Binding NPCInfoIsValid}">
+                <AdornerDecorator>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Grid.Row="0">
+                            <ToolBar Height="40" VerticalContentAlignment="Center">
+                                <Button Style="{StaticResource AppButtonStyle}" Margin="5" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding AddNewRow}" 
+                                        ToolTip="Add a new NPC." >
+                                    Add NPC
+                                </Button>
+                                <TextBlock Margin="15 5 5 5" FontWeight="Bold" Text="Show Additional Columns" VerticalAlignment="Center"></TextBlock>
+
+                                <Grid>
+                                    <CheckBox Margin="15 5 5 5" VerticalAlignment="Center" IsChecked="{Binding HideAdditionalInformation, 
+                                    Converter={StaticResource ReverseBooleanConverter}}" ></CheckBox>
+                                </Grid>
+                                <Button  VerticalAlignment="Center" Width="24" Height="24" Margin="15 5 5 5"  Command="{Binding PopulateAllFieldsWithLorem}" 
+                                         ToolTip="Populate all items with sample Lorem Ipsum text" >
+                                    <fa:ImageAwesome Icon="Book" />
+                                </Button>
+                            </ToolBar>
+                        </DockPanel>
+                        <syncfusion:SfDataGrid Grid.Row="1"  HeaderStyle="{StaticResource HeaderStyle}" SelectedItem="{Binding GridSelectedNpc}"  x:Name="NPCsGrid" 
+                         AllowDeleting="True" AllowEditing="True" AutoGenerateColumnsMode="None" AllowSorting="True"
+                       AllowResizingColumns="True" GridValidationMode="InView" ItemsSource="{Binding Npcs, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding Path=RowClickedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <syncfusion:SfDataGrid.Columns>
+                                <syncfusion:GridTemplateColumn Width="80" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" >
+                                                <Button  Width="20" Height="20" Margin="0 0 5 0" VerticalAlignment="Center" Command="{Binding ElementName=Npcs, Path=DataContext.PopulateNpcsWithLorem}" 
+                                             ToolTip="Populate this record with sample Lorem Ipsum text"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Book"  />
+                                                </Button>
+                                                <Button Width="20" Height="20" Margin="0 0 5 0" FontWeight="Bold"  CommandParameter="{Binding}"  
+                                                    VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 Command="{Binding ElementName=Npcs, Path=DataContext.PopulateNpc}" ToolTip="Populate this record with sample English text" >
+                                                    <fa:ImageAwesome Icon="Paste" />
+                                                </Button>
+                                                <Button  Width="20" Height="20"  VerticalAlignment="Center" Command="{Binding ElementName=Npcs, Path=DataContext.Delete}" 
+                                                     ToolTip="Delete this record"  CommandParameter="{Binding}" >
+                                                    <fa:ImageAwesome Icon="Trash" Foreground="Red" />
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+                                <syncfusion:GridTextColumn Width="180" HeaderText="Name" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Left" MappingName="BaseName"
+                                                           TextAlignment="Left" TextTrimming="CharacterEllipsis"  ShowToolTip="True">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Identifier of the npc that can be used by the player to interact with it."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                    <syncfusion:GridTextColumn.ToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding BaseName}"  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+
+                                <syncfusion:GridTextColumn Width="180" HeaderText="Inventory Description" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Left" MappingName="InventoryDescription"
+                                                           TextAlignment="Left" TextTrimming="CharacterEllipsis"  ShowToolTip="True">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Description used when the player inventory is listed by the game engine. If not specified then the name of the object is used."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                    <syncfusion:GridTextColumn.ToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding InventoryDescription}"  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+
+                                <syncfusion:GridTextColumn VerticalAlignment="Center" ShowHeaderToolTip="True" Width="{Binding DescriptionWidth}" ColumnSizer="{Binding DescriptionSizer}"  
+                                               HeaderText="Description" AllowSorting="False" MappingName="Descriptions" TextTrimming="CharacterEllipsis"
+                                               DisplayBinding="{Binding Descriptions, Converter={StaticResource MultilineConverter}}" ShowToolTip="True"
+                                               HorizontalHeaderContentAlignment="Left"  AllowEditing="False" TextAlignment="Left">
+                                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="List of possible descriptions for an game entity. By default the game engine will show the first one, they can be set programatically to represent different states."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridTextColumn>
+                                <syncfusion:GridTemplateColumn  Width="30"  HeaderText="" AllowEditing="False" AllowSorting="False">
+                                    <syncfusion:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button  VerticalAlignment="Center" Width="20" Height="20"  Command="{Binding ElementName=Npcs, Path=DataContext.OpenTextEditorForNpcDescriptions}" 
+                                                    CommandParameter="{Binding}" ToolTip="Open the field in the text editor" >
+                                                <Image Source="/Resources/Images/OpenFolder.png"  />
+                                            </Button>
+                                        </DataTemplate>
+                                    </syncfusion:GridTemplateColumn.CellTemplate>
+                                </syncfusion:GridTemplateColumn>
+
+                                <!-- Optional Columns -->
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Visible" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsVisible"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object is visible or not by default."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="120" HeaderText="Is Light Source" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLightSource"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object can be used as a light source."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Lit" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLit"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object is currently lit."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Fixed" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="Fixed"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object can be picked up. For example a lamp may be fixed to the wall."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="150" HeaderText="Hide From Autolist" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="HideFromAutoList"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the object will be automatically listed when a room is described. Useful for Fixed objects, that can be described as part of the room description and not shown in the list."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Open" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsOpen"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="NPC's can also act as containers, indicates whether it is Open or Closed."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Is Locked" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="IsLocked"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="NPC's can also act as containers, indicates whether it is Locked or Unlocked."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+
+                                <syncfusion:GridCheckBoxColumn Width="90" HeaderText="Auto Follow" ShowHeaderToolTip="True" HorizontalHeaderContentAlignment="Center" MappingName="AutoFollow"
+                                                               TextAlignment="Left" IsHidden="{Binding HideAdditionalInformation}" ShowToolTip="True">
+                                    <syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Indicates whether the NPC will automatically follow the player."  TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </syncfusion:GridCheckBoxColumn.HeaderToolTipTemplate>
+                                </syncfusion:GridCheckBoxColumn>
+                            </syncfusion:SfDataGrid.Columns>
+                        </syncfusion:SfDataGrid>
+
+                    </Grid>
+
+                </AdornerDecorator>
+            </xctk:WizardPage>
+
+            <xctk:WizardPage x:Name="Finish" CanFinish="True" CanSelectNextPage="False" PageType="Exterior" Title="Well Done!! Everything is ready. Click Finish to create your project" Margin="0" Padding="0" />
+
+        </xctk:Wizard>
+    </Grid>
+</Window>
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 

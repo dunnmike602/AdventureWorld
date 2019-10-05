@@ -1,0 +1,78 @@
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+	
+	# No parameter supplied ask the question
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+	
+	# If the room is dark you certainly can't read anything
+	if CurrentLocation.IsDark:
+		ConsoleApi.FormattedWrite(IsDarkText)
+		return True
+		
+	# Do we match any objects
+	objects = AWApi.GetObjectsFromNames(adventureCommand.GetParametersWithoutStopWords())
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(invalidObjects[0].Name.upper()))
+		return False
+		
+	# We can only use one thing at a time.
+	if validObjects.Count > 1:
+		ConsoleApi.FormattedWrite("One thing at a time please!")
+		return False
+		
+	# We can't use anything
+	if validObjects.Count == 0:
+		ConsoleApi.FormattedWrite("There isn't anything to read!")
+		return False
+
+	# Valid Use Object phrases
+	currentUseObjectsPhrases = []
+	
+	currentUseObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].WordThatMatchedThis)])
+	currentUseObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis)])
+
+	currentUseObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].Name)])
+	currentUseObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name)])
+	
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentUseObjectsPhrases):
+	
+		objectToUse = validObjects[0]
+	
+		itemIsAvailable = AWApi.IsItemAvailableToExamine(objectToUse)
+		
+		if not itemIsAvailable:
+			ConsoleApi.FormattedWrite("You can't see the {0} here.".format(objectToUse.Name))
+			return False
+		
+		if not objectToUse.IsHeld:
+			container = AWApi.GetContainerForPlaceableObject(objectToUse)
+			
+			if container == None:
+				ConsoleApi.FormattedWrite("You're not holding the {0}!".format(objectToUse.Name))
+			else:
+				ConsoleApi.FormattedWrite("Try taking it out of the {0}!".format(container.Name))
+		
+			return False
+			
+		# Run the pre-process script for the object, this will be where the interaction logic is.
+		# To avoid the default code executing, handle all the logic in the pre-process routine for
+		# the object and return false
+		preProcessResult = Preprocess(objectToUse)
+				
+		# If there was no script run othen display a failure message
+		if preProcessResult:
+			ConsoleApi.FormattedWrite("Sorry you can't do that.".format(originalCommandWord, objectToUse.Name))
+			return False
+			
+		return True
+			
+	return SentenceNotRecognised()

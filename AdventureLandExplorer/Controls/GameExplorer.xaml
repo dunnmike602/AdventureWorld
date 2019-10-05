@@ -1,0 +1,365 @@
+﻿<UserControl x:Class="AdventureLandExplorer.Controls.GameExplorer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:sharedControls="clr-namespace:SharedControls;assembly=SharedControls"
+             xmlns:controls1="clr-namespace:AdventureLandExplorer.Controls"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" Margin="0" Padding="0">
+    <UserControl.Resources>
+        <CollectionViewSource Source="{Binding AllAdventureObjects}" x:Key="GroupedCategories">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Category" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        <DataTemplate x:Key="ObjectAndContainerTemplate" >
+            <Border Background="{Binding IsContainer, Converter={StaticResource ObjectContainerToBrushConverter}}"
+                        BorderThickness="1" BorderBrush="Blue" Margin="10"
+                        Width="80" Height="80">
+                <Grid>
+                    <Image Source="/Resources/Images/lamp.png" Name="ContainerLightSourceIndicator" Opacity=".2" 
+                    Visibility="{Binding IsLightSource, Converter={StaticResource BooleanVisibilityConverter}}"></Image>
+
+                    <Button Cursor="Hand" Name="ObjectNameText" HorizontalAlignment="Center" VerticalAlignment="Center"  
+                                ToolTip="Select the Object in the Properties Browser." Margin="2"
+                                Style="{StaticResource LinkButton}" Click="PlaceableObjectSelectClicked"  Content="{Binding Name}" />
+
+                    <Button Background="Transparent" Visibility="{Binding IsContainer, Converter={StaticResource BooleanVisibilityConverter}}"  
+                            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1" Padding="2" Width="18" Height="18"  ToolTip="Open the container."
+                                Command="{x:Static controls1:GameExplorer.OpenContainer}" Cursor="Hand" CommandParameter="{Binding}">
+                        <fa:ImageAwesome Icon="Key"    />
+                    </Button>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="0 0 5 5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox Margin="5 5 5 0" IsReadOnly="True" BorderThickness="1" BorderBrush="Blue" Background="White" Foreground="Black" Grid.Column="0" FontSize="15" Grid.Row="0" Name="Title"
+                  FontWeight="Bold" FontFamily="Courier New" Text="Adventure World"></TextBox>
+        <xctk:RichTextBox Background="Black" Foreground="White" Grid.Column="0" Margin="5 0 5 0" FontFamily="Courier New" FontSize="14" BorderThickness="0"
+                          Grid.Row="1" IsReadOnly="True" Name="Console" 
+                          VerticalScrollBarVisibility="Auto" >
+        </xctk:RichTextBox>
+        <Grid Grid.Row="2"  Grid.Column="0" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" Background="Black" FontSize="14" Foreground="White" Grid.Column="0"  Margin="5 0 0 0" Padding="0 5 0 0" Text="{Binding ReadyPrompt}" Name="Prompt"></TextBox>
+            <TextBox BorderThickness="0" Background="Black" FontFamily="Courier New" Foreground="White" FontSize="14" Grid.Column="1"  Margin="0 0 5 0" Padding="0 5 0 5" Name="Input"></TextBox>
+        </Grid>
+        <Button Grid.Row="3"  Style="{StaticResource AppButtonStyle}" Grid.Column="0" Content="Run" Margin="5"  Name="RunCommand"  Click="RunOnClick" HorizontalAlignment="Left"/>
+
+        <GridSplitter Grid.Row="0 " Grid.RowSpan="4" Grid.Column="1" Width="3" HorizontalAlignment="Stretch"  Background="Transparent"/>
+
+        <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <syncfusion:TabControlExt  Grid.Row="0"  AllowDrop="False"  Margin="0 0 0 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  IsNewButtonEnabled="False" Name="ExplorerTabs"
+                                           EnableLabelEdit="False" CloseButtonType="Hide" Background="Transparent">
+                    <syncfusion:TabItemExt Header="Room Explorer" BorderThickness="0">
+                        <Border Margin="5"   BorderThickness="1" BorderBrush="Blue" Grid.Column="0"  Name="RoomExplorer">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=RoomNameText, Path=Content}"
+                                                    Value="">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=RoomNameText, Path=Content}"
+                                                    Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <Button Cursor="Hand" Name="RoomNameText" ToolTip="Select the Room in the Properties Browser." Margin="5"
+                                            Style="{StaticResource LinkButton}" Click="RoomSelectClicked"  Content="{Binding CurrentLocation.Name}" />
+                                </StackPanel>
+
+                                <Border Grid.Row="1"  Background="{StaticResource ItemBrushForRoom}" Margin="5" BorderThickness="1" BorderBrush="Blue">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="25" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="25"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="25"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Cursor="Hand" Grid.Row="0" Grid.Column="1" Margin="2" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="100" Style="{StaticResource AppButtonStyle}"
+                                CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=3}"
+                                    Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=3}"
+                                Command="{Binding ExitClickedCommand}" >
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=3}"></TextBlock>
+                                        </Button>
+                                        <Button Cursor="Hand" Grid.Row="3" Grid.Column="1" Margin="2" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="100" 
+                                    Style="{StaticResource AppButtonStyle}"
+                                CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=7}"
+                                Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=7}"
+                                Command="{Binding ExitClickedCommand}" >
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=7}"></TextBlock>
+                                        </Button>
+                                        <Button Cursor="Hand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="2" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="100" Style="{StaticResource AppButtonStyle}"
+                                CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=4}"
+                                Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=4}"
+                                Command="{Binding ExitClickedCommand}" >
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=4}"></TextBlock>
+                                        </Button>
+                                        <Button Cursor="Hand" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="2" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="100" Style="{StaticResource AppButtonStyle}"
+                                CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=2}"
+                                Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=2}"
+                                Command="{Binding ExitClickedCommand}" >
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=2}"></TextBlock>
+                                        </Button>
+                                        <Button Cursor="Hand" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="2" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="100" Style="{StaticResource AppButtonStyle}"
+                                CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=6}"
+                                Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=6}"
+                                Command="{Binding ExitClickedCommand}" >
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=6}"></TextBlock>
+                                        </Button>
+                                        <Button Cursor="Hand" Grid.Row="1" Grid.Column="0" Margin="2" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Width="100" Style="{StaticResource AppButtonStyle}"
+                                CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=5}"
+                                Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=5}"
+                                Command="{Binding ExitClickedCommand}" VerticalAlignment="Center">
+                                            <Button.LayoutTransform>
+                                                <RotateTransform CenterX="0.5" CenterY="0.5" Angle="90"/>
+                                            </Button.LayoutTransform>
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=5}"></TextBlock>
+                                        </Button>
+                                        <Button Cursor="Hand" Grid.Row="1" Grid.Column="2" Margin="2" HorizontalContentAlignment="Left" HorizontalAlignment="Center" Width="100" Style="{StaticResource AppButtonStyle}"
+                                CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=1}"
+                                Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=1}"
+                                Command="{Binding ExitClickedCommand}" >
+                                            <Button.LayoutTransform>
+                                                <RotateTransform CenterX="0.5" CenterY="0.5" Angle="90"/>
+                                            </Button.LayoutTransform>
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=1}"></TextBlock>
+                                        </Button>
+                                        <Button Cursor="Hand" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  Margin="2" HorizontalContentAlignment="Left" HorizontalAlignment="Right" Width="100" Style="{StaticResource AppButtonStyle}"
+                                 CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=8}"
+                                 Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=8}"
+                                Command="{Binding ExitClickedCommand}" >
+                                            <TextBlock TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=8}"></TextBlock>
+                                        </Button>
+                                        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                                            <ItemsControl  ItemTemplate="{StaticResource ObjectAndContainerTemplate}"  ItemsSource="{Binding CurrentRoomObjects}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal" Name="ObjectsInRoom"
+                                                                   HorizontalAlignment="Stretch"
+                                                                   VerticalAlignment="Stretch">
+                                                        </WrapPanel>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*" ></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Cursor="Hand" Grid.Column="0" Margin="2" HorizontalContentAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="100" Style="{StaticResource AppButtonStyle}"
+                                        CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=9}"
+                                        Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=9}"
+                                        Command="{Binding ExitClickedCommand}" >
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="20"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" 
+                                      Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=9}"></TextBlock>
+                                                    <fa:ImageAwesome Grid.Column="1" Icon="ArrowDown" HorizontalAlignment="Center" Foreground="Red" Height="14"/>
+                                                </Grid>
+                                            </Button>
+
+                                            <Button Cursor="Hand"  Grid.Column="1" Margin="2" HorizontalContentAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left"  Width="100" Style="{StaticResource AppButtonStyle}"
+                                        CommandParameter="{Binding CurrentLocation.Exits, Converter={StaticResource ExitCommandParameterConverter},ConverterParameter=10}"
+                                        Visibility="{Binding CurrentLocation.Exits, Converter={StaticResource ExitVisibilityConverter}, FallbackValue=Collapsed, ConverterParameter=10}"
+                                        Command="{Binding ExitClickedCommand}" >
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="20"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock  Grid.Column="0" TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}"
+                                                   Text="{Binding CurrentLocation.Exits, Converter={StaticResource ExitTextConverter}, ConverterParameter=10}"></TextBlock>
+                                                    <fa:ImageAwesome Grid.Column="1" HorizontalAlignment="Center" Icon="ArrowUp" Foreground="Red" Height="14"/>
+                                                </Grid>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+
+                            </Grid>
+                        </Border>
+                    </syncfusion:TabItemExt>
+                    <syncfusion:TabItemExt Header="Container Explorer" BorderThickness="0">
+
+                        <Border Margin="5" BorderThickness="1" BorderBrush="Blue" Name="ContainerExplorer" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                        Binding="{Binding ElementName=ContainerNameText, Path=Content}"
+                                                        Value="">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                        Binding="{Binding ElementName=ContainerNameText, Path=Content}"
+                                                        Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <Button Cursor="Hand" Name="ContainerNameText" ToolTip="Select the Container in the Properties Browser." Margin="5"
+                                                Style="{StaticResource LinkButton}" Click="ContainerSelectClicked"  Content="{Binding SelectedContainer.Name}" />
+                                    <Button Cursor="Hand" Visibility="{Binding SelectedContainer.Parent, Converter={StaticResource ParentBindingConverter}}" 
+                                                ToolTip="Click here to view this objects container." Margin="10 2 2 2" Width="16" Height="16"
+                                                 Click="ParentContainerClicked" >
+                                        <fa:ImageAwesome Icon="ArrowUp"    />
+                                    </Button>
+                                </StackPanel>
+                                <Border Grid.Row="1"  Background="{StaticResource ItemBrushForRoom}" Margin="5" BorderThickness="1" BorderBrush="Blue">
+                                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"  Background="{StaticResource ItemBrushForContainer}" >
+                                        <ItemsControl ItemsSource="{Binding ContainedObjects}" ItemTemplate="{StaticResource ObjectAndContainerTemplate}"
+                                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Horizontal" Name="ItemsInContainer"
+                                                               HorizontalAlignment="Stretch"
+                                                               VerticalAlignment="Stretch">
+                                                    </WrapPanel>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </syncfusion:TabItemExt>
+                </syncfusion:TabControlExt>
+
+                <CheckBox IsChecked="{Binding TrackCurrentRoom}" Margin="2 3 0 0" ToolTip="Determines if the Room Explorer changes to relect the current room when the player moved" Grid.Row="1">Track current Room</CheckBox>
+            </Grid>
+            <GridSplitter Grid.Row="1" Height="3"  HorizontalAlignment="Stretch"  Background="Transparent"/>
+            <syncfusion:TabControlExt  Grid.Row="2"  AllowDrop="False"  Margin="0 0 0 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  IsNewButtonEnabled="False" Name="AdventureObjectTab" 
+                                       EnableLabelEdit="False" CloseButtonType="Hide" Background="Transparent">
+                <syncfusion:TabItemExt Header="Properties" BorderThickness="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Name="AdventureObjectsList" Grid.Column="0"  Margin="4"  Background="Transparent" ItemsSource="{Binding Source={StaticResource GroupedCategories}}" 
+                                  SelectedItem="{Binding SelectedAdventureObject, Mode=TwoWay}">
+                                <ComboBox.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.HeaderTemplate>
+                                            <DataTemplate>
+                                                <DockPanel>
+                                                    <TextBlock FontWeight="Bold" Padding="0 0 0 3" TextDecorations="Underline" DockPanel.Dock="Top" Text="{Binding Name}">
+                                                    </TextBlock>
+                                                    <ItemsPresenter/>
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+                                    </GroupStyle>
+                                </ComboBox.GroupStyle>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Text="{Binding}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Grid.Column="1" Style="{StaticResource AppButtonStyle}"  Command="{x:Static controls1:GameExplorer.GotoRoomCommand}"
+                                    IsEnabled="{Binding SelectedAdventureObject, Converter={StaticResource InvisibleIfNotRoomConverter}}"  
+                                    HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="2"  ToolTip="Set the game current location to be this room."
+                                   Cursor="Hand">
+                                Go to Room
+                            </Button>
+                        </Grid>
+                        <xctk:PropertyGrid Grid.Row="1" ShowSummary="True" ShowSortOptions ="False" ShowAdvancedOptions="False" BorderBrush="Blue" 
+                               ShowSearchBox="False" IsCategorized="True" ShowPreview="False" BorderThickness="1" SelectedObject="{Binding SelectedAdventureObject,Mode=TwoWay}" 
+                               AutoGenerateProperties="true" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FilterWatermark="">
+                            <xctk:PropertyGrid.EditorDefinitions>
+                                <xctk:EditorTemplateDefinition TargetProperties="Descriptions">
+                                    <xctk:EditorTemplateDefinition.EditingTemplate>
+                                        <DataTemplate>
+                                            <sharedControls:CollectionEditor Values="{Binding Value, Mode=TwoWay}"/>
+                                        </DataTemplate>
+                                    </xctk:EditorTemplateDefinition.EditingTemplate>
+                                </xctk:EditorTemplateDefinition>
+                            </xctk:PropertyGrid.EditorDefinitions>
+                        </xctk:PropertyGrid>
+                    </Grid>
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt Header="Console" BorderThickness="0">
+                    <TextBox HorizontalScrollBarVisibility="Auto" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding ConsoleText}" BorderThickness="1" BorderBrush="Blue">
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Copy" Command="{x:Static ApplicationCommands.Copy}">
+                                    <MenuItem.Icon>
+                                        <Image Source="../Resources/Images/Copy.png" Width="16"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Clear All" Command="{x:Static controls1:GameExplorer.ClearAllCommand}"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </syncfusion:TabItemExt>
+            </syncfusion:TabControlExt>
+        </Grid>
+    </Grid>
+</UserControl>
+
+ 
+

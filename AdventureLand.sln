@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureLand", "AdventureLand\AdventureLand.csproj", "{782060E3-37FB-49A7-B26C-245A90D0F742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureLandCore", "AdventureLandCore\AdventureLandCore.csproj", "{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1576FC70-B76E-45E4-8F12-1F587DDBAADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureLandDesigner", "DiagramDesigner\AdventureLandDesigner.csproj", "{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedControls", "SharedControls\SharedControls.csproj", "{4062C172-430F-40C6-A916-5638E9DD695D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureLandExplorer", "AdventureLandExplorer\AdventureLandExplorer.csproj", "{50784489-E0D2-40C3-B21E-6B9744C7E0C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Debug|x86.ActiveCfg = Debug|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Debug|x86.Build.0 = Debug|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Release|Any CPU.ActiveCfg = Release|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Release|Mixed Platforms.Build.0 = Release|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Release|x86.ActiveCfg = Release|x86
+		{782060E3-37FB-49A7-B26C-245A90D0F742}.Release|x86.Build.0 = Release|x86
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B447AA90-F2EE-4992-B7C5-7A6DF1B09153}.Release|x86.ActiveCfg = Release|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Debug|x86.Build.0 = Debug|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}.Release|x86.Build.0 = Release|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Debug|x86.Build.0 = Debug|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Release|x86.ActiveCfg = Release|Any CPU
+		{4062C172-430F-40C6-A916-5638E9DD695D}.Release|x86.Build.0 = Release|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{50784489-E0D2-40C3-B21E-6B9744C7E0C3}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62A64537-3E3F-478F-AD08-6D24F716264B}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AdventureLand.vsmdi
+	EndGlobalSection
+EndGlobal

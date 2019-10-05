@@ -1,0 +1,20 @@
+﻿AdventureWorldDesigner
+
+
+winexe
+C#
+.cs
+E:\GAME DEV\AdventureGames\CORE1\DiagramDesigner\obj\Release\
+DiagramDesigner
+none
+false
+TRACE
+E:\GAME DEV\AdventureGames\CORE1\DiagramDesigner\App.xaml
+191271875063
+2-1838714920
+97-308251652
+17542654194
+ApiExplorer.xaml;Controls\AboutBox\AboutBoxSimple.xaml;Controls\CompassEditor.xaml;Controls\ParentObjectEditor.xaml;Controls\DirectoryEditor.xaml;Controls\CompassWindow.xaml;Controls\ScriptEditor.xaml;Controls\FileEditor.xaml;Controls\RichTextEditor.xaml;Controls\ScriptWindow.xaml;Controls\TextEditor.xaml;AdventureDesigner.xaml;Resources\ApplicationToolbar.xaml;Resources\Connection.xaml;Resources\DesignerItem.xaml;Resources\Stencils\FlowChartStencils.xaml;Resources\Toolbox.xaml;Resources\ToolboxItem.xaml;Wizards\GameWizard.xaml;
+
+False
+

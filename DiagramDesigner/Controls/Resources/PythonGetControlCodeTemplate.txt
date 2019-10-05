@@ -1,0 +1,4 @@
+﻿# This is one of the game engines control scripts. There are three that have different functions.
+# Initialise - runs once right at the start of the game, you can add your own initialisation routines, titles, introductions etc.
+# Loop Pre-process - the game runs in a loop asking for input and processing it. This script runs once per loop execution right at the start before input has been taken.
+# Loop Post-process - This script runs once per loop execution right at the end of the loop after user input has been processed.

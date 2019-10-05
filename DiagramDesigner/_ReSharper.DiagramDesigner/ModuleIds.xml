@@ -1,0 +1,6 @@
+<Modules>
+  <Module PersistentId="B437DF5F-20E0-4082-A92E-5C1D9C31A8E9" ModuleId="DiagramDesigner" />
+  <Module PersistentId="d:Miscellaneous Files" ModuleId="WPFToolkit.Extended" />
+  <Module PersistentId="WPFToolkit.Extended, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4" ModuleId="WPFToolkit.Extended_1" />
+  <Module PersistentId="FabTab, Version=1.0.0.0, Culture=neutral, PublicKeyToken=292626629a736ae0" ModuleId="FabTab" />
+</Modules>

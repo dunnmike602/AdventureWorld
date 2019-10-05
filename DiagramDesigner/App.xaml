@@ -1,0 +1,41 @@
+﻿<Application x:Class="DiagramDesigner.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:aboutBox="clr-namespace:DiagramDesigner.Controls.AboutBox"
+             xmlns:converters="clr-namespace:DiagramDesigner.Converters"
+             StartupUri="AdventureDesigner.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <aboutBox:AboutAssemblyDataProvider x:Key="AboutDataProvider" />
+            <XmlDataProvider x:Key="AboutProvider" XPath="ApplicationInfo" IsAsynchronous="False" IsInitialLoadEnabled="True">
+                <x:XData>
+                    <ApplicationInfo xmlns="">
+                        <Title>About Adventure Word Designer</Title>
+
+                        <Copyright>Copyright © 2018 MLD Computing Limited</Copyright>
+
+                    </ApplicationInfo>
+                </x:XData>
+            </XmlDataProvider>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Converters.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Shared.xaml" />
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/Shared.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/Button.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/ToolBar.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/slider.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/GroupBox.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/AltGroupBox.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/Expander.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/ScrollBar.xaml"/>
+                <ResourceDictionary Source="Resources/ApplicationToolbar.xaml"/>
+                <ResourceDictionary Source="Resources/DesignerItem.xaml"/>
+                <ResourceDictionary Source="Resources/ToolboxItem.xaml"/>
+                <ResourceDictionary Source="Resources/Toolbox.xaml"/>
+                <ResourceDictionary Source="Resources/Connection.xaml"/>
+                <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml"/>
+                <ResourceDictionary Source="ConversationDesigner/Stencils/ConversationStencils.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

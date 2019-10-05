@@ -1,0 +1,168 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+        xmlns:local="clr-namespace:DiagramDesigner.AdventureWorld.Domain"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:behaviours="clr-namespace:DiagramDesigner.Controls.Behaviours" Loaded="ScriptWindowOnLoaded"
+    mc:Ignorable="d" x:Class="DiagramDesigner.Controls.ScriptWindow" 
+        d:DesignWidth="1152" d:DesignHeight="110">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3.5*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch"  Background="Transparent"/>
+        <Grid Grid.Column="0" Grid.Row="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Script Explorer"  Margin="5,5,5,1"  Style="{StaticResource AltGroupBox}" BorderBrush="Transparent" IsHitTestVisible="True">
+                <GroupBox.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Script Explorer" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5 0 0 0" TextAlignment="Left"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" >
+                                <Button Padding="2" Style="{StaticResource ToolBarButtonBaseStyle}" ToolTip="Expand All"  x:Name="CmdExpand" Click="CmdExpandClick">
+                                    <fa:ImageAwesome Icon="PlusSquare"  VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                </Button>
+                                <Button Padding="2" Style="{StaticResource ToolBarButtonBaseStyle}" ToolTip="Collapse All"  x:Name="CmdCollapse" Click="CmdCollapseClick">
+                                    <fa:ImageAwesome Icon="MinusSquare"  VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </GroupBox.HeaderTemplate>
+                <TreeView x:Name="ScriptExplorer" AllowDrop="False"  TreeViewItem.Selected="ScriptExplorerOnSelected" HorizontalAlignment="Stretch" BorderBrush="Transparent" 
+                          VerticalAlignment="Stretch">
+                    <TreeViewItem  x:Name="AllScriptsContainer" Header="All Scripts" Foreground="Black" ItemsSource="{Binding ScriptContainerHeaders}" 
+                          HorizontalAlignment="Left" BorderBrush="Transparent">
+                        <TreeViewItem.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Setter Property="IsExpanded" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                                <Setter Property="behaviours:TreeViewItemBehavior.IsBroughtIntoViewWhenSelected" Value="True"/>
+                            </Style>
+                        </TreeViewItem.ItemContainerStyle>
+                        <TreeViewItem.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type local:ScriptContainerHeader}" ItemsSource="{Binding ScriptContainers}">
+                                <StackPanel Orientation="Horizontal" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Margin="0 3 0 3" Height="20" Width="18" Source="{Binding Image}" />
+                                        <TextBlock Margin="5 3 0 3" Text="{Binding Header}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                            <DataTemplate DataType="{x:Type local:ScriptContainer}">
+                                <StackPanel Orientation="Horizontal" Margin="0 3 0 3">
+                                    <Image Margin="0 0 3 0" Height="20" Width="18" ToolTip="{Binding Script.ScriptStateText}"  Source="{Binding Script.ScriptStateImage}" />
+                                    <TextBlock Text="{Binding Name}" ToolTip="{Binding Script.Id}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </TreeViewItem.Resources>
+                    </TreeViewItem>
+                </TreeView>
+            </GroupBox>
+            <DockPanel Grid.Row="1">
+                <Button  Margin="8,8,8,8"  Style="{StaticResource AppButtonStyle}"  HorizontalAlignment="Left" DockPanel.Dock="Left"  Width="100" Content="Compile All" x:Name="CmdValidateAll" Click="CmdCompileAllClick" />
+            </DockPanel>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <syncfusion:TabControlExt Grid.Row="0" x:Name="ScriptTab" Margin="0" HorizontalAlignment="Stretch" IsNewButtonEnabled="False"  Background="Transparent"
+                                  EnableLabelEdit="False" CloseButtonType="Hide">
+                <syncfusion:TabItemExt Header="Script" >
+                    <DockPanel>
+                        <ToolBar DockPanel.Dock="Top">
+                            <ToolBar.Resources>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                                            <Setter Property="Opacity" Value="0.30" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ToolBar.Resources>
+                            <Button Click="OpenFileClick" ToolTip="Insert File">
+                                <Image Source="/Resources/Images/tbOpen.png" Height="20" />
+                            </Button>
+                            <Button Click="SaveFileClick" ToolTip="Save Project">
+                                <Image Source="/Resources/Images/tbSave.png" Height="20" />
+                            </Button>
+                            <Separator/>
+                            <Button Command="Cut" ToolTip="Cut">
+                                <Image Source="/Resources/Images/tbCut.png" Height="20"/>
+                            </Button>
+                            <Button Command="Copy" ToolTip="Copy">
+                                <Image Source="/Resources/Images/tbCopy.png" Height="20"/>
+                            </Button>
+                            <Button Command="Paste" ToolTip="Paste">
+                                <Image Source="/Resources/Images/tbPaste.png" Height="20" />
+                            </Button>
+                            <Button Command="Delete" ToolTip="Delete">
+                                <Image Source="/Resources/Images/tbDelete.png" Height="20" />
+                            </Button>
+                            <Separator/>
+                            <Button Command="Undo" ToolTip="Undo">
+                                <Image Source="/Resources/Images/tbUndo.png" Height="20"/>
+                            </Button>
+                            <Button Command="Redo">
+                                <Image Source="/Resources/Images/tbRedo.png" Height="20" />
+                            </Button>
+                            <Separator/>
+                            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}" ToolTip="Word Wrap">
+                                <Image Source="/Resources/Images/tbWordWrap.png" Height="20"/>
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding ElementName=CodeTextEditor,Path=ShowLineNumbers}" ToolTip="Show Line Numbers">
+                                <TextBlock Width="20" TextAlignment="Center">#</TextBlock>
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding ElementName=CodeTextEditor,Path=Options.ShowEndOfLine}" ToolTip="Show End Of Line">
+                                <TextBlock Width="20" TextAlignment="Center">¶</TextBlock>
+                            </CheckBox>
+                            <Separator/>
+                            <Button  Margin="10 0 0 0"  Style="{StaticResource ToolBarButtonBaseStyle}" Width="20"  HorizontalAlignment="Right" ToolTip="Open Object Browser" x:Name="CmdObjectBrowser" Click="CmdObjectBrowserClick">
+                                <fa:ImageAwesome Icon="Sitemap"  VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                            </Button>
+                            <Button  Margin="10 0 0 0"  Style="{StaticResource ToolBarButtonBaseStyle}" Width="20"  HorizontalAlignment="Right" ToolTip="Quick Search in Document"  Click="QuickSearchClick">
+                                <fa:ImageAwesome Icon="Search"  VerticalAlignment="Center" Width="12" HorizontalAlignment="Center" />
+                            </Button>
+                            <Separator/>
+                            <Border BorderBrush="Black" BorderThickness="1" Margin="10 0 0 0" >
+                                <StackPanel Orientation="Horizontal" Margin="2">
+                                    <TextBlock FontWeight="Bold"   VerticalAlignment="Center"  Text="Script Name:" />
+                                    <TextBlock  Margin="5 0 0 0" x:Name="ScriptName" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                        </ToolBar>
+                        <avalonedit:TextEditor x:Name="CodeTextEditor" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" 
+                                           TextChanged="CodeTextEditorOnTextChanged"  FontSize="10pt" ShowLineNumbers="True">
+                        </avalonedit:TextEditor>
+                    </DockPanel>
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt Header="Output" BorderBrush="Transparent">
+                    <TextBox  x:Name="Errors" Margin="0"  BorderBrush="Transparent" BorderThickness="0"
+                                      TextAlignment="Left" FontStyle="Normal" FontWeight="Bold" 
+                                       AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" 
+                                       HorizontalContentAlignment="Stretch"  />
+                </syncfusion:TabItemExt>
+            </syncfusion:TabControlExt>
+            <DockPanel Grid.Row="1">
+                <Button  Margin="0,8,8,8"  Style="{StaticResource AppButtonStyle}" HorizontalAlignment="Right" DockPanel.Dock="Right" ToolTip="Run the current script"  Width="100" Content="Run" x:Name="CmdRun" Click="CmdRunClick" />
+                <Button  Margin="0,8,8,8"  Style="{StaticResource AppButtonStyle}" HorizontalAlignment="Right" DockPanel.Dock="Right" ToolTip="Compile but do not run the current script by compiling it." 
+                         Width="100" Content="Compile" x:Name="CmdValidate" Click="CmdCompileClick" />
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

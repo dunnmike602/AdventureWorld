@@ -1,0 +1,32 @@
+# The LOAD command allows you to load a saved game.
+
+def Execute(adventureCommand):
+	if not ProcessFileOperationParametersForLength(adventureCommand):
+		return False
+
+	# Parameter is of the correct the file can be deleted
+	if adventureCommand.Parameters.Count == 1:
+		FileToLoad = adventureCommand.Parameters[0].OriginalWord
+		
+		gameText = AWApi.LoadSaveGame(FileToLoad)
+		
+		# This file does not exist
+		if gameText == None:
+			ConsoleApi.FormattedWrite(ThereIsNoFile)
+			return False
+			
+		loadedGame = AWApi.DeserializeFromString(gameText)
+		 
+		if loadedGame.Version <> AWApi.GameData.Version:
+			ConsoleApi.FormattedWrite(InvalidGameVersion)
+			return False
+            
+		AWApi.InitGameData(loadedGame);
+		ConsoleApi.FormattedWrite("Game loaded successfully.")
+		
+		# We need to reset the time to be the same as it was when the game is starting
+		AWApi.SetVariable("startGame", True)
+		
+		return True
+	
+	return SentenceNotRecognised()

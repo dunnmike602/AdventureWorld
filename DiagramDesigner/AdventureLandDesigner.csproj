@@ -1,0 +1,794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DiagramDesigner</RootNamespace>
+    <AssemblyName>AdventureWorldDesigner</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DiagramDesigner.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AvalonWizard, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonWizard.1.2.0\lib\net40\AvalonWizard.dll</HintPath>
+    </Reference>
+    <Reference Include="Colorful.Console, Version=1.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Colorful.Console.1.2.9\lib\net461\Colorful.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Faker.NET4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.SQLite, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Wpf, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.2.7.8.1\lib\net45\IronPython.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeAnalysis.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeAnalysis.CSharp.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Scripting, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeAnalysis.CSharp.Scripting.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeAnalysis.Scripting.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Dynamic, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="PhilosophicalMonkey, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\PhilosophicalMonkey.1.4.0\lib\net451\PhilosophicalMonkey.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="ReactiveUI, Version=7.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\reactiveui-core.7.4.0\lib\Net45\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Splat.1.4.0\lib\Net45\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Data.WPF, Version=15.4460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=15.4460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Shared.Wpf, Version=15.4460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Tools.WPF, Version=15.4460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.FileVersionInfo.4.3.0\lib\net46\System.Diagnostics.FileVersionInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.StackTrace.4.3.0\lib\net46\System.Diagnostics.StackTrace.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=1.4.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Reflection.Metadata.1.5.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encoding.CodePages.4.4.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Xml.XmlDocument.4.3.0\lib\net46\System.Xml.XmlDocument.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Xml.XPath.4.3.0\lib\net46\System.Xml.XPath.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TaskDialog, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WPFTaskDialog.1.7.1\lib\net40-Client\TaskDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="ToggleSwitch, Version=1.1.2.0, Culture=neutral, PublicKeyToken=8637099990568f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToggleSwitch.1.1.2\lib\net40-client\ToggleSwitch.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
+      <HintPath>..\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AdventureWorld\Domain\ConversationItemsSource.cs" />
+    <Compile Include="AdventureWorld\Domain\Conversation.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationObjectBase.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationResponse.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationText.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationTree.cs" />
+    <Compile Include="AdventureWorld\Domain\DropDownItem.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationResponseMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationTextMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationTreeMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\NpcMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Npc.cs" />
+    <Compile Include="Controls\ConversationEditor.xaml.cs">
+      <DependentUpon>ConversationEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BitmapEditor.xaml.cs">
+      <DependentUpon>BitmapEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EntityExplorer.xaml.cs">
+      <DependentUpon>EntityExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConversationScriptEditor.xaml.cs">
+      <DependentUpon>ConversationScriptEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Helpers\ConversationHelper.cs" />
+    <Compile Include="ConversationDesigner\ConversationDesigner.xaml.cs">
+      <DependentUpon>ConversationDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConversationDesigner\Helpers\ConversationExplorerTabIndexes.cs" />
+    <Compile Include="ConversationDesigner\Helpers\ConversationObjectExplorerTabIndexes.cs" />
+    <Compile Include="Converters\ContainerToBrushConverter.cs" />
+    <Compile Include="Converters\ExitCommandParameterConverter.cs" />
+    <Compile Include="Converters\ExitTextConverter.cs" />
+    <Compile Include="Converters\ExitVisibilityConverter.cs" />
+    <Compile Include="Converters\MakeVisibleWhenConversationConverter.cs" />
+    <Compile Include="Converters\MakeVisibleWhenDesignerConverter.cs" />
+    <Compile Include="Converters\ObjectToBrushConverter.cs" />
+    <Compile Include="Helpers\DependancyObjectHelper.cs" />
+    <Compile Include="Extensions\DesignerCanvasExtensions.cs" />
+    <Compile Include="Helpers\MessageBusContractConstants.cs" />
+    <Compile Include="Helpers\GlobalUiConstants.cs" />
+    <Compile Include="Helpers\MainScreenTabIndexes.cs" />
+    <Compile Include="Helpers\ProjectExplorerTabIndexes.cs" />
+    <Compile Include="Interfaces\IStatusMessageProvider.cs" />
+    <Compile Include="Symbols\Helpers\CanvasType.cs" />
+    <Compile Include="Symbols\Helpers\ConnectionLinkerHelper.cs" />
+    <Compile Include="Symbols\Helpers\ObjectClass.cs" />
+    <Compile Include="Symbols\RoundedCornersPolygon.cs" />
+    <Compile Include="Wizards\AdventureObjectViewModel.cs" />
+    <Compile Include="Wizards\Attributes\RequiredIfAttribute.cs" />
+    <Compile Include="Wizards\Attributes\RequiredStringCollectionAttribute.cs" />
+    <Compile Include="Wizards\NpcViewModel.cs" />
+    <Compile Include="Wizards\NpcsViewModel.cs" />
+    <Compile Include="Wizards\ContainerViewModel.cs" />
+    <Compile Include="Wizards\GameFeaturesViewModel.cs" />
+    <Compile Include="Wizards\GameWizardBasicViewModel.cs" />
+    <Compile Include="Wizards\GameWizardViewModel.cs" />
+    <Compile Include="Wizards\GameWizardView.xaml.cs">
+      <DependentUpon>GameWizardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\ContainersViewModel.cs" />
+    <Compile Include="Wizards\PlaceableObjectsViewModel.cs" />
+    <Compile Include="Wizards\PlaceableObjectViewModel.cs" />
+    <Compile Include="Wizards\RoomsViewModel.cs" />
+    <Compile Include="Wizards\RoomViewModel.cs" />
+    <Compile Include="Wizards\ValidatableViewModelBase.cs" />
+    <Page Include="ApiExplorer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AboutBox\AboutBoxSimple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ConversationEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BitmapEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CompassEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EntityExplorer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ParentObjectEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DirectoryEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CompassWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ConversationScriptEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScriptEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FileEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RichTextEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScriptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TextEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AdventureDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="AdventureWorld\CustomCollections\ObservableItemCollection.cs" />
+    <Compile Include="AdventureWorld\Domain\AdventureGameDesignerViewModel.cs" />
+    <Compile Include="AdventureWorld\Domain\AdventureObjectBase.cs" />
+    <Compile Include="AdventureWorld\Domain\ChangedEventArgs.cs" />
+    <Compile Include="AdventureWorld\Domain\Client.cs" />
+    <Compile Include="AdventureWorld\Domain\ClientType.cs" />
+    <Compile Include="AdventureWorld\Domain\AdventureCommandMapping.cs" />
+    <Compile Include="AdventureWorld\Domain\Container.cs" />
+    <Compile Include="AdventureWorld\Domain\DirectionItemsSource.cs" />
+    <Compile Include="AdventureWorld\Domain\Encryptor.cs" />
+    <Compile Include="AdventureWorld\Domain\Exit.cs" />
+    <Compile Include="AdventureWorld\Domain\GameRoot.cs" />
+    <Compile Include="AdventureWorld\Domain\IdentifableObjectBase.cs" />
+    <Compile Include="AdventureWorld\Domain\Interfaces\IAdventureGameApi.cs" />
+    <Compile Include="AdventureWorld\Domain\Interfaces\IFilterableAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ContainerMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ExitMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\PlaceableObjectMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\RoomMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\NonEmptyCollectionAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\NoneZeroAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\NotNullAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\Options.cs" />
+    <Compile Include="AdventureWorld\Domain\PlaceableObject.cs" />
+    <Compile Include="AdventureWorld\Domain\Room.cs" />
+    <Compile Include="AdventureWorld\Domain\RoomItemsSource.cs" />
+    <Compile Include="AdventureWorld\Domain\ScriptContainer.cs" />
+    <Compile Include="AdventureWorld\Domain\ScriptContainerHeader.cs" />
+    <Compile Include="AdventureWorld\Domain\ScriptTypes.cs" />
+    <Compile Include="AdventureWorld\Domain\Severities.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationCategories.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationItemAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationItemHelper.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationTypes.cs" />
+    <Compile Include="AdventureWorld\Extensions\ArrayExtensions.cs" />
+    <Compile Include="AdventureWorld\Extensions\ObservableCollectionExtensions.cs" />
+    <Compile Include="AdventureWorld\Extensions\SerializationExtensions.cs" />
+    <Compile Include="AdventureWorld\GameExecution\ConsoleExecutor.cs" />
+    <Compile Include="AdventureWorld\GameExecution\ConsoleGameInformation.cs" />
+    <Compile Include="AdventureWorld\GameExecution\ExecutorFactory.cs" />
+    <Compile Include="AdventureWorld\GameExecution\GameInformation.cs" />
+    <Compile Include="AdventureWorld\GameExecution\Interfaces\IGameExecutor.cs" />
+    <Compile Include="AdventureWorld\GameExecution\WpfExecutor.cs" />
+    <Compile Include="ApiExplorer.xaml.cs">
+      <DependentUpon>ApiExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AdventureDesigner.xaml.cs">
+      <DependentUpon>AdventureDesigner.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ConversationDesigner\ConversationDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConversationDesigner\Stencils\ConversationStencils.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Converters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ApplicationToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Connection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\DesignerItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Stencils\FlowChartStencils.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Toolbox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ToolboxItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wizards\GameWizardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\AboutBox\AboutAssemblyDataProvider.cs" />
+    <Compile Include="Controls\AboutBox\AboutBoxSimple.xaml.cs">
+      <DependentUpon>AboutBoxSimple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AboutBox\IAboutDataProvider.cs" />
+    <Compile Include="Controls\Behaviours\TreeViewItemBehavior.cs" />
+    <Compile Include="Controls\CompassEditor.xaml.cs">
+      <DependentUpon>CompassEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ParentObjectEditor.xaml.cs">
+      <DependentUpon>ParentObjectEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RadialGrid.cs" />
+    <Compile Include="Controls\CompassWindow.xaml.cs">
+      <DependentUpon>CompassWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextOnlyTextBox.cs" />
+    <Compile Include="Services\CommandServices.cs" />
+    <Compile Include="Symbols\ArrowSymbol.cs" />
+    <Compile Include="Symbols\Connection.cs" />
+    <Compile Include="Symbols\ConnectionAdorner.cs" />
+    <Compile Include="Symbols\Connector.cs" />
+    <Compile Include="Symbols\ConnectorAdorner.cs" />
+    <Compile Include="Controls\DirectoryEditor.xaml.cs">
+      <DependentUpon>DirectoryEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\StencilHelpers.cs" />
+    <Compile Include="Extensions\TreeViewExtensions.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Scripting\PythonHandler.cs" />
+    <Compile Include="Scripting\Interfaces\IScriptHandler.cs" />
+    <Compile Include="Controls\ScriptEditor.xaml.cs">
+      <DependentUpon>ScriptEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FileEditor.xaml.cs">
+      <DependentUpon>FileEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RichTextEditor.xaml.cs">
+      <DependentUpon>RichTextEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scripting\ScriptHandlerBase.cs" />
+    <Compile Include="Controls\ScriptWindow.xaml.cs">
+      <DependentUpon>ScriptWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextEditor.xaml.cs">
+      <DependentUpon>TextEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragThumb.cs" />
+    <Compile Include="Controls\RelativePositionPanel.cs" />
+    <Compile Include="Controls\ResizeThumb.cs" />
+    <Compile Include="Symbols\ConnectorInfo.cs" />
+    <Compile Include="Symbols\ConnectorOrientation.cs" />
+    <Compile Include="Symbols\DesignerCanvas.Commands.cs" />
+    <Compile Include="Symbols\DesignerCanvas.cs" />
+    <Compile Include="Symbols\DesignerItem.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\DesignerItemExtensions.cs" />
+    <Compile Include="Extensions\PropertyInfoExtensions.cs" />
+    <Compile Include="Interfaces\IGroupable.cs" />
+    <Compile Include="Interfaces\ISelectable.cs" />
+    <Compile Include="Symbols\Helpers\AdventureObjectHelper.cs" />
+    <Compile Include="Symbols\Helpers\ObjectTypes.cs" />
+    <Compile Include="Symbols\OrthogonalPathFinder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Symbols\RubberbandAdorner.cs" />
+    <Compile Include="Symbols\SelectionService.cs" />
+    <Compile Include="ToolboxImpl\DragObject.cs" />
+    <Compile Include="ToolboxImpl\Toolbox.cs" />
+    <Compile Include="ToolboxImpl\ToolboxItem.cs" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\AlignObjectsBottom.png" />
+    <Resource Include="Resources\Images\AlignObjectsCenteredHorizontal.png" />
+    <Resource Include="Resources\Images\AlignObjectsCenteredVertical.png" />
+    <Resource Include="Resources\Images\AlignObjectsLeft.png" />
+    <Resource Include="Resources\Images\AlignObjectsRight.png" />
+    <Resource Include="Resources\Images\AlignObjectsTop.png" />
+    <Resource Include="Resources\Images\BringForward.png" />
+    <Resource Include="Resources\Images\BringToFront.png" />
+    <Resource Include="Resources\Images\Copy.png" />
+    <Resource Include="Resources\Images\Cut.png" />
+    <Resource Include="Resources\Images\Delete.png" />
+    <Resource Include="Resources\Images\DistributeObjectsHorizontal.png" />
+    <Resource Include="Resources\Images\DistributeObjectsVertical.png" />
+    <Resource Include="Resources\Images\GenericDocument.png" />
+    <Resource Include="Resources\Images\Group.png" />
+    <Resource Include="Resources\Images\OpenFolder.png" />
+    <Resource Include="Resources\Images\PasteBig.png" />
+    <Resource Include="Resources\Images\Paste.png" />
+    <Resource Include="Resources\Images\Print.png" />
+    <Resource Include="Resources\Images\Save.png" />
+    <Resource Include="Resources\Images\SendBackward.png" />
+    <Resource Include="Resources\Images\SendToBack.png" />
+    <Resource Include="Resources\Images\Ungroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\amber.png" />
+    <Resource Include="Resources\Images\green.png" />
+    <Resource Include="Resources\Images\red.png" />
+    <Resource Include="Resources\Images\python.png" />
+    <Resource Include="Resources\Images\ctrlscripts.png" />
+    <Resource Include="Resources\Images\userfunction.png" />
+    <Resource Include="Resources\Images\method.jpg" />
+    <Resource Include="Resources\Images\link.png" />
+    <Resource Include="Resources\Images\New-Room.png" />
+    <Resource Include="Resources\Images\Key-icon.png" />
+    <Resource Include="Resources\Images\script-icon.png" />
+    <Resource Include="Resources\Images\Warning.png" />
+    <Resource Include="Resources\Images\info.png" />
+    <Resource Include="Resources\Images\error.png" />
+    <Resource Include="Resources\Images\exit.png" />
+    <EmbeddedResource Include="Controls\Resources\ICSharpCode.PythonBinding.Resources.Python.xshd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Resource Include="Resources\Images\options.png" />
+    <Resource Include="Resources\Images\check.png" />
+    <Resource Include="Resources\Images\exec.png" />
+    <Resource Include="Resources\Images\properties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdventureLandCore\AdventureLandCore.csproj">
+      <Project>{b447aa90-f2ee-4992-b7c5-7a6df1b09153}</Project>
+      <Name>AdventureLandCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectBrowser\ObjectBrowser.csproj">
+      <Project>{87179a00-8b6a-4671-8dc5-70fe55a312e3}</Project>
+      <Name>ObjectBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReflectionHelper\ReflectionHelper.csproj">
+      <Project>{7a33d8f0-4f24-4af4-a19a-4d9d86f02cce}</Project>
+      <Name>ReflectionHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedControls\SharedControls.csproj">
+      <Project>{4062c172-430f-40c6-a916-5638e9dd695d}</Project>
+      <Name>SharedControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameClients\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\objbrowser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Namespace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\assembly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Class.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Interface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Enum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Delegate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\struct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnumItem.png" />
+    <Resource Include="Resources\Images\event.png" />
+    <Resource Include="Resources\Images\command.png" />
+    <EmbeddedResource Include="Controls\Resources\PythonCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonCommonCodeTemplate.txt" />
+    <Resource Include="Resources\Images\tbCut.png" />
+    <Resource Include="Resources\Images\tbDelete.png" />
+    <Resource Include="Resources\Images\tbOpen.png" />
+    <Resource Include="Resources\Images\tbPaste.png" />
+    <Resource Include="Resources\Images\tbRedo.png" />
+    <Resource Include="Resources\Images\tbSave.png" />
+    <Resource Include="Resources\Images\tbUndo.png" />
+    <Resource Include="Resources\Images\tbWordWrap.png" />
+    <Resource Include="Resources\Images\tbCopy.png" />
+    <EmbeddedResource Include="Controls\Resources\PythonDeleteCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonDropCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonHelpCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonListCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonLoadCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonSaveCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonScoreCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonLookCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonTakeCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonWaitCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonQuitCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonWalkCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonSwimCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonCrawlCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonRunCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonInventoryCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonThrowCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonUseCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonSwitchCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonPreprocessTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonGetControlCodeTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonUnlockCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonOpenCommandTemplate.txt" />
+    <Resource Include="Resources\Images\lamp.png" />
+    <Resource Include="Resources\Images\method.gif" />
+    <Resource Include="Resources\Images\Property.png" />
+    <Resource Include="Resources\Images\compass.png" />
+    <Resource Include="Resources\Images\maze.png" />
+    <Resource Include="Resources\Images\selectall.png" />
+    <Resource Include="Resources\Images\Ladder.png" />
+    <Resource Include="Resources\Images\npc.png" />
+    <Resource Include="Resources\Images\Conversation.png" />
+    <EmbeddedResource Include="Controls\Resources\PythonConversationTemplate.txt" />
+    <Resource Include="Resources\Images\ConStartScript.png" />
+    <Resource Include="Resources\Images\NpcSpeaksScript.png" />
+    <Resource Include="Resources\Images\PlayerResScript.png" />
+    <EmbeddedResource Include="Controls\Resources\PythonTalkCommandTemplate.txt" />
+    <Resource Include="Resources\Images\compassglyph.jpg" />
+    <Content Include="XmlDocumentation\AdventureLandCore.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="XmlDocumentation\mscorlib.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

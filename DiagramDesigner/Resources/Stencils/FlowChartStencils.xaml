@@ -1,0 +1,139 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:toolboxImpl="clr-namespace:DiagramDesigner.ToolboxImpl">
+
+    
+<toolboxImpl:Toolbox x:Key="FlowChartStencils" ItemSize="80,80" SnapsToDevicePixels="True" Margin="0 -10 0 0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+        <ItemsControl.Items>
+            <Grid ToolTip="Room" Name="RoomGrid" IsHitTestVisible="False">
+                <Border BorderThickness="1" BorderBrush="Black" >
+                    <Grid Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="Blue"  x:Name="RoomRectangle"/>
+                        <TextBlock Grid.Row="1" FontWeight="Bold" Text="{Binding BaseName,FallbackValue='Room'}" x:Name="RoomText" HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" TextWrapping="Wrap" Foreground="Black"
+                                   Width="{Binding Source=RoomRectangle, Path=ActualWidth}"
+                                   Height="{Binding Source=RoomRectangle, Path=ActualHeight}"  />
+                        <Image Grid.Row="1" Name="RoomImage" Opacity=".2"  IsHitTestVisible="False"></Image>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid ToolTip="PlaceableObject" Name="ObjectGrid" IsHitTestVisible="False">
+                <Border BorderThickness="1" BorderBrush="Black" >
+                    <Grid Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="Red"  x:Name="ObjectRectangle"/>
+                        <TextBlock Text="{Binding BaseName,FallbackValue='Object'}" FontWeight="Bold" Grid.Row="1" x:Name="ObjectText"  HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" Foreground="Black"
+                                   Width="{Binding Source=ObjectRectangle, Path=ActualWidth}"
+                                   Height="{Binding Source=ObjectRectangle, Path=ActualHeight}" 
+                                   TextWrapping="Wrap"/>
+                        <Image Grid.Row="1" Name="ObjectImage" Opacity=".2"  IsHitTestVisible="False"></Image>
+
+                        <Border Grid.Row="2"   Height="18" x:Name="ObjectParentNameBackGround"  VerticalAlignment="Bottom">
+                            <TextBlock x:Name="ObjectParentName"  HorizontalAlignment="Left" FontSize="10" Foreground="White"
+                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis" FontWeight="Bold"
+                                       TextWrapping="NoWrap">
+                            </TextBlock>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=ObjectParentName, Path=Text}" Value="">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=ObjectParentName, Path=Text}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid ToolTip="Container" Name="ContainerGrid" IsHitTestVisible="False">
+                <Border BorderThickness="1" BorderBrush="Black" >
+                    <Grid Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="DarkOliveGreen"  x:Name="ContainerRectangle"/>
+                        <TextBlock Text="{Binding BaseName,FallbackValue='Container'}" Grid.Row="1" x:Name="ContainerText" TextAlignment="Center"  HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" FontWeight="Bold" Foreground="Black"
+                                   Width="{Binding Source=ContainerRectangle, Path=ActualWidth}"
+                                   Height="{Binding Source=ContainerRectangle, Path=ActualHeight}" 
+                                   TextWrapping="Wrap"/>
+                        <Image Grid.Row="1" Name="ContainerImage" Opacity=".2"  IsHitTestVisible="False"></Image>
+
+                        <Border Grid.Row="2"   Height="18" x:Name="ContainerParentNameBackGround"  VerticalAlignment="Bottom">
+                            <TextBlock x:Name="ContainerParentName"  HorizontalAlignment="Left" FontSize="10" Foreground="White" Cursor="Hand"
+                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis" FontWeight="Bold" 
+                                       TextWrapping="NoWrap">
+                            </TextBlock>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=ContainerParentName, Path=Text}" Value="">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=ContainerParentName, Path=Text}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid ToolTip="Npc" Name="NpcGrid" IsHitTestVisible="False">
+                <Border BorderThickness="1" BorderBrush="Black" >
+                    <Grid Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="Goldenrod"  x:Name="NpcRectangle"/>
+                        <TextBlock Text="{Binding BaseName,FallbackValue='NPC'}" Grid.Row="1" x:Name="NpcText" TextAlignment="Center"  HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" Foreground="Black" FontWeight="Bold"
+                                   Width="{Binding Source=NpcRectangle, Path=ActualWidth}"
+                                   Height="{Binding Source=NpcRectangle, Path=ActualHeight}" 
+                                   TextWrapping="Wrap"/>
+                        <Image Grid.Row="1" Name="NpcImage" Opacity=".2"  IsHitTestVisible="False"></Image>
+                        <Border Grid.Row="2"   Height="18" x:Name="NpcParentNameBackGround"  VerticalAlignment="Bottom">
+                            <TextBlock x:Name="NpcParentName"  HorizontalAlignment="Left" FontSize="10" Foreground="White" Cursor="Hand"
+                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis" FontWeight="Bold" 
+                                       TextWrapping="NoWrap">
+                            </TextBlock>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=NpcParentName, Path=Text}" Value="">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=NpcParentName, Path=Text}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ItemsControl.Items>
+    </toolboxImpl:Toolbox>
+</ResourceDictionary>

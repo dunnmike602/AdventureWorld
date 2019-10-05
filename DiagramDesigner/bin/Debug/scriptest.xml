@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <RoomDesigner>
+    <DesignerItems>
+      <DesignerItem>
+        <Left>96</Left>
+        <Top>44.539999999999992</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>6cccd298-e9f2-4747-99ea-256e6e188b9a</ID>
+        <zIndex>0</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Room" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="RoomRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFAFBE9" Offset="0" /&gt;&lt;GradientStop Color="#FFFFA500" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFD69436&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="ROOM1" TextWrapping="Wrap" Name="RoomText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+    </DesignerItems>
+    <Connections />
+  </RoomDesigner>
+  <ObjectDesigner>
+    <DesignerItems>
+      <DesignerItem>
+        <Left>58</Left>
+        <Top>18.539999999999992</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>19e69511-b0a2-4f81-95af-20f0f5ab94ee</ID>
+        <zIndex>0</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="OBJECT1" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+    </DesignerItems>
+    <Connections />
+  </ObjectDesigner>
+  <AdventureGame>&lt;AdventureGameDesignerApi xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;Exits /&gt;&lt;GameLoopProcessCode&gt;TO MYFUNCTION X
+ [
+PRINTLN "HELLO"
+]
+
+DO MYFUNCTION 1
+&lt;/GameLoopProcessCode&gt;&lt;Introduction&gt;This is a test of a script
+
+I hope you like it&lt;/Introduction&gt;&lt;MaxScore&gt;2&lt;/MaxScore&gt;&lt;MaximumInventorySize&gt;4&lt;/MaximumInventorySize&gt;&lt;PlaceableObjects&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;19e69511-b0a2-4f81-95af-20f0f5ab94ee&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;This is a key&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;OBJECT1&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;Key&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;Key&lt;/ShortDescription&gt;&lt;StartRoomId i:nil="true" /&gt;&lt;/PlaceableObject&gt;&lt;/PlaceableObjects&gt;&lt;Rooms&gt;&lt;Room&gt;&lt;ControlId&gt;6cccd298-e9f2-4747-99ea-256e6e188b9a&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;You are in the shop&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;ROOM1&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;/Room&gt;&lt;/Rooms&gt;&lt;StartRoomId&gt;6cccd298-e9f2-4747-99ea-256e6e188b9a&lt;/StartRoomId&gt;&lt;Title&gt;Script Test&lt;/Title&gt;&lt;WonGame&gt;You have won the game&lt;/WonGame&gt;&lt;/AdventureGameDesignerApi&gt;</AdventureGame>
+  <Options>&lt;Options xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;ClientExe&gt;C:\Users\mjd\Documents\Visual Studio 2010\Projects\AdventureLand\AdventureLand\bin\Debug\AdventureLand.exe&lt;/ClientExe&gt;&lt;ClientType&gt;ConsoleApplication&lt;/ClientType&gt;&lt;GameDescription&gt;Script Test Game&lt;/GameDescription&gt;&lt;GameDirectory&gt;Games&lt;/GameDirectory&gt;&lt;GameName&gt;Script Test&lt;/GameName&gt;&lt;Id&gt;d374e385-004b-4955-9293-f5f7f8ddabe3&lt;/Id&gt;&lt;Temp i:nil="true" /&gt;&lt;UserName i:nil="true" /&gt;&lt;/Options&gt;</Options>
+</Root>

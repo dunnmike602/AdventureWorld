@@ -1,0 +1,1566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <RoomDesigner>
+    <DesignerItems />
+    <Connections />
+  </RoomDesigner>
+  <ObjectDesigner>
+    <DesignerItems />
+    <Connections />
+  </ObjectDesigner>
+  <AdventureGame>&lt;AdventureGameDesignerViewModel xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="i1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;ControlId&gt;f3b01fd2-bf53-4c89-a16f-311f1e1554c7&lt;/ControlId&gt;&lt;AdventureCommandMappings&gt;&lt;AdventureCommandMapping z:Id="i2"&gt;&lt;ControlId&gt;2f1b4ce8-41ff-4b91-bcc6-a1b4d1499317&lt;/ControlId&gt;&lt;AliasList&gt;WORM
+SLITHER&lt;/AliasList&gt;&lt;HelpText&gt;Crawl in the specified direction.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;d8603fd7-209e-4506-9ddc-7b0735e15729&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The Crawl command allows the player to crawl around the Adventure World.
+
+def Execute(adventureCommand):
+	return ExecuteGenericMove(adventureCommand)
+	
+	&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;CRAWL&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i3"&gt;&lt;ControlId&gt;0830cee2-3fbb-4f36-abbe-9a7160ff7788&lt;/ControlId&gt;&lt;AliasList&gt;DEL
+ERASE&lt;/AliasList&gt;&lt;HelpText&gt;Deletes the saved game with the specified name.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;887a012a-6766-4bde-9c28-1f8de32a95a5&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The DELETE command allows you to delete a previous save game
+
+def Execute(adventureCommand):
+	if not ProcessFileOperationParametersForLength(adventureCommand):
+		return False
+
+	# Parameter is of the correct the file can be deleted
+	if adventureCommand.Parameters.Count == 1:
+		FileToDelete = adventureCommand.Parameters[0].OriginalWord
+		
+		gameText = AWApi.LoadSaveGame(FileToDelete);
+		
+		# This file does not exist
+		if gameText == None:
+			ConsoleApi.FormattedWrite(ThereIsNoFile);
+			return False
+			
+		AWApi.DeleteSaveGame(FileToDelete);
+		ConsoleApi.FormattedWrite("Save game successfully deleted.")
+		return True
+	
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;DELETE&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i4"&gt;&lt;ControlId&gt;70632081-dc82-44f1-a1d4-c03b42262e1f&lt;/ControlId&gt;&lt;AliasList&gt;LEAVE&lt;/AliasList&gt;&lt;HelpText&gt;Drop object(s).&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;d05b9fec-d901-4887-9d41-f4426b8c4142&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The DROP command allows the player to leave objects lying around
+
+def Execute(adventureCommand):
+	
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+		
+	# Do we match any objects, first check to see if we are asking for anything
+	parametersToCheck = wildcardGameWordList if adventureCommand.Parameters[0].Word.lower() in everythingWords else adventureCommand.GetParametersWithoutStopWords()
+	objects = AWApi.GetObjectsFromNames(parametersToCheck, 70.0, True)
+
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite(DontKnowWord.format(invalidObjects[0].Name.upper()))
+		return False
+		
+	# Valid Drop Object phrases
+	currentDropObjectsPhrases = []
+	
+	# Build phrases for objects to be dropped based on the word that matched them
+	phrase1 = originalCommandWord + " "
+	phrase2 = originalCommandWord + " "
+	
+	for i in range(len(validObjects)):
+		actualAndWord = andWord if i &amp;lt; len(validObjects) - 1 else ""
+		phrase1 = phrase1 + '{} {} '.format(validObjects[i].WordThatMatchedThis, actualAndWord)
+		phrase2 = phrase2 + '{} {} {} '.format(theWord, validObjects[i].WordThatMatchedThis, actualAndWord)
+		
+	currentDropObjectsPhrases.extend([ phrase1.strip(), phrase2.strip()])
+	
+	# Build phrases for objects to be dropped based on their actual names
+	phrase1 = originalCommandWord + " "
+	phrase2 = originalCommandWord + " "
+		
+	for i in range(len(validObjects)):
+		actualAndWord = andWord if i &amp;lt; len(validObjects) - 1 else ""
+		phrase1 = phrase1 + '{} {} '.format(validObjects[i].Name, actualAndWord)
+		phrase2 = phrase2 + '{} {} {} '.format(theWord, validObjects[i].Name, actualAndWord)
+			
+	currentDropObjectsPhrases.extend([ phrase1.strip(), phrase2.strip()])
+	
+	# Add "all" words to support DROP ALL
+	for word in everythingWords:
+		currentDropObjectsPhrases.extend(['{} {}'.format(originalCommandWord, word)])
+	
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentDropObjectsPhrases):
+		# We can't drop anything
+		if validObjects.Count == 0:
+			ConsoleApi.FormattedWrite("There isn't anything to drop!")
+			return True
+	
+		return ProcessObjectListForDrop(validObjects, "dropped")
+	
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;DROP&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i5"&gt;&lt;ControlId&gt;22c3e0b9-ae8b-4134-9779-c5ee15de2ef4&lt;/ControlId&gt;&lt;AliasList i:nil="true" /&gt;&lt;HelpText&gt;Show help.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;4b52c3e4-5ef2-48b8-bcd0-23a04c6b1cd3&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The HELP command allows the player to get some help
+
+def Execute(adventureCommand):
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.WriteLine(AWApi.GetDefaultHelpText())
+		return True
+
+	return SentenceNotRecognised()
+&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;HELP&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i6"&gt;&lt;ControlId&gt;aa791207-fdec-4720-be27-3f8bac40c821&lt;/ControlId&gt;&lt;AliasList&gt;INV
+HOLDING&lt;/AliasList&gt;&lt;HelpText&gt;Show items you are holding.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;918f680b-4465-4c0f-ba5d-35e45e1e2be3&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The INVENTORY shows what the player is holding
+
+def InventoryHelper():
+	if AWApi.GetInventory().Count == 0:
+		ConsoleApi.FormattedWrite("You're not holding anything.")
+		return True
+    	
+	ConsoleApi.FormattedWrite("You are holding:")
+
+	for placeableObject in AWApi.GetInventory():
+		ConsoleApi.FormattedWrite(placeableObject.InventoryDescription)
+     
+	return True 
+           
+def Execute(adventureCommand):
+	if adventureCommand.Parameters.Count == 0:
+		return InventoryHelper()
+
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;INVENTORY&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i7"&gt;&lt;ControlId&gt;7810bf31-f7a0-475c-a15a-bdd482bd44f7&lt;/ControlId&gt;&lt;AliasList&gt;LS&lt;/AliasList&gt;&lt;HelpText&gt;List saved games.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;fc777e07-e75b-443f-a067-573d3f21cf02&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The LIST command shows all available games that have been saved
+# Note this command is only every run on its own and so always returns false to stop command processing
+def Execute(adventureCommand):
+	if adventureCommand.Parameters.Count == 0:
+		# Get a list of save games
+		saveGames = AWApi.ListSaveGames()
+		
+		if saveGames.Count == 0:
+			ConsoleApi.FormattedWrite("There are no saved games.")	
+			return False
+			
+		# Loop through them and display each one
+		for file in saveGames:
+			ConsoleApi.WriteLine(file)
+			
+		return True
+
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;LIST&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i8"&gt;&lt;ControlId&gt;d7be3e3a-2060-4438-8a21-49c30ef6d48c&lt;/ControlId&gt;&lt;AliasList&gt;LD&lt;/AliasList&gt;&lt;HelpText&gt;Loads the saved game with the specified name.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;6d784c89-599f-4e91-9727-4e26384c748b&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The LOAD command allows you to load a saved game.
+
+def Execute(adventureCommand):
+	if not ProcessFileOperationParametersForLength(adventureCommand):
+		return False
+
+	# Parameter is of the correct the file can be deleted
+	if adventureCommand.Parameters.Count == 1:
+		FileToLoad = adventureCommand.Parameters[0].OriginalWord
+		
+		gameText = AWApi.LoadSaveGame(FileToLoad)
+		
+		# This file does not exist
+		if gameText == None:
+			ConsoleApi.FormattedWrite(ThereIsNoFile)
+			return False
+			
+		loadedGame = AWApi.DeserializeFromString(gameText)
+		 
+		if loadedGame.Version &amp;lt;&amp;gt; AWApi.GameData.Version:
+			ConsoleApi.FormattedWrite(InvalidGameVersion)
+			return False
+            
+		AWApi.InitGameData(loadedGame);
+		ConsoleApi.FormattedWrite("Game loaded successfully.")
+		return True
+	
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;LOAD&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i9"&gt;&lt;ControlId&gt;0ae85c8e-3850-47ca-8d1c-57978a8dbf63&lt;/ControlId&gt;&lt;AliasList&gt;EXAMINE
+INSPECT&lt;/AliasList&gt;&lt;HelpText&gt;Describe an object or look at whats around.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;9de1c670-6554-473a-8b4c-8426563b59d1&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The LOOK command allows the player to examine rooms and objects
+originalCommandWord = ""
+
+def ShowRoomInformationHelper():
+	# Give the chance for customisations to run and bail out of default actions if required.
+	preProcessResult = Preprocess(CurrentLocation)
+			
+	if not preProcessResult:
+		return False
+		
+	AWApi.ShowRoomInformation()
+	
+	return True
+		
+def ProcessPlaceableObjectHelper(objectToProcess, adventureCommand):
+	matchedObjectName = objectToProcess.WordThatMatchedThis
+	
+	# Valid object phrases
+	currentObjectPhrases = []
+	
+	for objectName in [objectToProcess.WordThatMatchedThis, objectToProcess.Name]:
+		currentObjectPhrases.extend([ '{} {} {}'.format(lookWord, atWord, objectName), 
+		'{} {} {} {}'.format(lookWord, atWord, theWord, objectName),
+		'{} {} {}'.format(examineWord, theWord, objectName),
+		'{} {}'.format(examineWord, objectName),
+		'{} {} {}'.format(inspectWord, theWord, objectName),
+		'{} {}'.format(inspectWord, objectName)])
+
+	if not LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentObjectPhrases):
+		return SentenceNotRecognised()
+	
+	if not AWApi.IsItemAvailableToExamine(objectToProcess):
+		ConsoleApi.FormattedWrite("I don't see that here.")
+		return False
+		
+	# Give the chance for customisations to run and bail out of default actions if required.
+	preProcessResult = Preprocess(objectToProcess)
+			
+	if not preProcessResult:
+		return False		
+	
+	# Describe the object
+	ConsoleApi.FormattedWrite(objectToProcess.CurrentDescription)
+	
+	# If it is a container and open describe the object
+	if type(objectToProcess) is Container and objectToProcess.IsOpen and AWApi.GetChildObjects(objectToProcess).Count &amp;gt; 0:
+		ConsoleApi.FormattedWrite("Inside the {0}, you can see.".format(objectToProcess.Name))
+		AWApi.ListChildObjectDescriptions(objectToProcess);
+	
+	return True
+	
+def Execute(adventureCommand):
+	
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+	
+	# If the room is dark you certainly can't pick anything up
+	if CurrentLocation.IsDark:
+		ConsoleApi.FormattedWrite(IsDarkText)
+		return True
+
+	# Build a list of phrases that mean look at the current room
+	lookAtRoomPhrases = [ lookWord , '{} {}'.format(lookWord, aroundWord), 
+	'{} {} {}'.format(lookWord, aroundWord, roomWord), '{} {} {} {}'.format(lookWord, aroundWord, theWord, roomWord),
+	'{} {} {}'.format(lookWord, atWord, roomWord), '{} {} {} {}'.format(lookWord, atWord, theWord, roomWord)]
+	
+	# If the command is look and there are no parameters or the parameter is a specific word we assume we are looking at the current room
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), lookAtRoomPhrases):
+		return ShowRoomInformationHelper()
+	
+	# If the command is not look and there are no parameters we need more information
+	if originalCommandWord &amp;lt;&amp;gt; "LOOK" and adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+
+	# Do we match any rooms or object (we must ignore the stop words at the moment)
+	rooms = AWApi.GetRoomsFromNames(adventureCommand.GetParametersWithoutStopWords())
+	objects = AWApi.GetObjectsFromNames(adventureCommand.GetParametersWithoutStopWords())
+	
+	# Check for words we don't understand
+	invalidRooms = list(filter(lambda room: not room.IsValid, rooms))
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	
+	# Check for words we don't understand
+	if any(invalidObjects) and any(invalidRooms):
+		badObject = NotNone(invalidObjects[0], invalidRooms[0])
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(badObject.Name.upper()))
+		return False
+	
+	# We have only stopwords and therefore a meaningless sentence
+	if rooms.Count == 0 + objects.Count == 0:
+		return SentenceNotRecognised()
+	
+	# This command cannot work on multiple objects/rooms
+	validRooms = list(filter(lambda room: room.IsValid, rooms))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	if validRooms.Count + validObjects.Count &amp;gt; 1:
+		ConsoleApi.FormattedWrite("One thing at a time please!")
+		return False
+	
+	if rooms.Count == 1 and AWApi.IsNameCurrentRoom(rooms[0].Name, 100.0):
+		matchedRoomName = rooms[0].WordThatMatchedThis
+		
+		# If we are in the current room we can process the sentence as the current room
+		currentRoomPhrases = [ '{} {} {}'.format(originalCommandWord, atWord, matchedRoomName), 
+		'{} {} {} {}'.format(originalCommandWord, atWord, theWord, matchedRoomName),
+		'{} {} {} {}'.format(originalCommandWord, aroundWord, theWord, matchedRoomName),
+		'{} {} {}'.format(originalCommandWord, aroundWord, matchedRoomName)]
+		
+		if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentRoomPhrases):
+			return ShowRoomInformationHelper()
+			
+		return SentenceNotRecognised()
+
+	# Process the examine command on the object selected (running the pre-process script of course)
+	return ProcessPlaceableObjectHelper(validObjects[0], adventureCommand)
+&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;LOOK&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i10"&gt;&lt;ControlId&gt;bc7d6ddf-6dcc-9999-bef7-a08d18cd97dd&lt;/ControlId&gt;&lt;AliasList i:nil="true" /&gt;&lt;HelpText&gt;Open a container object.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;b0270419-bb34-4b5d-b4f0-4a6aa962c324&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The OPEN command allows the player to Open container objects.
+
+originalCommandWord = ""
+
+def ProcessPlaceableObjectHelper(objectToProcess):
+	# Try the pre-process script for the current room and return its result
+	preProcessResult = Preprocess(objectToProcess)
+			
+	if not preProcessResult:
+		return False		
+
+	return True
+	
+def OpenObjectHelper(adventureCommand):
+
+	# Do we match any objects
+	allObjects = AWApi.GetObjectsFromNames(adventureCommand.GetParametersWithoutStopWords())
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, allObjects))
+	
+	if not UnknownWordsHelper(invalidObjects):
+		return False
+	
+	# At this point we must be trying to open a real object
+	objectToOpen = allObjects[0]
+	
+	objectOpenPhrases = []
+	
+	for objectName in [objectToOpen.WordThatMatchedThis, objectToOpen.Name]:
+		# Process allowable phrases
+		objectOpenPhrases.extend([ '{} {}'.format(originalCommandWord, objectName), 
+		'{} {} {}'.format(originalCommandWord, theWord, objectName)])
+	
+	if not LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), objectOpenPhrases):
+		return SentenceNotRecognised()
+			
+	if not AWApi.IsItemAvailableToExamine(objectToOpen):
+		ConsoleApi.FormattedWrite("I don't see that here")
+		return False
+		
+	if not type(objectToOpen) is Container:
+		ConsoleApi.FormattedWrite("Try as you might it doesn't seem to open.")
+		return False
+	
+	if objectToOpen.IsLocked:
+		ConsoleApi.FormattedWrite("Try unlocking it first.")
+		return False
+		
+	if objectToOpen.IsOpen:
+		ShowAlreadyOpenMessage()
+		return False
+			
+	objectToOpen.IsOpen = True
+				
+	# Give the chance for customisations to run and bail out of default actions.
+	preProcessResult = Preprocess(objectToOpen)
+			
+	if not preProcessResult:
+		return False
+
+	ShowOpenMessage(objectToOpen)
+		
+	return True
+		
+def ShowAlreadyOpenMessage():
+	ConsoleApi.FormattedWrite("There is no point, it's already open.")
+	return
+	
+def ShowOpenMessage(objectToOpen):
+	ConsoleApi.FormattedWrite("The {0} is now open".format(objectToOpen.Name))
+	return
+
+	
+def UnknownWordsHelper(invalidObjects):
+	if any(invalidObjects):
+		badObject = invalidObjects[0]
+		ConsoleApi.FormattedWrite(DontKnowWord.format(badObject.Name.upper()))
+		return False
+		
+	return True
+	
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+	
+	# No parameter supplied ask the question
+	if adventureCommand.GetParametersWithoutStopWords().Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+	
+	# We can only open a single object 
+	if adventureCommand.GetParametersWithoutStopWords().Count == 1:
+		return OpenObjectHelper(adventureCommand)
+		
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;OPEN&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i11"&gt;&lt;ControlId&gt;3c9335bf-e648-46b8-924d-58d90a02babf&lt;/ControlId&gt;&lt;AliasList&gt;Q&lt;/AliasList&gt;&lt;HelpText&gt;Quit the game.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;3221e7ef-75f2-48fb-ab53-4650658b1ec0&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The QUIT command allows the player to exit the game.
+
+from System.Globalization import CultureInfo
+
+def Execute(adventureCommand):
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("Are you sure?")
+		
+		if ConsoleApi.ReadLine(AWApi.GameData.CommandPromptText).StartsWith("Y", True, CultureInfo.InvariantCulture):
+			AWApi.QuitGame()
+		else:
+			ConsoleApi.FormattedWrite("Ok please carry on?")
+
+		return False
+
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;QUIT&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i12"&gt;&lt;ControlId&gt;ac7d81fa-6dcc-4c9e-bef7-a08d18cd37dd&lt;/ControlId&gt;&lt;AliasList&gt;SPRINT
+JOG&lt;/AliasList&gt;&lt;HelpText&gt;Run in the specified direction.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;9c40220e-8c2a-4e36-9fa6-9f41098d8d73&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The Run command allows the player to move around the Adventure World.
+def Execute(adventureCommand):
+	return ExecuteGenericMove(adventureCommand)	&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;RUN&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i13"&gt;&lt;ControlId&gt;79367091-e460-42bf-9b24-a5ffed3b3480&lt;/ControlId&gt;&lt;AliasList&gt;SAV&lt;/AliasList&gt;&lt;HelpText&gt;Saves the current game with the specified name.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;80ae9cce-af8b-43bd-9afe-f3e19231e903&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The SAVE command allows the player to save the current game.
+
+def Execute(adventureCommand):
+	if not ProcessFileOperationParametersForLength(adventureCommand):
+		return False
+
+	# One file name parameter supplied the current game can be saved with this game
+	if adventureCommand.Parameters.Count == 1:
+		FileToSave = adventureCommand.Parameters[0].OriginalWord
+		AWApi.Save(FileToSave, AWApi.SerializeToString());
+		ConsoleApi.FormattedWrite("Game saved successfully.")
+		return True
+	
+	# More than one file name parameter specified
+	ConsoleApi.FormattedWrite("You must specify only one name for the Save command.")
+
+	return False&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;SAVE&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i14"&gt;&lt;ControlId&gt;c0826aac-33fa-4a33-a8be-435187c708ca&lt;/ControlId&gt;&lt;AliasList i:nil="true" /&gt;&lt;HelpText&gt;Show the current score.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;58190307-5f47-4cfa-b2bd-40281697c0a4&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The SCORE command allows the player to check there current score
+
+def Execute(adventureCommand):
+	if adventureCommand.Parameters.Count &amp;gt; 0:
+		return SentenceNotRecognised()
+	
+	ShowScoreHelper()
+	return True	
+	&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;SCORE&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i15"&gt;&lt;ControlId&gt;b1663bd0-c540-4f30-929c-4e7b6fdcb0d0&lt;/ControlId&gt;&lt;AliasList&gt;PADDLE&lt;/AliasList&gt;&lt;HelpText&gt;Swim in the specified direction.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;1d592e78-8e5b-4079-8d4e-be81fd2d7d00&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The Swim command allows the player to move around the Adventure World.
+def Execute(adventureCommand):
+	return ExecuteGenericMove(adventureCommand)
+	
+	&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;SWIM&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i16"&gt;&lt;ControlId&gt;d4cdc8a9-61be-41f6-8b85-c9900d72ccd3&lt;/ControlId&gt;&lt;AliasList&gt;TURN&lt;/AliasList&gt;&lt;HelpText&gt;Switch a lightable object on or off.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;54c79ad0-6b58-46c1-b9b6-e57572a23a39&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The SWITCH command allows the player to switch things on
+from System.Collections.Generic import List
+from System import String
+
+originalCommandWord = ""
+	
+def SetObjectToLightState(objectToLight, state):
+	# Can't set to the same state
+	if (objectToLight.IsLit and state == "on") or (not objectToLight.IsLit and state == "off"):
+		ConsoleApi.FormattedWrite("The {0} is already {1}.".format(objectToLight.Name, state))
+	else:
+		ConsoleApi.FormattedWrite("Success!!")
+		objectToLight.IsLit = True if state == "on" else False
+	
+		# Give the chance for customisations to run and bail out of default actions if required.
+		preProcessResult = Preprocess(objectToLight)
+			
+		if not preProcessResult:
+			return False
+			
+	return True
+	
+def Execute(adventureCommand):
+	
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+	
+	# If the room is dark you certainly can't pick anything up
+	if CurrentLocation.IsDark:
+		ConsoleApi.FormattedWrite("You can't see anything!!")
+		return True
+		
+	# No parameter supplied ask the question
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+		
+	# Do we match any objects
+	objects = AWApi.GetObjectsFromNames(adventureCommand.GetParametersWithoutStopWords(), 70.0, True)
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	# Words we don't know
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(invalidObjects[0].Name.upper()))
+		return False
+
+	# Allowable phrases
+	objectSwitchPhrases = []
+	objectToSwitch = validObjects[0]
+	
+	for objectName in [objectToSwitch.WordThatMatchedThis, objectToSwitch.Name]:
+		# Process allowable phrases
+		objectSwitchPhrases.extend([ '{} {} {}'.format(originalCommandWord, objectName, onWord), 
+		'{} {} {} {}'.format(originalCommandWord, theWord, objectName, onWord),
+		'{} {} {}'.format(originalCommandWord, objectName, offWord), 
+		'{} {} {} {}'.format(originalCommandWord, theWord, objectName, offWord)])
+
+	if not LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), objectSwitchPhrases):
+		return SentenceNotRecognised()
+	
+	# Nothing to light or the room is dark or the object is not visible
+	# NOTE this behavior can be changed in the pre-process scripts to customise light behavior or
+	# directly in the command if required.
+	if validObjects.Count == 0 or not validObjects[0].Visible:
+		ConsoleApi.FormattedWrite("You can't see that here.")
+		return False
+	
+	if (validObjects.Count &amp;gt; 0 and not validObjects[0].IsLightSource):
+		ConsoleApi.FormattedWrite("You can't do that the {}.".format(validObjects[0]))
+		return False
+		
+	onOrOff = onWord if adventureCommand.GetWords().IndexOf(onWord.upper()) &amp;gt; 0 else offWord
+
+	# We can attempt the light operation
+	return SetObjectToLightState(validObjects[0], onOrOff)
+	
+	&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;SWITCH&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i17"&gt;&lt;ControlId&gt;154b6bd8-8605-4e48-aea9-4be4c2f73855&lt;/ControlId&gt;&lt;AliasList&gt;GET
+SNATCH
+SEIZE
+COLLECT
+SNAG
+OBTAIN
+CLASP
+GRASP
+GATHER
+PICK&lt;/AliasList&gt;&lt;HelpText&gt;Take object(s).&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;362b1432-e760-46ee-b821-0c8c0905bd6f&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The TAKE command allows the player to pick up objects.
+
+# Loop through each object and process as appropriate
+	
+def ProcessObjectList(validObjects):
+	
+	for nextObject in validObjects:
+		itemIsAvailable = AWApi.IsItemAvailableToExamine(nextObject)
+		
+		if not itemIsAvailable:
+			ConsoleApi.FormattedWrite("{0}: You can't see that here.".format(nextObject.Name))
+		
+		elif nextObject.Fixed:
+			ConsoleApi.FormattedWrite("{0}: Cannot be moved.".format(nextObject.Name))
+			
+		elif nextObject.IsHeld:
+			ConsoleApi.FormattedWrite("{0}: You already have it.".format(nextObject.Name))
+		
+		else:
+			# Can we add this to our inventory
+			if AWApi.GameData.EnableInventorySize and (AWApi.GetInventory().Count + 1) &amp;gt; AWApi.GameData.InventorySize:
+				ConsoleApi.FormattedWrite("You can't carry anything else!!")
+				return True
+			
+			# We can take the object
+			AWApi.Take(nextObject)
+			
+			# Give the chance for customisations to run and bail out of default actions if required.
+			preProcessResult = Preprocess(nextObject)
+			
+			if not preProcessResult:
+				return False
+		
+			ConsoleApi.FormattedWrite("{0}: Taken.".format(nextObject.Name))
+			
+	return True
+		
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+
+	# No parameter supplied ask the question
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+		
+	# If the room is dark you certainly can't pick anything up
+	if CurrentLocation.IsDark:
+		ConsoleApi.FormattedWrite(IsDarkText)
+		return True
+		
+	# Do we match any objects
+	parametersToCheck = wildcardGameWordList if adventureCommand.Parameters[0].Word.lower() in everythingWords else adventureCommand.GetParametersWithoutStopWords()
+	objects = AWApi.GetObjectsFromNames(parametersToCheck, 70.0, False)
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(invalidObjects[0].Name.upper()))
+		return False
+		
+	# Valid Take Object phrases
+	currentTakeObjectsPhrases = []
+	
+	# Build phrases for objects to be dropped based on the word that matched them
+	phrase1 = originalCommandWord + " "
+	phrase2 = originalCommandWord + " "
+	
+	for i in range(len(validObjects)):
+		actualAndWord = andWord if i &amp;lt; len(validObjects) - 1 else ""
+		phrase1 = phrase1 + '{} {} '.format(validObjects[i].WordThatMatchedThis, actualAndWord)
+		phrase2 = phrase2 + '{} {} {} '.format(theWord, validObjects[i].WordThatMatchedThis, actualAndWord)
+
+	currentTakeObjectsPhrases.extend([ phrase1.strip(), phrase2.strip()])
+	
+	# Build phrases for objects to be dropped based on their actual names
+	phrase1 = originalCommandWord + " "
+	phrase2 = originalCommandWord + " "
+		
+	for i in range(len(validObjects)):
+		actualAndWord = andWord if i &amp;lt; len(validObjects) - 1 else ""
+		phrase1 = '{} {} '.format(originalCommandWord, validObjects[i].Name, actualAndWord).strip()
+		phrase2 = '{} {} {} '.format(originalCommandWord, theWord, validObjects[i].Name, actualAndWord).strip()
+			
+	currentTakeObjectsPhrases.extend([ phrase1.strip(), phrase2.strip()])
+		
+	# Add "all" words to support TAKE ALL
+	for word in everythingWords:
+		currentTakeObjectsPhrases.extend(['{} {}'.format(originalCommandWord, word)])
+	
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentTakeObjectsPhrases):
+		# We can't take anything
+		if validObjects.Count == 0:
+			ConsoleApi.FormattedWrite("There isn't anything to take!")
+			return True
+	
+		return ProcessObjectList(validObjects)
+	
+	return SentenceNotRecognised()	&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;TAKE&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i18"&gt;&lt;ControlId&gt;bc0920c7-ec1d-42e2-8759-c1f655bfe246&lt;/ControlId&gt;&lt;AliasList&gt;LOB
+HURL
+HEAVE
+FLING&lt;/AliasList&gt;&lt;HelpText&gt;Throw an object, optionally in a particular direction.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;d53b2619-eb74-481a-b9ba-98f66c6a8942&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The THROW command allows the player to throw objects around
+from System.Collections.Generic import List
+from System import String
+
+import clr
+clr.AddReference("System.Core")
+import System
+clr.ImportExtensions(System.Linq)
+
+def ThrowItemThroughExit(objectToThrow, directionToThrow):
+
+	# Check is the item is available to throw and run its script if so
+	itemIsAvailable = AWApi.IsItemAvailableToExamine(objectToThrow)
+	
+	if not itemIsAvailable:
+		ConsoleApi.FormattedWrite("{0}: You can't see that here.".format(objectToThrow.Name))
+		return False
+		
+	elif not objectToThrow.IsHeld:
+		ConsoleApi.FormattedWrite("{0}: You are not holding that.".format(objectToThrow.Name))
+		return False
+				
+	if not directionToThrow.upper() in MoveValueLimits:
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(directionToThrow.upper()))
+		return False
+			
+	exit = GetExitFromDirection(CurrentLocation, directionToThrow)
+
+	# We can't throw this way
+	if exit == None:
+		ConsoleApi.FormattedWrite("I can't throw the {0} that way.".format(objectToThrow.Name))
+		return False
+		
+	# We next check if the exit is locked (and not visible of course)
+	if not CheckExitLocked(exit):
+		return False
+		
+	# Finally we can perform the operation
+	AWApi.ThrowToRoom(objectToThrow, exit.RoomName)
+
+	# Give the chance for customisations to run and bail out of default actions if required.
+	preProcessResult = Preprocess(exit)
+			
+	if not preProcessResult:
+		return False
+		
+	ConsoleApi.FormattedWrite("You throw the {0} {1}.".format(objectToThrow.Name.upper(), directionToThrow.lower()))
+	
+	return True
+
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+	
+	# An allowable parameter is a direction so we must remove this from the list of objects before checking them
+	objects = AWApi.GetObjectsFromNames(adventureCommand.GetParametersWithoutStopWords(List[String](MoveValueLimits)), 70.0, True)
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	# Check for directions
+	throwDirection = None
+	
+	if adventureCommand.GetParametersWithoutStopWords().Count &amp;gt; 1:
+		# Only last word can be a direction
+		directionList = List[String]()
+		potentialThrowDirection = adventureCommand.GetParametersWithoutStopWords().Last().Word
+	
+		directionList.Add(potentialThrowDirection)
+	
+		unknownDirections = set(directionList).difference(set(MoveValueLimits))
+		
+		# Must specify a known direction
+		if unknownDirections.Count == 0:
+			throwDirection = potentialThrowDirection
+
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite(DontKnowWord.format(invalidObjects[0].Name.upper()))
+		return False
+
+	if validObjects.Count &amp;gt; 1:
+		ConsoleApi.FormattedWrite("One thing at a time please!")
+		return False
+	
+	if invalidObjects.Count + validObjects.Count == 0:
+		ConsoleApi.FormattedWrite("I can't throw that!")
+		return False
+		
+	# Valid Drop Object phrases
+	currentThrowObjectsPhrases = []
+	
+	currentThrowObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].WordThatMatchedThis)])
+	currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis)])
+
+	currentThrowObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].Name)])
+	currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name)])
+	
+	if throwDirection &amp;lt;&amp;gt; None:
+		currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, validObjects[0].WordThatMatchedThis, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis, toWord, theWord, throwDirection)])
+		
+		currentThrowObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, validObjects[0].Name, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name, throwDirection)])
+		currentThrowObjectsPhrases.extend(['{} {} {} {} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name, toWord, theWord, throwDirection)])
+
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentThrowObjectsPhrases):
+		# We can't throw anything
+		if validObjects.Count == 0:
+			ConsoleApi.FormattedWrite("There isn't anything to throw!")
+			return True
+	
+		objectToThrow = validObjects[0]
+	
+		if(throwDirection == None):
+				# Same as drop in the room
+				return ProcessObjectListForDrop(validObjects, "thrown")
+		else:	
+			# Otherwise we attempt to throw the item through the exit
+			return ThrowItemThroughExit(objectToThrow, throwDirection)
+		
+	return SentenceNotRecognised()		&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;THROW&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i19"&gt;&lt;ControlId&gt;bc7d61fa-6dcc-9999-bef7-a08d18cd97dd&lt;/ControlId&gt;&lt;AliasList i:nil="true" /&gt;&lt;HelpText&gt;Unlock an object or an exit.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;d8e30cfc-b6e3-48e1-93a6-269734425617&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The UNLOCK command allows the player to unlock rooms and exit
+
+def ProcessPlaceableObjectHelper(objectToProcess):
+	# Try the pre-process script for the current room and return its result
+	preProcessResult = Preprocess(objectToProcess)
+			
+	if not preProcessResult:
+		return False		
+
+	return True
+	
+def UnlockObjectHelper(objectToUnlock):
+	
+	if not AWApi.IsItemAvailableToExamine(objectToUnlock):
+		ConsoleApi.FormattedWrite("I don't see that here.")
+		return False
+	
+	if not type(objectToUnlock) is Container:
+		ConsoleApi.FormattedWrite("Try as you might it can't be done")
+		return False
+		
+	if not objectToUnlock.IsLocked:
+		ShowAlreadyUnlockedMessage()
+		return False
+			
+	objectToUnlock.IsLocked = False
+				
+	# Give the chance for customisations to run and bail out of default actions.
+	preProcessResult = Preprocess(objectToUnlock)
+			
+	if not preProcessResult:
+		return False
+
+	ShowUnlockedMessage()
+		
+	return True
+
+def UnlockExitHelper(directionToUnlock):
+
+	# See if the exit exists
+	exit = GetExitFromDirection(CurrentLocation, directionToUnlock)
+
+	# We can't move this way
+	if exit == None:
+		ConsoleApi.FormattedWrite("I can't see anything over there.")
+		return False
+		
+	# Already unlocked
+	if not exit.IsLocked:
+		ShowAlreadyUnlockedMessage()
+		return False
+			
+	exit.IsLocked = False
+				
+	# Give the chance for customisations to run and bail out of default actions.
+	preProcessResult = Preprocess(exit)
+			
+	if not preProcessResult:
+		return False
+
+	ShowUnlockedMessage()
+	
+	return True
+		
+def ShowAlreadyUnlockedMessage():
+	ConsoleApi.FormattedWrite("There is no point, it's already unlocked.")
+	return
+	
+def ShowUnlockedMessage():
+	ConsoleApi.FormattedWrite("Its unlocked, well done!!")
+	return
+	
+def UnknownDirectionsHelper(invalidDirections):
+	if any(invalidDirections):
+		badDirection = invalidDirections.pop()
+		ConsoleApi.FormattedWrite(DontKnowWord.format(badDirection.upper()))
+		return False
+		
+	return True
+	
+def UnknownWordsHelper(invalidObjects):
+	if any(invalidObjects):
+		badObject = invalidObjects[0]
+		ConsoleApi.FormattedWrite(DontKnowWord.format(badObject.Name.upper()))
+		return False
+		
+	return True
+	
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+
+	# No parameter supplied ask the question
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+	
+	unlockDirection = None
+	objectToUnlock = None
+	
+	if adventureCommand.GetParametersWithoutStopWords().Count &amp;gt; 1:
+		directionList = List[String]()
+		unlockDirection = adventureCommand.GetParametersWithoutStopWords()[1].Word
+		directionList.Add(unlockDirection)
+	
+		unknownDirections = set(directionList).difference(set(MoveValueLimits))
+	
+		# Must specify a known direction
+		if unknownDirections.Count &amp;gt; 0:
+			ConsoleApi.FormattedWrite(DontKnowWord.format(unknownDirections.pop()))
+			return False
+	
+	elif adventureCommand.GetParametersWithoutStopWords().Count &amp;gt; 0:
+		objectList = List[GameWord]()
+		objectList.Add(adventureCommand.GetParametersWithoutStopWords()[0])
+		
+		objects = AWApi.GetObjectsFromNames(objectList, 70.0, True)
+	
+		# Check for words we don't understand
+		invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+		validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+		if any(invalidObjects):
+			ConsoleApi.FormattedWrite(DontKnowWord.format(invalidObjects[0].Name.upper()))
+			return False
+
+		objectToUnlock = validObjects[0]
+		
+	# Valid Unlock phrases
+	currentUnlockObjectsPhrases = []
+	
+	if objectToUnlock &amp;lt;&amp;gt; None:
+		currentUnlockObjectsPhrases.extend(['{} {}'.format(originalCommandWord, objectToUnlock.WordThatMatchedThis)])
+		currentUnlockObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, objectToUnlock.WordThatMatchedThis)])
+
+		currentUnlockObjectsPhrases.extend(['{} {}'.format(originalCommandWord, objectToUnlock.Name)])
+		currentUnlockObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, objectToUnlock.Name)])
+	
+	elif unlockDirection &amp;lt;&amp;gt; None:
+		for exitWord in exitWords:
+			currentUnlockObjectsPhrases.extend(['{} {} {} {}'.format(originalCommandWord, theWord, exitWord, unlockDirection)])
+			currentUnlockObjectsPhrases.extend(['{} {} {} {} {}'.format(originalCommandWord, exitWord, toWord, theWord, unlockDirection)])
+			currentUnlockObjectsPhrases.extend(['{} {} {} {} {} {}'.format(originalCommandWord, theWord, exitWord, toWord, theWord, unlockDirection)])
+			currentUnlockObjectsPhrases.extend(['{} {} {} {}'.format(originalCommandWord, exitWord, toWord, unlockDirection)])
+			currentUnlockObjectsPhrases.extend(['{} {} {} {} {}'.format(originalCommandWord, theWord, exitWord, toWord, unlockDirection)])
+			currentUnlockObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, exitWord, unlockDirection)])
+
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentUnlockObjectsPhrases):
+		# Are we unlocking an object or an exit
+		if objectToUnlock &amp;lt;&amp;gt; None:
+			# We can't unlock anything
+			if validObjects.Count == 0:
+				ConsoleApi.FormattedWrite("There isn't anything to unlock!")
+				return True
+			
+			return UnlockObjectHelper(objectToUnlock)
+		elif unlockDirection &amp;lt;&amp;gt; None:
+			return UnlockExitHelper(unlockDirection)
+		
+	return SentenceNotRecognised()		&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;UNLOCK&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i20"&gt;&lt;ControlId&gt;353f2448-65c6-46a7-9feb-bc751344d8cc&lt;/ControlId&gt;&lt;AliasList&gt;HANDLE&lt;/AliasList&gt;&lt;HelpText&gt;Interact with an object.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;c9e88a3f-2294-4b99-94ae-a3daf2962e4f&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The USE command allows the player to interact with objects in a generic fashion. The actual
+# implementation is placed in the pre-process script for the object. This can be replaced
+# by more specific action commands by the game designer such as SWITCH or TIE
+
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+	
+	# No parameter supplied ask the question
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+	
+	# If the room is dark you certainly can't use anything
+	if CurrentLocation.IsDark:
+		ConsoleApi.FormattedWrite(IsDarkText)
+		return True
+		
+	# Do we match any objects
+	objects = AWApi.GetObjectsFromNames(adventureCommand.GetParametersWithoutStopWords())
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(invalidObjects[0].Name.upper()))
+		return False
+		
+	# We can only use one thing at a time.
+	if validObjects.Count &amp;gt; 1:
+		ConsoleApi.FormattedWrite("One thing at a time please!")
+		return False
+		
+	# We can't use anything
+	if validObjects.Count == 0:
+		ConsoleApi.FormattedWrite("There isn't anything to use!")
+		return False
+		
+	if invalidObjects.Count + validObjects.Count == 0:
+		ConsoleApi.FormattedWrite("I can't use that!")
+		return False
+		
+	# Valid Drop Object phrases
+	currentUseObjectsPhrases = []
+	
+	currentUseObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].WordThatMatchedThis)])
+	currentUseObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].WordThatMatchedThis)])
+
+	currentUseObjectsPhrases.extend(['{} {}'.format(originalCommandWord, validObjects[0].Name)])
+	currentUseObjectsPhrases.extend(['{} {} {}'.format(originalCommandWord, theWord, validObjects[0].Name)])
+	
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentUseObjectsPhrases):
+	
+		objectToUse = validObjects[0]
+	
+		itemIsAvailable = AWApi.IsItemAvailableToExamine(objectToUse)
+		
+		if not itemIsAvailable:
+			ConsoleApi.FormattedWrite("You can't see the {0} here.".format(objectToUse.Name))
+			return False
+		
+		if not objectToUse.IsHeld:
+			container = AWApi.GetContainerForPlaceableObject(objectToUse)
+			
+			if container == None:
+				ConsoleApi.FormattedWrite("You're not holding the {0}!".format(objectToUse.Name))
+			else:
+				ConsoleApi.FormattedWrite("Try taking it out of the {0}!".format(container.Name))
+		
+			return False
+			
+		# Run the pre-process script for the object, this will be where the interaction logic is.
+		# To avoid the default code executing, handle all the logic in the pre-process routine for
+		# the object and return false
+		preProcessResult = Preprocess(objectToUse)
+				
+		# If there was no script run othen display a failure message
+		if preProcessResult:
+			ConsoleApi.FormattedWrite("You cannot {0} the {1} at the moment.".format(originalCommandWord, objectToUse.Name))
+			return False
+			
+		return True
+			
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;USE&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i21"&gt;&lt;ControlId&gt;3d932e34-a69d-4d64-ba02-812e0fe7fcf3&lt;/ControlId&gt;&lt;AliasList&gt;HANG
+CHILL&lt;/AliasList&gt;&lt;HelpText&gt;Wait around for a bit.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList i:nil="true" /&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;c256f403-89c8-41a2-9885-e264d254b825&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The WAIT command allows the player to wait around for a bit
+
+def Execute(adventureCommand):
+	if adventureCommand.Parameters.Count == 0:
+		# Try the pre-process script for the current room and return its result
+		preProcessResult = Preprocess(AWApi.GetCurrentLocation())
+			
+		if not preProcessResult:
+			return False
+			
+		ConsoleApi.FormattedWrite("Time passes...Yawn...")
+		return True
+
+	return SentenceNotRecognised()&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;WAIT&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;AdventureCommandMapping z:Id="i22"&gt;&lt;ControlId&gt;bc7d61fa-6dcc-4c9e-bef7-a08d18cd97dd&lt;/ControlId&gt;&lt;AliasList&gt;GO
+MOVE
+STEP&lt;/AliasList&gt;&lt;HelpText&gt;Walk in the specified direction.&lt;/HelpText&gt;&lt;IsBuiltInCommand&gt;true&lt;/IsBuiltInCommand&gt;&lt;IsEnabled&gt;true&lt;/IsEnabled&gt;&lt;OneWordSubstitutionList&gt;N
+NORTH
+S
+SOUTH
+E
+EAST
+W
+WEST
+SE
+SOUTHEAST
+SW
+SOUTHWEST
+NE
+NORTHEAST
+NW
+NORTHWEST
+U
+UP
+D
+DOWN&lt;/OneWordSubstitutionList&gt;&lt;ScriptCommand xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d4p1:Id&gt;70ff404e-fd61-434d-a2aa-803fdad71b3c&lt;/d4p1:Id&gt;&lt;d4p1:Source&gt;# The Walk command allows the player to move around the Adventure World.
+def Execute(adventureCommand):
+	return ExecuteGenericMove(adventureCommand)
+	
+	&lt;/d4p1:Source&gt;&lt;/ScriptCommand&gt;&lt;VerbName&gt;WALK&lt;/VerbName&gt;&lt;/AdventureCommandMapping&gt;&lt;/AdventureCommandMappings&gt;&lt;AnotherGameText i:nil="true" /&gt;&lt;AnotherGameYesResponse i:nil="true" /&gt;&lt;CommandPromptText&gt;Ready&amp;gt;&lt;/CommandPromptText&gt;&lt;CommonCode xmlns:d2p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d2p1:Id&gt;7e79a632-c6a9-4d49-afc4-4f0955e2ac5b&lt;/d2p1:Id&gt;&lt;d2p1:Source&gt;# This script contains common code routines for all scripts in your game. It ships with code that is used by the built in commands.
+# You can add your own routines or change behaviour of existing commands. Please note if you change the existing commands incorrectly they
+# will likely not function correctly.
+from AdventureLandCore.Domain import GameWord
+from System.Collections.Generic import List
+from AdventureLandCore.Domain import Container
+from System import Char
+from System import String
+from System import Object
+from System import Linq 
+from AdventureLandCore.Domain import ParsedAdventureCommand
+from System import Environment
+from AdventureLandCore.Domain import WordType
+from System.IO import Path
+from AdventureLandCore.Domain import GlobalConstants
+
+import clr
+clr.AddReference("System.Core")
+import System
+clr.ImportExtensions(System.Linq)
+
+originalCommandWord = ""
+	
+# some word constants
+lookWord = "look"
+roomWord = "room"
+aroundWord = "around"
+theWord = "the"
+aWord = "a"
+atWord = "at"
+toWord = "to"
+examineWord = "examine"
+inspectWord = "inspect"
+andWord = "and"
+onWord = "on"
+offWord = "off"
+
+exitWords = ["exit", "door"]
+everythingWords = ["everything", "all"]
+
+wildcardGameWordList = List[GameWord]()
+wildcardGameWord = GameWord()
+wildcardGameWord.Word = "*"
+wildcardGameWordList.Add(wildcardGameWord)
+
+CurrentLocation = AWApi.GetCurrentLocation()
+FileNameMinLength = 3
+FileNameMustBeCorrectLength = 'The filename must be at least {} characters.'
+ThereIsNoFile = "Sorry I can't find that game."
+InvalidGameVersion = "I cannot load this it does not match the current game version."
+DontKnowWord = "I don't know the word \"{0}\"."
+IsDarkText = "You can't see anything."
+
+# Defines the limits of directions for move commands
+MoveValueLimits = AWApi.GetMoveLimits()
+
+# This can be changed to see a different title
+def ShowTitle():
+	ConsoleApi.Title = "{0} : Score {1} out of {2}".format(AWApi.GameData.Title, AWApi.GameData.CurrentScore,AWApi.GameData.MaximumScore) if AWApi.GameData.EnableScore else AWApi.GameData.Title
+	return
+	
+def GetExitFromDirection(room, direction):
+	# Apply abbreviations
+	mappedDirection = AWApi.GetDirectionFromAbbreviation(direction)
+	
+	if not mappedDirection == None:
+    	 direction = mappedDirection
+	
+	return AWApi.GetExitFromName(CurrentLocation.Name, direction)
+
+def IsNullOrWhiteSpace(source):
+	if not source:
+		return True
+	elif not source.strip():
+		return True
+	else:
+		return False
+
+def NameIsCorrectLength(source):
+	if len(source) &amp;lt; FileNameMinLength:
+		return False
+	else:
+		return True
+		
+def SentenceNotRecognised():
+	ConsoleApi.FormattedWrite("That sentence isn't one I recognise.")
+	
+	return False
+	
+def Preprocess(targetObject):
+ 	return LanguageApi.ExecuteObjectScript(targetObject.PreProcessScript, targetObject, AWApi.LastExecutedCommand) 
+ 	
+def ProcessFileOperationParametersForLength(adventureCommand):
+	# One parameter not of the correct length specified
+	if adventureCommand.Parameters.Count == 0 or (adventureCommand.Parameters.Count == 1 and not NameIsCorrectLength(adventureCommand.Parameters[0].OriginalWord)):
+		ConsoleApi.FormattedWrite(FileNameMustBeCorrectLength.format(FileNameMinLength))
+		return False
+		
+	return True
+	
+def NotNone(s,d):
+    if s is None:
+        return d
+    else:
+        return s
+ 
+# This function is used to show the current score, both by the built-in score command and automatically when the game finishes.
+# Change it here if you want to customise it
+def ShowScoreHelper():
+	if AWApi.GameData.EnableScore:
+		ConsoleApi.FormattedWrite("Current Score is {0} out of {1}.".format(AWApi.GameData.CurrentScore, AWApi.GameData.MaximumScore))
+	
+	return
+	
+# Executes the specified move checking against the various allowable phrases
+def ProcessTheMoveHelper(adventureCommand):
+	
+	nextMoveDirection = adventureCommand.Parameters[0].OriginalWord
+	
+	exit = GetExitFromDirection(CurrentLocation, nextMoveDirection)
+
+	# We can't move this way
+	if exit == None:
+		ConsoleApi.FormattedWrite("I can't {0} {1}".format(originalCommandWord.lower(), nextMoveDirection))
+		return False
+		
+	# We next check if the exit is locked (and not visible of course)
+	if not CheckExitLocked(exit):
+		return False
+	
+	originalCommand = adventureCommand.ParsedCommand.Word.upper()
+
+	# We next check if the move type is supported through this exit
+	canWalk = (exit.CanWalk and originalCommand== "WALK")
+	canRun = (exit.CanRun and originalCommand == "RUN")
+	canCrawl = (exit.CanCrawl and originalCommand == "CRAWL")
+	canSwim = (exit.CanSwim and originalCommand == "SWIM")
+
+	if not canWalk and not canRun and not canCrawl and not canSwim:
+		ConsoleApi.FormattedWrite("Sorry you cannot {0} this way.".format(originalCommandWord))
+		return False
+		
+	# Finally we can do the move
+	AWApi.SetCurrentLocation(AWApi.GetRoomFromName(exit.RoomName))
+			   	
+	# Give the chance for customisations to run and bail out of default actions.
+	preProcessResult = Preprocess(exit)
+		
+	if not preProcessResult:
+		return False
+		
+	# Describe the exit if this feature toggle is enabled
+	if AWApi.GameData.EnableExitDescriptions:
+		ConsoleApi.FormattedWrite(exit.CurrentDescription)
+
+	return True
+	
+# Peforms a generic Move operation, used by SWIM, RUN, WALK and CRAWL. Can be modified by an Exit pre-processing script
+# to change the action depending on Move type. For example player can be made to SWIM a river.
+def ExecuteGenericMove(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+
+	# If the room is dark you certainly can't see the exits
+	if CurrentLocation.IsDark:
+		ConsoleApi.FormattedWrite("You can't see any exits!!")
+		return False
+		
+	# Must specify a direction to move
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("Where do you want to {0} to?".format(originalCommandWord))
+		return False
+		
+	# Must specify a known direction
+	unknownItems = set(adventureCommand.GetOriginalWordsWithoutStopWords()).difference(set(MoveValueLimits))
+	
+	if unknownItems.Count &amp;gt; 0:
+		ConsoleApi.FormattedWrite(DontKnowWord.format(unknownItems.pop()))
+		return False
+
+	# If we are in the current room we can process the sentence as the current room
+	movePhrases = [ '{} {}'.format(originalCommandWord, adventureCommand.Parameters[0].OriginalWord)]
+	
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), movePhrases):
+			return ProcessTheMoveHelper(adventureCommand)
+	
+	return SentenceNotRecognised()
+
+def CheckExitLocked(exit):
+	if exit.IsLocked and exit.Visible:
+		ConsoleApi.FormattedWrite("Sorry the exit is locked.")
+		return False
+
+	return True
+
+# Removed items from inventory one by one (can be THROW or DROP for example)
+def ProcessObjectListForDrop(objectsToLeave, verb):
+	for nextObject in objectsToLeave:
+		itemIsAvailable = AWApi.IsItemAvailableToExamine(nextObject)
+		
+		if not itemIsAvailable:
+			ConsoleApi.FormattedWrite("{0}: You can't see that here.".format(nextObject.Name))
+			
+		elif not nextObject.IsHeld:
+			ConsoleApi.FormattedWrite("{0}: You are not holding that.".format(nextObject.Name))
+		
+		else:
+			AWApi.Drop(nextObject)
+			
+			# Give the chance for customisations to run and bail out of default actions if required.
+			preProcessResult = Preprocess(nextObject)
+			
+			if not preProcessResult:
+				return False
+				
+			ConsoleApi.FormattedWrite("{0}: {1}.".format(nextObject.Name, verb))
+		
+	return True
+
+# THE FOLLOWING SCRIPTS ARE USED BY THE DEFAULT LANGUAGE PROCESSOR - IF YOU REMOVE IT WILL STOP WORKING
+# YOU CAN WRITE YOUR OWN SIMPLY BY REPLACING THE CODE IN PROCESS INPUT.
+# IT IS PASSED A STRING CONTAINING THE LAST TEXT INPUT BY THE USER. IT MUST PROCESS IT AND RETURN THE 
+# CORRECT ParsedAdventureCommand
+
+def MoveAutoFollowNpcs():
+
+	for npc in AWApi.GetAllAutoFollowNpcs():
+		npc.Parent = AWApi.GetCurrentLocation()
+		
+	return
+	
+def ProcessInput(playerInputText):
+
+	cleanedPlayerInputText = Clean(playerInputText)
+	
+	tokenList = Tokenise(cleanedPlayerInputText);
+	    
+	return CreateCommandFromSentence(tokenList, playerInputText)
+
+def CreateCommandFromSentence(input, playerInputText):
+	newParsedAdventureCommand = ParsedAdventureCommand();
+	
+	# Handle some simple commands directly
+	if input.Count &amp;gt; 0:
+		if ShowDebugInformation(input[0]) or ClearScreen(input[0]) or ControlLogging(playerInputText):
+			return newParsedAdventureCommand
+    
+	adventureCommand = ConvertInputToCommand(input)
+ 
+ 	if (adventureCommand.IsValid):
+ 		newParsedAdventureCommand = adventureCommand
+	else:
+		ConsoleApi.FormattedWrite(adventureCommand.ErrorMessage)
+              
+	return newParsedAdventureCommand
+
+def ConvertInputToCommand(inputTokens):
+	# Firstly convert the sentence, represented by the list of words in the input. 
+	# We can use an Api call to do this
+	outputTokens = LanguageApi.ConvertSentence(inputTokens)
+	
+	# We can now convert this list of word tokens into a command and check it for validity
+	return ConvertTokensToCommand(outputTokens)
+    
+def ConvertTokensToCommand(tokens):
+	
+	commandTypes = [WordType.Command, WordType.ReplacedCommand]
+
+	parsedAdventureCommand = ParsedAdventureCommand()
+	parsedAdventureCommand.IsValid = False
+	
+	commandCount = sum(1 for token in tokens if token.Type in commandTypes)
+
+	# Check for validity
+	if tokens.Count == 0:
+		parsedAdventureCommand.ErrorMessage = "Pardon?"
+	elif commandCount == 0:
+		parsedAdventureCommand.ErrorMessage = "That sentence has no verb!";
+	elif (commandCount &amp;gt; 1 or (not tokens.First().Type in commandTypes) and not tokens.Last().Type in commandTypes):
+		firstToken = tokens.First(lambda token: token.Type in commandTypes).OriginalWord.upper()
+		parsedAdventureCommand.ErrorMessage = "You used the word '{0}' in a way that I don't understand.".format(firstToken)
+	else:
+		parsedAdventureCommand.IsValid = True
+	
+	for token in tokens:
+		if token.Type in commandTypes:
+			parsedAdventureCommand.ParsedCommand = token
+			parsedAdventureCommand.CommandMapping = AWApi.Configuration.CommandMappings.First(lambda command: command.VerbName.upper() == token.Word.upper())
+ 		else:
+ 			parsedAdventureCommand.Parameters.Add(token)
+                    
+	return parsedAdventureCommand;
+	
+
+def ClearScreen(input):
+	if input.upper() == "CLS":
+		ConsoleApi.ClearScreen()
+		return True
+
+	return False
+
+def ShowDebugInformation(input):
+	if input.upper() == "DEBUG" and AWApi.IsDebugEnabled():
+		ConsoleApi.WriteLine("ENVIRONMENT INFO:" + Environment.NewLine)
+		ConsoleApi.WriteLine("Current Directory: " + Environment.CurrentDirectory)
+		ConsoleApi.WriteLine("Save Game Directory: " + Path.Combine(Environment.CurrentDirectory, GlobalConstants.SaveGameDirectory))
+		ConsoleApi.WriteLine("Path to game file: " + AWApi.Configuration.FullFilePath)
+		ConsoleApi.WriteLine("Game Name: " + AWApi.Configuration.GameName)
+		ConsoleApi.WriteLine("Start Room: " + AWApi.Configuration.StartRoom)
+		ConsoleApi.WriteLine("Current Room: " + AWApi.GetCurrentLocation().Name)
+		return True
+
+	return False
+
+def ControlLogging(playerInputText):
+	input = playerInputText.split(' ', 1)
+
+	if input[0].upper() == "LOGOFF" and AWApi.IsDebugEnabled():
+		ConsoleApi.TurnLoggingOff();
+		return True
+
+	if input[0].upper() == "LOGON" and AWApi.IsDebugEnabled():
+		if len(input) == 1:
+			ConsoleApi.WriteLine("You must specify a file to start the logger")
+			return True
+
+		ConsoleApi.TurnLoggingOn(input[1]);
+		return True
+
+	return False
+
+def Tokenise(sentence):
+	return sentence.split() if sentence else List[String]()
+        
+def Clean(playerInputText):
+	return StripPunctuation(playerInputText, True) if playerInputText else ""
+
+def StripPunctuation(playerInputText, preserveQuotes):
+	source = ""
+	
+	for chr in playerInputText:
+		 if not Char.IsPunctuation(chr) or (preserveQuotes and chr == '"'):
+		 	source += chr
+    	
+	return source
+
+# Show the title everytime a script it called so it is constantly updated
+ShowTitle()&lt;/d2p1:Source&gt;&lt;/CommonCode&gt;&lt;DirectionMappings xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;3&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i23"&gt;&lt;d4p1:Abbreviation&gt;N&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;NORTH&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;7&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i24"&gt;&lt;d4p1:Abbreviation&gt;S&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;SOUTH&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;1&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i25"&gt;&lt;d4p1:Abbreviation&gt;E&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;EAST&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;5&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i26"&gt;&lt;d4p1:Abbreviation&gt;W&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;WEST&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;8&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i27"&gt;&lt;d4p1:Abbreviation&gt;SE&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;SOUTHEAST&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;6&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i28"&gt;&lt;d4p1:Abbreviation&gt;SW&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;SOUTHWEST&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;2&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i29"&gt;&lt;d4p1:Abbreviation&gt;NE&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;NORTHEAST&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;4&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i30"&gt;&lt;d4p1:Abbreviation&gt;NW&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;NORTHWEST&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;9&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i31"&gt;&lt;d4p1:Abbreviation&gt;U&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;UP&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;d2p1:Key&gt;10&lt;/d2p1:Key&gt;&lt;d2p1:Value xmlns:d4p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain" z:Id="i32"&gt;&lt;d4p1:Abbreviation&gt;D&lt;/d4p1:Abbreviation&gt;&lt;d4p1:Text&gt;DOWN&lt;/d4p1:Text&gt;&lt;/d2p1:Value&gt;&lt;/d2p1:KeyValueOfintDirectionz50XgxK_P&gt;&lt;/DirectionMappings&gt;&lt;EnableDebug&gt;true&lt;/EnableDebug&gt;&lt;EnableExitDescriptions&gt;false&lt;/EnableExitDescriptions&gt;&lt;EnableInventorySize&gt;true&lt;/EnableInventorySize&gt;&lt;EnablePlayerLost&gt;true&lt;/EnablePlayerLost&gt;&lt;EnableScore&gt;true&lt;/EnableScore&gt;&lt;EnableShowItemsInRoom&gt;true&lt;/EnableShowItemsInRoom&gt;&lt;EnableTitles&gt;true&lt;/EnableTitles&gt;&lt;Exits /&gt;&lt;GameDescription i:nil="true" /&gt;&lt;GameLogFileName&gt;Log.txt&lt;/GameLogFileName&gt;&lt;GameLogPath&gt;C:\Users\dunnm\OneDrive\Documents\AdventureWorld&lt;/GameLogPath&gt;&lt;GameLoopPostProcessCode xmlns:d2p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d2p1:Id&gt;73b20f5d-7edb-4c8a-b731-0d305a787db9&lt;/d2p1:Id&gt;&lt;d2p1:Source&gt;# This is one of the game engines control scripts. There are three that have different functions.
+# Initialise - runs once right at the start of the game, you can add your own initialisation routines, titles, introductions etc.
+# Loop Pre-process - the game runs in a loop asking for input and processing it. This script runs once per loop execution right at the start before input has been taken.
+# Loop Post-process - This script runs once per loop execution right at the end of the loop after user input has been processed.&lt;/d2p1:Source&gt;&lt;/GameLoopPostProcessCode&gt;&lt;GameLoopPreProcessCode xmlns:d2p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d2p1:Id&gt;0de475f7-8514-46c8-a8f6-3b935d39ad57&lt;/d2p1:Id&gt;&lt;d2p1:Source&gt;# This is one of the game engines control scripts. There are three that have different functions.
+# Initialise - runs once right at the start of the game, you can add your own initialisation routines, titles, introductions etc.
+# Loop Pre-process - the game runs in a loop asking for input and processing it. This script runs once per loop execution right at the start before input has been taken.
+# Loop Post-process - This script runs once per loop execution right at the end of the loop after user input has been processed.&lt;/d2p1:Source&gt;&lt;/GameLoopPreProcessCode&gt;&lt;GameName i:nil="true" /&gt;&lt;InitialisationCode xmlns:d2p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d2p1:Id&gt;880daf67-8339-4877-bb27-96c37a63ef6e&lt;/d2p1:Id&gt;&lt;d2p1:Source&gt;# This is one of the game engines control scripts. There are three that have different functions.
+# Initialise - runs once right at the start of the game, you can add your own initialisation routines, titles, introductions etc.
+# Loop Pre-process - the game runs in a loop asking for input and processing it. This script runs once per loop execution right at the start before input has been taken.
+# Loop Post-process - This script runs once per loop execution right at the end of the loop after user input has been processed.&lt;/d2p1:Source&gt;&lt;/InitialisationCode&gt;&lt;Introduction i:nil="true" /&gt;&lt;LogGameConsole&gt;false&lt;/LogGameConsole&gt;&lt;MaximumInventorySize&gt;0&lt;/MaximumInventorySize&gt;&lt;MaximumScore&gt;0&lt;/MaximumScore&gt;&lt;PlaceableObjects /&gt;&lt;PlayerLostMessage i:nil="true" /&gt;&lt;ProjectDirectory&gt;C:\Users\dunnm\OneDrive\Documents\AdventureWorld&lt;/ProjectDirectory&gt;&lt;Rooms /&gt;&lt;ShowImages&gt;true&lt;/ShowImages&gt;&lt;StartRoomId i:nil="true" /&gt;&lt;StopWords&gt;a
+about
+above
+after
+again
+against
+am
+an
+and
+any
+are
+arent
+around
+as
+at
+be
+because
+been
+before
+being
+below
+between
+both
+but
+by
+cant
+cannot
+could
+couldnt
+did
+didnt
+do
+does
+doesnt
+doing
+dont
+during
+each
+few
+for
+from
+further
+had
+hadnt
+has
+hasnt
+have
+havent
+having
+he
+hed
+hell
+hes
+her
+here
+heres
+hers
+herself
+him
+himself
+his
+how
+hows
+i
+id
+ill
+im
+ive
+if
+in
+into
+is
+isnt
+it
+its
+its
+itself
+lets
+me
+more
+most
+mustnt
+my
+myself
+no
+nor
+not
+of
+off
+on
+once
+only
+or
+other
+ought
+our
+ours
+ourselves
+out
+over
+own
+room
+same
+shant
+she
+shed
+shell
+shes
+should
+shouldnt
+so
+some
+such
+than
+that
+thats
+the
+their
+theirs
+them
+themselves
+then
+there
+theres
+these
+they
+theyd
+theyll
+theyre
+theyve
+this
+those
+through
+to
+too
+under
+until
+very
+was
+wasnt
+we
+wed
+well
+were
+weve
+were
+werent
+what
+whats
+when
+whens
+where
+wheres
+which
+while
+who
+whos
+whom
+why
+whys
+with
+wont
+would
+wouldnt
+you
+youd
+youll
+youre
+youve
+your
+yours
+yourself
+yourselves&lt;/StopWords&gt;&lt;Title i:nil="true" /&gt;&lt;WonGame i:nil="true" /&gt;&lt;/AdventureGameDesignerViewModel&gt;</AdventureGame>
+</Root>

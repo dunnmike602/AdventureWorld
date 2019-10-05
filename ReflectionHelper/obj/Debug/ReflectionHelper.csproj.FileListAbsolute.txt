@@ -1,0 +1,8 @@
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\bin\Debug\ReflectionHelper.dll
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\bin\Debug\ReflectionHelper.pdb
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\bin\Debug\PhilosophicalMonkey.dll
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\bin\Debug\System.ValueTuple.dll
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\bin\Debug\System.ValueTuple.xml
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\obj\Debug\ReflectionHelper.csproj.CoreCompileInputs.cache
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\obj\Debug\ReflectionHelper.dll
+E:\GAME DEV\AdventureGames\CORE1\ReflectionHelper\obj\Debug\ReflectionHelper.pdb

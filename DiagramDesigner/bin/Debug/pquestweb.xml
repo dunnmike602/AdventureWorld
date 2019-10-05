@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <RoomDesigner>
+    <DesignerItems>
+      <DesignerItem>
+        <Left>56</Left>
+        <Top>9.539999999999992</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>4a8fae6d-1316-437b-a65f-b4f0bbedec2a</ID>
+        <zIndex>0</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Room" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="RoomRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFAFBE9" Offset="0" /&gt;&lt;GradientStop Color="#FFFFA500" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFD69436&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="SHOP" TextWrapping="Wrap" Name="RoomText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>56</Left>
+        <Top>138.20666666666665</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14</ID>
+        <zIndex>1</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Room" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="RoomRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFAFBE9" Offset="0" /&gt;&lt;GradientStop Color="#FFFFA500" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFD69436&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="PASSAGEN" TextWrapping="Wrap" Name="RoomText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>56</Left>
+        <Top>266.87333333333333</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>58019f83-7c87-4d80-af3a-b82baebfd438</ID>
+        <zIndex>4</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Room" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="RoomRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFAFBE9" Offset="0" /&gt;&lt;GradientStop Color="#FFFFA500" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFD69436&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="PASSAGES" TextWrapping="Wrap" Name="RoomText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>56</Left>
+        <Top>395.54</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>0f91c47a-91c9-471d-a67b-31eb3bdb2def</ID>
+        <zIndex>7</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Room" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="RoomRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFAFBE9" Offset="0" /&gt;&lt;GradientStop Color="#FFFFA500" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFD69436&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="BEACHE" TextWrapping="Wrap" Name="RoomText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+    </DesignerItems>
+    <Connections>
+      <Connection>
+        <SourceID>4a8fae6d-1316-437b-a65f-b4f0bbedec2a</SourceID>
+        <SinkID>5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14</SinkID>
+        <SourceConnectorName>Bottom</SourceConnectorName>
+        <SinkConnectorName>Top</SinkConnectorName>
+        <SourceArrowSymbol>None</SourceArrowSymbol>
+        <SinkArrowSymbol>Arrow</SinkArrowSymbol>
+        <zIndex>2</zIndex>
+        <ID>db18f319-00b9-4099-97e4-8da1f344562d</ID>
+      </Connection>
+      <Connection>
+        <SourceID>5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14</SourceID>
+        <SinkID>4a8fae6d-1316-437b-a65f-b4f0bbedec2a</SinkID>
+        <SourceConnectorName>Top</SourceConnectorName>
+        <SinkConnectorName>Bottom</SinkConnectorName>
+        <SourceArrowSymbol>None</SourceArrowSymbol>
+        <SinkArrowSymbol>Arrow</SinkArrowSymbol>
+        <zIndex>3</zIndex>
+        <ID>82b2fa14-76ba-4a9c-b6f9-5788644126e3</ID>
+      </Connection>
+      <Connection>
+        <SourceID>5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14</SourceID>
+        <SinkID>58019f83-7c87-4d80-af3a-b82baebfd438</SinkID>
+        <SourceConnectorName>Bottom</SourceConnectorName>
+        <SinkConnectorName>Top</SinkConnectorName>
+        <SourceArrowSymbol>None</SourceArrowSymbol>
+        <SinkArrowSymbol>Arrow</SinkArrowSymbol>
+        <zIndex>5</zIndex>
+        <ID>76816990-d909-4e82-8c43-c2f164ae08e0</ID>
+      </Connection>
+      <Connection>
+        <SourceID>58019f83-7c87-4d80-af3a-b82baebfd438</SourceID>
+        <SinkID>5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14</SinkID>
+        <SourceConnectorName>Top</SourceConnectorName>
+        <SinkConnectorName>Bottom</SinkConnectorName>
+        <SourceArrowSymbol>None</SourceArrowSymbol>
+        <SinkArrowSymbol>Arrow</SinkArrowSymbol>
+        <zIndex>6</zIndex>
+        <ID>d35debe1-ceab-487e-b3b8-0dd7a4999c5c</ID>
+      </Connection>
+      <Connection>
+        <SourceID>58019f83-7c87-4d80-af3a-b82baebfd438</SourceID>
+        <SinkID>0f91c47a-91c9-471d-a67b-31eb3bdb2def</SinkID>
+        <SourceConnectorName>Bottom</SourceConnectorName>
+        <SinkConnectorName>Top</SinkConnectorName>
+        <SourceArrowSymbol>None</SourceArrowSymbol>
+        <SinkArrowSymbol>Arrow</SinkArrowSymbol>
+        <zIndex>8</zIndex>
+        <ID>6c304b87-3a2a-44a1-a9af-f8eab42bf354</ID>
+      </Connection>
+      <Connection>
+        <SourceID>0f91c47a-91c9-471d-a67b-31eb3bdb2def</SourceID>
+        <SinkID>58019f83-7c87-4d80-af3a-b82baebfd438</SinkID>
+        <SourceConnectorName>Top</SourceConnectorName>
+        <SinkConnectorName>Bottom</SinkConnectorName>
+        <SourceArrowSymbol>None</SourceArrowSymbol>
+        <SinkArrowSymbol>Arrow</SinkArrowSymbol>
+        <zIndex>9</zIndex>
+        <ID>cce0bb06-ac41-48c6-bfeb-4e87d7c330aa</ID>
+      </Connection>
+    </Connections>
+  </RoomDesigner>
+  <ObjectDesigner>
+    <DesignerItems>
+      <DesignerItem>
+        <Left>3</Left>
+        <Top>1.539999999999992</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>f582da60-1c59-4688-bcf0-a1b28645e0d4</ID>
+        <zIndex>0</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="SAUSAGE" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>92</Left>
+        <Top>0</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>74f08067-2d3d-4704-9629-84da2044edf2</ID>
+        <zIndex>1</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="CUSHION" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>3</Left>
+        <Top>85.539999999999992</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>de2e1f87-fdc1-4acc-931e-d926eee04a84</ID>
+        <zIndex>2</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="TEABAG" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>92</Left>
+        <Top>84.539999999999992</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>4471a7be-e4ce-4a4d-9e44-e37eab934bdf</ID>
+        <zIndex>3</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="AQUALUNG" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>4</Left>
+        <Top>165.54</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>0463d6cf-705e-4610-a637-89d8ac6f6f94</ID>
+        <zIndex>4</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="KEYS" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>92</Left>
+        <Top>166.54</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>26a812c9-667e-435a-a5d5-41e3a766c3b7</ID>
+        <zIndex>5</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="LAMP" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+      <DesignerItem>
+        <Left>0</Left>
+        <Top>247.53999999999996</Top>
+        <Width>78</Width>
+        <Height>65</Height>
+        <ID>680ec649-65f3-4cf5-8934-fa73cd85231a</ID>
+        <zIndex>6</zIndex>
+        <IsGroup>false</IsGroup>
+        <ParentID>00000000-0000-0000-0000-000000000000</ParentID>
+        <Content>&lt;Grid ToolTip="Object" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;&lt;Rectangle Name="ObjectRectangle"&gt;&lt;Rectangle.Style&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.BasedOn&gt;&lt;Style TargetType="Rectangle"&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;Setter Property="Shape.Fill"&gt;&lt;Setter.Value&gt;&lt;LinearGradientBrush StartPoint="0,0" EndPoint="0,1"&gt;&lt;LinearGradientBrush.GradientStops&gt;&lt;GradientStop Color="#FFFEFEFE" Offset="0" /&gt;&lt;GradientStop Color="#FFBDBEDE" Offset="1" /&gt;&lt;/LinearGradientBrush.GradientStops&gt;&lt;/LinearGradientBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stroke"&gt;&lt;Setter.Value&gt;&lt;SolidColorBrush&gt;#FFACADCD&lt;/SolidColorBrush&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeThickness"&gt;&lt;Setter.Value&gt;&lt;s:Double&gt;1&lt;/s:Double&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.StrokeLineJoin"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="PenLineJoin.Round" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="Shape.Stretch"&gt;&lt;Setter.Value&gt;&lt;x:Static Member="Stretch.Fill" /&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.IsHitTestVisible"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;False&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;Setter Property="UIElement.SnapsToDevicePixels"&gt;&lt;Setter.Value&gt;&lt;s:Boolean&gt;True&lt;/s:Boolean&gt;&lt;/Setter.Value&gt;&lt;/Setter&gt;&lt;/Style&gt;&lt;/Style.BasedOn&gt;&lt;Style.Resources&gt;&lt;ResourceDictionary /&gt;&lt;/Style.Resources&gt;&lt;/Style&gt;&lt;/Rectangle.Style&gt;&lt;/Rectangle&gt;&lt;TextBlock Text="AMULET" TextWrapping="Wrap" Name="ObjectText" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" /&gt;&lt;/Grid&gt;</Content>
+      </DesignerItem>
+    </DesignerItems>
+    <Connections />
+  </ObjectDesigner>
+  <AdventureGame>&lt;AdventureGameDesignerApi xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;Exits&gt;&lt;Exit&gt;&lt;ControlId&gt;db18f319-00b9-4099-97e4-8da1f344562d&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name i:nil="true" /&gt;&lt;ObjectPreprocssCode&gt;SETCONST
+
+IFSTRING currentRoom= "SHOP" 
+[
+	IF inventoryItemCount &amp;gt; 2
+	[
+		PRINT "I WARNED YOU!"
+		PRINT "The sibilant hiss of twenty synchronised lasers is the last thing you hear as you collapse to the floor, mortally wounded (you twit)."
+		 KILLPLAYER
+
+	]
+
+	REM "If you don't use em you loose em, destroy all unheld items"
+
+	SETSTR shopItems "SAUSAGE,CUSHION,TEABAG,AQUALUNG,KEYS,"
+
+	SET itemIndex 1
+
+	WHILE itemIndex &amp;lt;= 5
+	[
+		SETATINDEX nextItem shopItems itemIndex
+
+		SETIFINROOM isInRoom currentRoom nextItem
+
+		IF isInRoom = 1
+		[
+			OBJECTDSTRYSTATE nextItem 1
+		]
+		
+		ADD itemIndex 1
+	]
+ ]
+
+
+DO SetRoomStateForLight 0&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" /&gt;&lt;Direction&gt;SOUTH&lt;/Direction&gt;&lt;FromRoom&gt;&lt;ControlId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are standing in a small shop which normally has various goods displayed for sale. There are areas of the shop obviously intended for the display of treasure. There is an exit south, above which hangs a large sign, which reads:
+ADVENTURERS PLEASE NOTE ONLY TWO IMPLEMENTS MAY BE REMOVED FROM THIS SHOP UNDER PENALTY OF DEATH SO CHOOSE CAREFULLY
+BY ORDER OF THE THE MAGICIAN!!!!
+&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;SHOP&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/FromRoom&gt;&lt;ToRoom&gt;&lt;ControlId&gt;5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;It is pitch dark&lt;/d5p1:string&gt;&lt;d5p1:string&gt;You are at the north end of a long straight passage. To the north lies the shop (presumably!), while side passages exit easy and west.&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGEN&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/ToRoom&gt;&lt;/Exit&gt;&lt;Exit&gt;&lt;ControlId&gt;82b2fa14-76ba-4a9c-b6f9-5788644126e3&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name i:nil="true" /&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" /&gt;&lt;Direction&gt;NORTH&lt;/Direction&gt;&lt;FromRoom&gt;&lt;ControlId&gt;5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;It is pitch dark&lt;/d5p1:string&gt;&lt;d5p1:string&gt;You are at the north end of a long straight passage. To the north lies the shop (presumably!), while side passages exit easy and west.&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGEN&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/FromRoom&gt;&lt;ToRoom&gt;&lt;ControlId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are standing in a small shop which normally has various goods displayed for sale. There are areas of the shop obviously intended for the display of treasure. There is an exit south, above which hangs a large sign, which reads:
+ADVENTURERS PLEASE NOTE ONLY TWO IMPLEMENTS MAY BE REMOVED FROM THIS SHOP UNDER PENALTY OF DEATH SO CHOOSE CAREFULLY
+BY ORDER OF THE THE MAGICIAN!!!!
+&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;SHOP&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/ToRoom&gt;&lt;/Exit&gt;&lt;Exit&gt;&lt;ControlId&gt;76816990-d909-4e82-8c43-c2f164ae08e0&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name i:nil="true" /&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" /&gt;&lt;Direction&gt;SOUTH&lt;/Direction&gt;&lt;FromRoom&gt;&lt;ControlId&gt;5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are at the north end of a long straight passage. To the north lies the shop (presumably!), while side passages exit easy and west.&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGEN&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/FromRoom&gt;&lt;ToRoom&gt;&lt;ControlId&gt;58019f83-7c87-4d80-af3a-b82baebfd438&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are at the south end of the long passage. There is a tunnel to the south through which light is faintly visible. Someone has scratched the word 'BLACH' on the wall!&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGES&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/ToRoom&gt;&lt;/Exit&gt;&lt;Exit&gt;&lt;ControlId&gt;d35debe1-ceab-487e-b3b8-0dd7a4999c5c&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name i:nil="true" /&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" /&gt;&lt;Direction&gt;NORTH&lt;/Direction&gt;&lt;FromRoom&gt;&lt;ControlId&gt;58019f83-7c87-4d80-af3a-b82baebfd438&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are at the south end of the long passage. There is a tunnel to the south through which light is faintly visible. Someone has scratched the word 'BLACH' on the wall!&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGES&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/FromRoom&gt;&lt;ToRoom&gt;&lt;ControlId&gt;5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are at the north end of a long straight passage. To the north lies the shop (presumably!), while side passages exit easy and west.&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGEN&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/ToRoom&gt;&lt;/Exit&gt;&lt;Exit&gt;&lt;ControlId&gt;6c304b87-3a2a-44a1-a9af-f8eab42bf354&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name i:nil="true" /&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" /&gt;&lt;Direction&gt;SOUTH&lt;/Direction&gt;&lt;FromRoom&gt;&lt;ControlId&gt;58019f83-7c87-4d80-af3a-b82baebfd438&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are at the south end of the long passage. There is a tunnel to the south through which light is faintly visible. Someone has scratched the word 'BLACH' on the wall!&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGES&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/FromRoom&gt;&lt;ToRoom&gt;&lt;ControlId&gt;0f91c47a-91c9-471d-a67b-31eb3bdb2def&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are on a sandy beach to the east of an enormous cliff which bars the way to the north everywhere except a small cave entrance at its base. Rocks to south and east block these routes effectively. There is a ledge vertically above you on the cliff, but far to high to reach. A track exits west, parallel to the cliff. There is a purple star drawn on the face of the cliff.&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;BEACHE&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/ToRoom&gt;&lt;/Exit&gt;&lt;Exit&gt;&lt;ControlId&gt;cce0bb06-ac41-48c6-bfeb-4e87d7c330aa&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name i:nil="true" /&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" /&gt;&lt;Direction&gt;NORTH&lt;/Direction&gt;&lt;FromRoom&gt;&lt;ControlId&gt;0f91c47a-91c9-471d-a67b-31eb3bdb2def&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are on a sandy beach to the east of an enormous cliff which bars the way to the north everywhere except a small cave entrance at its base. Rocks to south and east block these routes effectively. There is a ledge vertically above you on the cliff, but far to high to reach. A track exits west, parallel to the cliff. There is a purple star drawn on the face of the cliff.&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;BEACHE&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/FromRoom&gt;&lt;ToRoom&gt;&lt;ControlId&gt;58019f83-7c87-4d80-af3a-b82baebfd438&lt;/ControlId&gt;&lt;Descriptions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d5p1:string&gt;You are at the south end of the long passage. There is a tunnel to the south through which light is faintly visible. Someone has scratched the word 'BLACH' on the wall!&lt;/d5p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGES&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/ToRoom&gt;&lt;/Exit&gt;&lt;/Exits&gt;&lt;GameLoopPostProcessCode&gt;DO CheckUnlitRooms 0&lt;/GameLoopPostProcessCode&gt;&lt;GameLoopProcessCode&gt;TO CheckUnlitRooms state
+[
+	SETCONST
+
+	SETISINLIST isDarkRoom "PASSAGEN,PASSAGES" currentRoom
+
+	SETSTR lamp "LAMP"
+
+	IF isDarkRoom = 1
+	[
+		SETIFINROOM isInRoom currentRoom lamp
+
+		IF isInRoom = 0
+		[
+			ROOMDARKSTATE currentRoom 1
+			STOP
+		]
+
+		SETOBJECTSTATE lampState lamp
+
+		IF lampState = 0
+		[
+			ROOMDARKSTATE currentRoom 1
+			STOP
+		]
+
+		ROOMDARKSTATE currentRoom 0
+	]
+]
+
+TO CheckObjectWhenThown Dummy
+[
+	SETCONST
+
+	IFSTRING currentRoom != "SHOP"
+	[
+		STOP
+	]
+	
+	IFSTRING commandName != "THROW"
+	[
+		STOP
+	]
+
+	IF  hasShopThrowBeenChecked = 1
+	[
+		PRINTLN "A thunderous voice from nowhere intones 'I WARNED YOU!'"
+		PRINT "The sibilant hiss of twenty synchronised lasers as you collapse to the floor, mortally wounded (you twit)."
+ 		KILLPLAYER
+	]
+
+	IF hasShopThrowBeenChecked = 0
+	[
+		SETSTR Message "You throw the {} neatly through the exit."
+		REPLACESTRING Message commandArgument
+		PRINTLN Message
+		PRINTLN "A thunderous voice from nowhere intones 'VERY CLEVER BUT YOU WON'T GET AWAY WITH THAT AGAIN!'"
+		SET hasShopThrowBeenChecked  1 
+		OBJECTINROOM commandArgument "PASSAGEN"
+		CANCONTINUE 0
+	]
+]
+
+SETCONST
+
+IF isFirstTime = 1
+[
+	REM "ALL INITIALISATION PERFORMED HERE"
+	SET hasShopThrowBeenChecked  0
+]
+
+&lt;/GameLoopProcessCode&gt;&lt;Introduction&gt;Magic wands can be dangerous things.
+The one you found in the junk shop off Market Street was no exception. It was a mistake to wave it while the cranky old shopkeeper's back was turned... 
+Instantly the atmosphere turned inside out, taking you with it. Then it twisted back again, dumping you back inside the shop - but a strangely altered shop indeed... No windows, precious little stock - and no shopkeeper either! You were in part of a cave system, to judge from the granite-grey walls, ceiling and floor. 
+One more thing "READ MY NOTICE" !!!!!&lt;/Introduction&gt;&lt;MaxScore&gt;315&lt;/MaxScore&gt;&lt;MaximumInventorySize&gt;10&lt;/MaximumInventorySize&gt;&lt;PlaceableObjects&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;f582da60-1c59-4688-bcf0-a1b28645e0d4&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;A piece of sausage is curled up here.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;SAUSAGE&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;DO CheckObjectWhenThown 0
+
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;A peice of sausage.&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;SAUSAGE&lt;/ShortDescription&gt;&lt;StartRoomId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/StartRoomId&gt;&lt;/PlaceableObject&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;74f08067-2d3d-4704-9629-84da2044edf2&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;There is a fluffy lace-edged cushion here.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;CUSHION&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;DO CheckObjectWhenThown 0
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;A cushion.&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;CUSHION&lt;/ShortDescription&gt;&lt;StartRoomId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/StartRoomId&gt;&lt;/PlaceableObject&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;de2e1f87-fdc1-4acc-931e-d926eee04a84&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;There is a small teabag nearby.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;TEABAG&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;DO CheckObjectWhenThown 0
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;A small teabag.&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;TEABAG&lt;/ShortDescription&gt;&lt;StartRoomId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/StartRoomId&gt;&lt;/PlaceableObject&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;4471a7be-e4ce-4a4d-9e44-e37eab934bdf&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;There is an aqualung with a full tank of oxygen here. It turns on automatically on contact with water.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;AQUALUNG&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;DO CheckObjectWhenThown 0
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;An aqualung with a full air supply.&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;AQUALUNG&lt;/ShortDescription&gt;&lt;StartRoomId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/StartRoomId&gt;&lt;/PlaceableObject&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;0463d6cf-705e-4610-a637-89d8ac6f6f94&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;There is a bunch of keys here.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;KEYS&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;DO CheckObjectWhenThown 0
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;Some keys.&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;KEYS&lt;/ShortDescription&gt;&lt;StartRoomId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/StartRoomId&gt;&lt;/PlaceableObject&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;26a812c9-667e-435a-a5d5-41e3a766c3b7&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;The lamp is off&lt;/d4p1:string&gt;&lt;d4p1:string&gt;There is a battery operated lamp here, it is on and burning brightly.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;LAMP&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;SETCONST
+
+SETIFINROOM held currentRoom commandArgument 
+ 
+IFSTRING commandName = "LIGHT"
+[
+	if held != 2
+	[
+		PRINTLN "Try picking it up first."
+		STOP
+	]
+
+	OBJECTSTATE commandArgument 1
+	OBJECTINVDESC commandArgument "A lamp, it is on and burning brightly."
+	PRINTLN "Your lamp is now on and burning brightly."
+
+	DO CheckUnlitRooms 0
+]
+
+IFSTRING commandName = "UNLIGHT"
+[
+	if held != 2
+	[
+		PRINTLN "Try picking it up first."
+		STOP
+	]
+
+	OBJECTSTATE commandArgument 0
+	OBJECTINVDESC commandArgument "A lamp, it is off."
+	PRINTLN "The lamp is now off."
+
+	DO CheckUnlitRooms 0
+]
+
+
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;A lamp. It is off&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;LAMP&lt;/ShortDescription&gt;&lt;StartRoomId&gt;5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14&lt;/StartRoomId&gt;&lt;/PlaceableObject&gt;&lt;PlaceableObject&gt;&lt;ControlId&gt;680ec649-65f3-4cf5-8934-fa73cd85231a&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;There is a Ruby Amulet here!&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;AMULET&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;InventoryDescription&gt;A ruby amulet.&lt;/InventoryDescription&gt;&lt;IsHeld&gt;false&lt;/IsHeld&gt;&lt;IsTakeable&gt;true&lt;/IsTakeable&gt;&lt;ShortDescription&gt;Ruby Amulet&lt;/ShortDescription&gt;&lt;StartRoomId&gt;58019f83-7c87-4d80-af3a-b82baebfd438&lt;/StartRoomId&gt;&lt;/PlaceableObject&gt;&lt;/PlaceableObjects&gt;&lt;Rooms&gt;&lt;Room&gt;&lt;ControlId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;You are standing in a small shop which normally has various goods displayed for sale. There are areas of the shop obviously intended for the display of treasure. There is an exit south, above which hangs a large sign, which reads:
+ADVENTURERS PLEASE NOTE ONLY TWO IMPLEMENTS MAY BE REMOVED FROM THIS SHOP UNDER PENALTY OF DEATH SO CHOOSE CAREFULLY
+BY ORDER OF THE THE MAGICIAN!!!!
+&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;SHOP&lt;/Name&gt;&lt;ObjectPreprocssCode /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/Room&gt;&lt;Room&gt;&lt;ControlId&gt;5f5c9072-aeb2-49d2-ad1d-2f7f893b8f14&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;You are at the north end of a long straight passage. To the north lies the shop (presumably!), while side passages exit east and west.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGEN&lt;/Name&gt;&lt;ObjectPreprocssCode&gt;
+&lt;/ObjectPreprocssCode&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/Room&gt;&lt;Room&gt;&lt;ControlId&gt;58019f83-7c87-4d80-af3a-b82baebfd438&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;You are at the south end of the long passage. There is a tunnel to the south through which light is faintly visible. Someone has scratched the word 'BLACH' on the wall!&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;PASSAGES&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription&gt;It is pitch dark.&lt;/DarkDescription&gt;&lt;IsDark&gt;true&lt;/IsDark&gt;&lt;/Room&gt;&lt;Room&gt;&lt;ControlId&gt;0f91c47a-91c9-471d-a67b-31eb3bdb2def&lt;/ControlId&gt;&lt;Descriptions xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"&gt;&lt;d4p1:string&gt;You are on a sandy beach to the east of an enormous cliff which bars the way to the north everywhere except a small cave entrance at its base. Rocks to south and east block these routes effectively. There is a ledge vertically above you on the cliff, but far to high to reach. A track exits west, parallel to the cliff. There is a purple star drawn on the face of the cliff.&lt;/d4p1:string&gt;&lt;/Descriptions&gt;&lt;IsDestroyed&gt;false&lt;/IsDestroyed&gt;&lt;Name&gt;BEACHE&lt;/Name&gt;&lt;ObjectPreprocssCode i:nil="true" /&gt;&lt;StartState&gt;0&lt;/StartState&gt;&lt;DarkDescription i:nil="true" /&gt;&lt;IsDark&gt;false&lt;/IsDark&gt;&lt;/Room&gt;&lt;/Rooms&gt;&lt;StartRoomId&gt;4a8fae6d-1316-437b-a65f-b4f0bbedec2a&lt;/StartRoomId&gt;&lt;Title&gt;Philospher's Quest&lt;/Title&gt;&lt;WonGame&gt;WELL DONE! YOU'VE CRACKED THE WHOLE GAME!
+
+YOU GOT THE POINT AT LAST!&lt;/WonGame&gt;&lt;/AdventureGameDesignerApi&gt;</AdventureGame>
+  <Options>&lt;Options xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;ClientExe&gt;C:\Users\mjd\Documents\Visual Studio 2010\Projects\AdventureLand\AdventureLand\bin\Debug\AdventureLand.exe&lt;/ClientExe&gt;&lt;ClientType&gt;WebApplication&lt;/ClientType&gt;&lt;GameDescription&gt;Game based on the original by Jonathan Mestel and Peter Killworth.&lt;/GameDescription&gt;&lt;GameDirectory&gt;Games&lt;/GameDirectory&gt;&lt;GameName&gt;Philosphers Quest&lt;/GameName&gt;&lt;Id&gt;f87a30c2-7f8e-4305-8f7f-387f33ca62ea&lt;/Id&gt;&lt;Temp&gt;Jap/+Tn24fPF8WNtlGXEJA==&lt;/Temp&gt;&lt;UserName&gt;mike2&lt;/UserName&gt;&lt;/Options&gt;</Options>
+</Root>

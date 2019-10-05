@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <RoomDesigner>
+    <DesignerItems />
+    <Connections />
+  </RoomDesigner>
+  <ObjectDesigner>
+    <DesignerItems />
+    <Connections />
+  </ObjectDesigner>
+  <AdventureGame>&lt;AdventureGameDesignerApi xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;Exits /&gt;&lt;GameLoopPostProcessCode i:nil="true" /&gt;&lt;GameLoopProcessCode i:nil="true" /&gt;&lt;Introduction i:nil="true" /&gt;&lt;MaxScore&gt;0&lt;/MaxScore&gt;&lt;MaximumInventorySize&gt;0&lt;/MaximumInventorySize&gt;&lt;PlaceableObjects /&gt;&lt;Rooms /&gt;&lt;StartRoomId i:nil="true" /&gt;&lt;Title i:nil="true" /&gt;&lt;WonGame i:nil="true" /&gt;&lt;/AdventureGameDesignerApi&gt;</AdventureGame>
+  <Options>&lt;Options xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;ClientExe i:nil="true" /&gt;&lt;ClientType&gt;ConsoleApplication&lt;/ClientType&gt;&lt;GameDescription i:nil="true" /&gt;&lt;GameDirectory&gt;Games&lt;/GameDirectory&gt;&lt;GameName i:nil="true" /&gt;&lt;Id&gt;6b5f5ef8-5f7f-4efc-b2e3-ff2669d85136&lt;/Id&gt;&lt;Temp i:nil="true" /&gt;&lt;UserName i:nil="true" /&gt;&lt;/Options&gt;</Options>
+</Root>

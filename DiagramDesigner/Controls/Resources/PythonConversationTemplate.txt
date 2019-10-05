@@ -1,0 +1,11 @@
+﻿# This is a template for an Conversation pre-process command. During a conversation with a NPC this script will be run before the text for that
+# stage of the conversation is output.
+# The NPC the player is having the conversation with.
+# The conversationObject is passed in it will be one of Conversation, ConversationText or ConversationResponse.
+# The conversation stage is 1=Conversation is about to start, 2=Npc is about to say something, 3=Player has selected a response.
+# If you want the conversation to terminate immediately return False from this function otherwise return True.
+
+def Execute(npc, conversationObject, conversationStage):
+	
+	return True
+	

@@ -1,0 +1,7 @@
+E:\GAME DEV\AdventureGames\CORE1\AdventureLandWpf\obj\Debug\AdventureLandWpf.csprojResolveAssemblyReference.cache
+E:\GAME DEV\AdventureGames\CORE1\AdventureLandWpf\obj\Debug\GameExplorer.baml
+E:\GAME DEV\AdventureGames\CORE1\AdventureLandWpf\obj\Debug\Controls\GameExplorer.g.cs
+E:\GAME DEV\AdventureGames\CORE1\AdventureLandWpf\obj\Debug\GameExplorer.g.cs
+E:\GAME DEV\AdventureGames\CORE1\AdventureLandWpf\obj\Debug\App.g.cs
+E:\GAME DEV\AdventureGames\CORE1\AdventureLandWpf\obj\Debug\AdventureLandWpf_MarkupCompile.cache
+E:\GAME DEV\AdventureGames\CORE1\AdventureLandWpf\obj\Debug\AdventureLandWpf_MarkupCompile.lref

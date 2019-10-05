@@ -1,0 +1,1237 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AdventureLandCore</name>
+    </assembly>
+    <members>
+        <member name="P:AdventureLandCore.Domain.AdventureObjectBase.CurrentDescription">
+            <summary>
+            Gets/sets the current description for the object, always defaults to first item in the Descriptions list. It can be set by user scripts
+            to present different descriptions based on room state.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.AdventureObjectBase.IsValid">
+            <summary>
+            Flag that can be used by scripts to determine if the object is valid. This allows objects to be created on the fly to represent entities that are typed in as text
+            but do not exist in the game.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.IsFirstTimeThrough">
+            <summary>
+            Flag that is true on first pass through the game loop and false all other times.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.PlaceableObjects">
+            <summary>
+            A full list of all objects that can appear in the game.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.Rooms">
+            <summary>
+            A full list of all rooms that can appear in the game.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.Title">
+            <summary>
+            The game title.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.Introduction">
+            <summary>
+            The game Introduction.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.CurrentScore">
+            <summary>
+            The players score at any given point.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.MaximumScore">
+            <summary>
+            The maxiumum score a player can reach.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.StopWords">
+            <summary>
+            List of noise words currently in use in the game.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Domain.GameData.InventorySize">
+            <summary>
+            Current size of the inventory.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Domain.PlaceableObject.GetIsVisibleFromOutside">
+            <summary>
+            Determines if the current object is visible from the outside. Rules are different for items in rooms or items in containers
+            </summary>
+            <returns>True if visible, false otherwise.</returns>
+        </member>
+        <member name="T:AdventureLandCore.Domain.GameState">
+            <summary>
+            Enumeration that defines the current game state.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GameState.Initialising">
+            <summary>
+            Game is initialising variables and state.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GameState.ScriptsCompiled">
+            <summary>
+            All scripts are compiled.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GameState.InitialisationComplete">
+            <summary>
+            Initialisation is complete but the game loop has not started.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GameState.Running">
+            <summary>
+            Game is currently running the game loop.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GameState.PlayerLost">
+            <summary>
+            Game is still running but player has lost the game.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GameState.Quit">
+            <summary>
+            Player has asked to quit the game.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GameState.Won">
+            <summary>
+            Player has won the game.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Domain.GlobalConstants">
+            <summary>
+            Global constants used throughout the game engine.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.SaveGameDirectory">
+            <summary>
+            Name if the directory where games are saved during play.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.SaveGameExtension">
+            <summary>
+            Save game file extension.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.GameExtension">
+            <summary>
+            Extension of game files, this are files that define a particulare adventure game.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.ScriptApiName">
+            <summary>
+            Names of the Adventure World scripting Api.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.LanguageApiName">
+            <summary>
+            Names of the Language scripting Api.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.ConsoleApiName">
+            <summary>
+            Name of the Console api.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.InitScriptName">
+            <summary>
+            Initialisation script name.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.GameLoopPreScriptName">
+            <summary>
+            Game loop pre-process script name.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.GameLoopPostScriptName">
+            <summary>
+            Game loop post-process script name.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Domain.GlobalConstants.CommonCodeScriptName">
+            <summary>
+            Common code name.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Domain.Key">
+            <summary>
+            Enumeration that lists all keys on a standard keyboard
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi">
+            <summary>
+            This interface defines the Api (Applications Programming Interface) that can be used by scripts to access the game engine and perform operations on
+            players, rooms and placeable objects. All access to the api for the currently running game is through the variable AWApi available to Python and C# scripts.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.QuitGame">
+            <summary>
+            Cause the the current game to be ended.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.InitGameData(AdventureLandCore.Domain.GameData)">
+            <summary>
+            Replaces the current in-game data structures with those supplied in the parameter. This allows a new game loaded from disk to replace the current one.
+            </summary>
+            <param name="newGameData">NewGameData object to load</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.SerializeToString">
+            <summary>
+            Serialises the current game to a string, that can be saved to disk.
+            </summary>
+            <returns>String containing the current game state.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.DeserializeFromString(System.String)">
+            <summary>
+            Creates a GameData object from the supplied data. This allows the current game to be loaded from an Xml file on disk.
+            </summary>
+            <param name="xmlData">Xml data created using the SerializeToString method.</param>
+            <returns>A GameData object created from XmlData.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetDefaultHelpText">
+            <summary>
+            Retrieves the default help text associated with each command that the game recognised.
+            </summary>
+            <returns>Formatted list of the default help text.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetCurrentLocation">
+            <summary>
+            Returns the current location of the player.
+            </summary>
+            <returns>A Room object that represents the players current Location.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.SetCurrentLocation(AdventureLandCore.Domain.Room)">
+            <summary>
+            Sets the current location of the player. Not that this Api call automatically sets the Visited flag of the last room.
+            to true.
+            </summary>
+            <param name="newRoom">A Room object that is the new location of the player</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.ShowRoomInformation">
+            <summary>
+            Helper function that shows information about the current location. If the room is dark, its dark description will be shown. If the
+            ShowItemsInRoom feature toggle is false, then the items will not be listed (also not shown if the room is dark).
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.IsItemAvailableToExamine(AdventureLandCore.Domain.PlaceableObject)">
+            <summary>
+            Determines if the specified item is available to examine. That is it is held by the player or in the current room and is currently visible.
+            </summary>
+            <param name="objectToCheck">The game object to check.</param>
+            <returns>True is it can be examined, false otherwise.</returns>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.CanContinue">
+            <summary>
+            Property used to control the execution of user scripts. Can be set by any user script to determine if processing should continue after that script.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GameData">
+            <summary>
+            Top level object that contains all data (flags etc.) relating the the game.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.LastPlayerInput">
+            <summary>
+            Gets/sets the last sentence input by the player.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.SuppressAutomaticInputProcessing">
+            <summary>
+            Stops the game engine performing its own language processing on the last input from the user. Call this method in your own processing script
+            if you want to handle all processing yourself. You will have to write all your own commands and perform all parsing as well.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.LastParsedCommands">
+            <summary>
+            Gets all the commands that have been parsed by the internal game engine from the text in LastPlayerInput
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.LastExecutedCommand">
+            <summary>
+            Gets the last command to be executed, useful in pre-process scripts to determine which command caused the script to be executed
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetInventory">
+            <summary>
+            Retrieve the current players inventory.
+            </summary>
+            <returns>A list of PlaceableObjects that the player is holding.</returns>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.CurrentInventoryCount">
+            <summary>
+            Retrieves the count of items in the player's inventory.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.Drop(AdventureLandCore.Domain.PlaceableObject)">
+            <summary>
+            Cause the specified object to be dropped.
+            </summary>
+            <param name="objectToDrop">The PlaceableObject to drop.</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.ThrowToRoom(AdventureLandCore.Domain.PlaceableObject,System.String)">
+            <summary>
+            Causes the specified object to be thrown through an exit.
+            </summary>
+            <param name="objectToThrow">The PlaceableObject to throw.</param>
+            <param name="roomName">The name of the room the exit thrown through leads to</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.Take(AdventureLandCore.Domain.PlaceableObject)">
+            <summary>
+            Cause the specified object to be taken.
+            </summary>
+            <param name="objectToTake">The PlaceableObject to taken.</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetObjectsFromNames(System.Collections.Generic.List{System.String},System.Double,System.Boolean)">
+            <summary>
+            Finds all Game Objects that match the specified word list. Each word is checked against all possible words and a list returned.
+            Any unmatched words are returned as invalid Game Objects (aka placeable objects). This also excepts All and Everything to return all items
+            in the room.
+            </summary>
+            <param name="sentenceWords">List of words that constitutes the sentence to check.</param>
+            <param name="percentOfWordToMatch">Allows partial matches if set to anything other than 100. Default is 70.</param>
+            <param name="allRefersToHeldItems">If True, then All/Everthing refers to held items, otherwise it refers to things that can be seen in the room.</param>
+            <returns>A list of PlaceableObjects (IsValid = true) and invalid words (IsValid = false and Name set to original word).</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetRoomsFromNames(System.Collections.Generic.List{System.String},System.Double)">
+            <summary>
+            Finds all Rooms that match the specified word list. Each word is checked against all possible words and a list returned.
+            Any unmatched words are returned as invalid Room objects.
+            </summary>
+            <param name="sentenceWords">List of words that constitutes the sentence to check.</param>
+            <param name="percentOfWordToMatch">Allows partial matches if set to anything other than 100. Default is 70.</param>
+            <returns>A list of valid rooms (IsValid = true) and invalid words (IsValid = false and Name set to original word).</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetStartRoom">
+            <summary>
+            Returns the room that the game started in.
+            </summary>
+            <returns>A Room object that the game started in.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetExitFromName(System.String,System.String)">
+            <summary>
+            Retrieves the Exit from the specified room at the specified direction. Returns null if the exit does not exist or is invisible.
+            </summary>
+            <param name="roomName">Name of the room</param>
+            <param name="direction">Direction to travel</param>
+            <returns>An Exit object representing the Exit, this may be null.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetRoomFromName(System.String)">
+            <summary>
+            Given the entire name of a Room return the programmatic object that represents it.
+            </summary>
+            <param name="roomName">Name of the Room.</param>
+            <returns>Room object for the specified name, or null if it does not exist.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetPlaceableObjectFromName(System.String)">
+            <summary>
+            Given the entire name of a PlaceableObject return the programmatic object that represents it.
+            </summary>
+            <param name="objectName">Name of the PlaceableObject.</param>
+            <returns>GamObject object for the specified name, or null if it does not exist.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetPlaceableObjectsInRoom(System.String)">
+            <summary>
+            Get all game objects currently in the room (regardless of whether they are Visible or listable). Ignores objects held by player.
+            </summary>
+            <param name="roomName">Name of the room to check, if empty current room is used.</param>
+            <returns>List of PlaceableObjects.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetVisiblePlaceableObjectsInRoom(System.String)">
+            <summary>
+            Get all game objects currently in the room. Invisible ones and objects held by player are ignored.
+            </summary>
+            <param name="roomName">Name of the room to check, if empty current room is used.</param>
+            <returns>List of PlaceableObjects.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetVisibleAndListablePaceableObjectsInRoom(System.String)">
+            <summary>
+            Get all game objects currently in the room. Invisible ones, non-listable ones and objects held by player are ignored.
+            </summary>
+            <param name="roomName">Name of the room to check, if empty current room is used.</param>
+            <returns>List of PlaceableObjects.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetHeldObjectFromName(System.String)">
+            <summary>
+            Return the held object, identified by its name.
+            </summary>
+            <param name="name">String containing the name of the object.</param>
+            <returns>The requested object</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.Save(System.String,System.String)">
+            <summary>
+            Save the current game to disk.
+            </summary>
+            <param name="fileStem">Name of the save game.</param>
+            <param name="data">Data to be saved</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.LoadSaveGame(System.String)">
+            <summary>
+            Load a previously saved game.
+            </summary>
+            <param name="fileStem">Name of the game to load.</param>
+            <returns>String containing the saved game data.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.DeleteSaveGame(System.String)">
+            <summary>
+            Deletes a Save Game.
+            </summary>
+            <param name="fileStem">Name of the game to delete.</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.ListSaveGames">
+            <summary>
+            Returns a list of the names of all save games.
+            </summary>
+            <returns>List of strings containing the names of saved games.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.KillPlayer">
+            <summary>
+            Kills the current player, sets Player.IsDestroyed to false.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.ResurrectPlayer">
+            <summary>
+            Resurects the current player, sets Player.IsDestroyed to true.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.ClearVariables">
+            <summary>
+            Call this to clear all currently set user-defined game variables.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.SetVariable(System.String,System.Object)">
+            <summary>
+            Call this to add a new user-defined variable. These are game variables that persist between script calls and are visible to all scripts.
+            </summary>
+            <param name="name">Name of the variable to be set. Must be a valid non-null string.</param>
+            <param name="value">Value of the variable. Variable will hold any object type.</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.GetVariable(System.String)">
+            <summary>
+            Gets the value of the specified variable (may be any type).
+            </summary>
+            <param name="name">Name of the variable whose value is required.</param>
+            <returns>Value of the variable.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.ClearVariable(System.String)">
+            <summary>
+            Clears the specified game variable without effecting any others.
+            </summary>
+            <param name="name">Name of the variable to clear.</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IAdventureApi.HasVariable(System.String)">
+            <summary>
+            Checks if the specified game variable exists.
+            </summary>
+            <param name="name">String containing the name of the game variable to check.</param>
+            <returns>Returns a boolean value, true if the specified variable exists already, false otherwise.</returns>
+        </member>
+        <member name="T:AdventureLandCore.Services.CoreApi.Interfaces.IConsole">
+            <summary>
+            This class is used for all interaction with the current Console. Access to this object is via the variable ConsoleApi. This will choose the correct
+            class depending on which Console is being used, for example Command Console or Windows Store application. Some methods may not be appropriate for some
+            Consoles, this will be described in the comments and in the Api documentation.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.HideCursor">
+            <summary>
+            Hide the cursor. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.Wait(System.Int32,System.Boolean)">
+            <summary>
+            Waits for the specified amount of time, or optionally until a key is pressed.
+            </summary>
+            <param name="milliSeconds">An integer containing the number of milliseconds to wait.</param>
+            <param name="cancelOnKeyPress">Boolean value if True, pressing any key will cancel the wait.</param>
+            <returns>Null if cancelOnKeyPress is false or no key is pressed in the time period. Otherwise the Key code of the 
+            key that was pressed.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.ShowCursor">
+            <summary>
+            Show the cursor. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.ScreenWidth">
+            <summary>
+            Specifies the width in characters of the screen. The FormattedWrite methods use this to layout text. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.CursorLeft">
+            <summary>
+            Sets the left value (horizontal) of the cursor. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.CursorTop">
+            <summary>
+            Sets the top value (vertical) of the cursor. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.BackgroundColor">
+            <summary>
+            Sets the console background color. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.ForegroundColor">
+            <summary>
+            Sets the console foreground color. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.ConsoleString">
+            <summary>
+            Records the last string written to the screen. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.Title">
+            <summary>
+            Specified the title of the screen. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.FormattedWrite(System.Object,System.Nullable{System.ConsoleColor},System.Nullable{System.ConsoleColor})">
+            <summary>
+            Writes a text string the screen, wrapped to the value of ScreenWidth. Applies to: Command Console.
+            </summary>
+            <param name="value">String contained the text to be written.</param>
+            <param name="foregroundColor">Foreground color of the text string (optional).</param>
+            <param name="backgroundColor">Background color of the text string (optional).</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.FormattedWrite(System.String,System.Nullable{System.ConsoleColor},System.Nullable{System.ConsoleColor})">
+            <summary>
+            Writes an object the screen, wrapped to the value of ScreenWidth. ToString() will be called on the object first. Applies to: Command Console.
+            </summary>
+            <param name="value">String contained the text to be written.</param>
+            <param name="foregroundColor">Foreground color of the text string (optional).</param>
+            <param name="backgroundColor">Background color of the text string (optional).</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.WriteLine(System.String,System.Nullable{System.ConsoleColor},System.Nullable{System.ConsoleColor})">
+            <summary>
+            Writes a text string the screen, followed by a newline. Applies to: Command Console.
+            </summary>
+            <param name="value">String contained the text to be written.</param>
+            <param name="foregroundColor">Foreground color of the text string (optional).</param>
+            <param name="backgroundColor">Background color of the text string (optional).</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.Write(System.String,System.Nullable{System.ConsoleColor},System.Nullable{System.ConsoleColor})">
+            <summary>
+            Writes a text string the screen, without a newline. Applies to: Command Console.
+            </summary>
+            <param name="value">String contained the text to be written.</param>
+            <param name="foregroundColor">Foreground color of the text string (optional).</param>
+            <param name="backgroundColor">Background color of the text string (optional).</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.ReadLine(System.String)">
+            <summary>
+            Reads a line of text from the keyboard. Applies to: Command Console.
+            </summary>
+            <param name="prompt">Text to be displayed before the input line.</param>
+            <returns>A string containing the text read.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.ClearScreen">
+            <summary>
+            Clears the screen and resets the cursor to top left. Applies to: Command Console.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.CenteredWrite(System.String,System.Nullable{System.ConsoleColor},System.Nullable{System.ConsoleColor})">
+            <summary>
+            Writes a text string to the screen, centered, with a newline. Applies to: Command Console.
+            </summary>
+            <param name="value">String contained the text to be written.</param>
+            <param name="foregroundColor">Foreground color of the text string (optional).</param>
+            <param name="backgroundColor">Background color of the text string (optional).</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.CenteredWrite(System.Object,System.Nullable{System.ConsoleColor},System.Nullable{System.ConsoleColor})">
+            <summary>
+            Writes an object the screen (ToString() is called first), centered, with a newline. Applies to: Command Console.
+            </summary>
+            <param name="value">String contained the text to be written.</param>
+            <param name="foregroundColor">Foreground color of the text string (optional).</param>
+            <param name="backgroundColor">Background color of the text string (optional).</param>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.Beep">
+            <summary>
+            Make a beeping sound, exact implementation is determined by the current console.
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.IConsole.WriteBanner(System.String,System.Drawing.Color)">
+            <summary>
+            Writes a line of text in large banner format.
+            </summary>
+            <param name="text">String contained the text to be written.</param>
+            <param name="foregroundColor">Foreground color of the text string (optional).</param>
+        </member>
+        <member name="T:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi">
+            <summary>
+            This class is a helper class that has some useful methods if you want to write your own text process routines. Access to this object is via the variable LanguageApi. 
+            </summary>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.SplitSentence(System.String)">
+            <summary>
+            Splits a sentence into a list (by the spaces in it)
+            </summary>
+            <param name="source">String to be split.</param>
+            <returns>List of the constituent words.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.GetAllNamesInGame">
+            <summary>
+            Retrieves all the names of all rooms and placeable objects in the game. This includes short descriptions, long descriptions and inventory descriptions.
+            </summary>
+            <returns>A string array containing all the names in the game.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.ExecuteObjectScript(AdventureLandCore.Domain.Script,AdventureLandCore.Domain.AdventureObjectBase,AdventureLandCore.Domain.ParsedAdventureCommand)">
+            <summary>
+            Executes the supplied script, passing in the object been acted on and the command being processed.
+            </summary>
+            <param name="script">Script object encapsulating the script to be executed.</param>
+            <param name="adventureObject">Adventure object that is currently being pre-processed.</param>
+            <param name="adventureCommand">The command that was executed that caused the object to be processed.</param>
+            <returns>Value of the CanContinue flag that can be set internally by the script.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.GetStopWords">
+            <summary>
+            Retrieves the current list of stop words used in the game. Stop word are noise words like and, the and so on.
+            </summary>
+            <returns>A string array containing a list of all the stop words.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.RemovePunctuation(System.String,System.Boolean)">
+            <summary>
+            Give a source string returns it back with punctuation characters removed.
+            </summary>
+            <param name="source">String to be processed.</param>
+            <param name="preserveQuotes">Boolean flag, if set to true quotes will not be removed.</param>
+            <returns>A string containing the source string minus punctuation characters.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.RemoveStopWords(System.String[])">
+            <summary>
+            Removes stop words from the input string array.
+            </summary>
+            <param name="wordList">A string array containing the list of words to process.</param>
+            <returns>A string array that contains the original list minus stop words.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.ConvertSentence(System.String[])">
+            <summary>
+            Processes a sentence and uses data associated with AdventurCommandMappings to categorise them as GameWords that then allows each one to
+            be converted to an actual AdventurCommandMapping.
+            </summary>
+            <param name="wordList">A string array containing the list of words to process.</param>
+            <returns>A List of GameWord objects.</returns>
+        </member>
+        <member name="M:AdventureLandCore.Services.CoreApi.Interfaces.ILanguageApi.MatchesPercent(System.String,System.String,System.Double)">
+            <summary>
+            Determines if the target string is equal to the source, optionally allowing a partial match.
+            </summary>
+            <param name="source">The source string</param>
+            <param name="target">The target string</param>
+            <param name="pc">A decimal number representing the percentage of the string to match before returning true.</param>
+            <returns>True if the strings match, false otherwise.</returns>
+        </member>
+        <member name="T:AdventureLandCore.Services.CoreApi.PreProcessResult">
+            <summary>
+            Represents the result for running an object pre-processing script. 
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.PreProcessResult.CanContinue">
+            <summary>
+            User-settable flag. The normal behavior of this is: If set the True subsequent processing in the command will be continued. If set to false command processing with stop.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Services.CoreApi.PreProcessResult.ScriptWasRun">
+            <summary>
+            Indicates whether the pre-processing script was run or not.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.CanBeNullAttribute">
+            <summary>
+            Indicates that the value of the marked element could be <c>null</c> sometimes,
+            so the check for <c>null</c> is necessary before its usage.
+            </summary>
+            <example><code>
+            [CanBeNull] object Test() => null;
+            
+            void UseTest() {
+              var p = Test();
+              var s = p.ToString(); // Warning: Possible 'System.NullReferenceException'
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.NotNullAttribute">
+            <summary>
+            Indicates that the value of the marked element could never be <c>null</c>.
+            </summary>
+            <example><code>
+            [NotNull] object Foo() {
+              return null; // Warning: Possible 'null' assignment
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.ItemNotNullAttribute">
+            <summary>
+            Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+            and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+            or of the Lazy.Value property can never be null.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.ItemCanBeNullAttribute">
+            <summary>
+            Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+            and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+            or of the Lazy.Value property can be null.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.StringFormatMethodAttribute">
+            <summary>
+            Indicates that the marked method builds string by format pattern and (optional) arguments.
+            Parameter, which contains format string, should be given in constructor. The format string
+            should be in <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])"/>-like form.
+            </summary>
+            <example><code>
+            [StringFormatMethod("message")]
+            void ShowError(string message, params object[] args) { /* do something */ }
+            
+            void Foo() {
+              ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
+            }
+            </code></example>
+        </member>
+        <member name="M:AdventureLandCore.Properties.StringFormatMethodAttribute.#ctor(System.String)">
+            <param name="formatParameterName">
+            Specifies which parameter of an annotated method should be treated as format-string
+            </param>
+        </member>
+        <member name="T:AdventureLandCore.Properties.ValueProviderAttribute">
+            <summary>
+            For a parameter that is expected to be one of the limited set of values.
+            Specify fields of which type should be used as values for this parameter.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.InvokerParameterNameAttribute">
+            <summary>
+            Indicates that the function argument should be string literal and match one
+            of the parameters of the caller function. For example, ReSharper annotates
+            the parameter of <see cref="T:System.ArgumentNullException"/>.
+            </summary>
+            <example><code>
+            void Foo(string param) {
+              if (param == null)
+                throw new ArgumentNullException("par"); // Warning: Cannot resolve symbol
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.NotifyPropertyChangedInvocatorAttribute">
+             <summary>
+             Indicates that the method is contained in a type that implements
+             <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method
+             is used to notify that some property value changed.
+             </summary>
+             <remarks>
+             The method should be non-static and conform to one of the supported signatures:
+             <list>
+             <item><c>NotifyChanged(string)</c></item>
+             <item><c>NotifyChanged(params string[])</c></item>
+             <item><c>NotifyChanged{T}(Expression{Func{T}})</c></item>
+             <item><c>NotifyChanged{T,U}(Expression{Func{T,U}})</c></item>
+             <item><c>SetProperty{T}(ref T, T, string)</c></item>
+             </list>
+             </remarks>
+             <example><code>
+             public class Foo : INotifyPropertyChanged {
+               public event PropertyChangedEventHandler PropertyChanged;
+             
+               [NotifyPropertyChangedInvocator]
+               protected virtual void NotifyChanged(string propertyName) { ... }
+            
+               string _name;
+             
+               public string Name {
+                 get { return _name; }
+                 set { _name = value; NotifyChanged("LastName"); /* Warning */ }
+               }
+             }
+             </code>
+             Examples of generated notifications:
+             <list>
+             <item><c>NotifyChanged("Property")</c></item>
+             <item><c>NotifyChanged(() =&gt; Property)</c></item>
+             <item><c>NotifyChanged((VM x) =&gt; x.Property)</c></item>
+             <item><c>SetProperty(ref myField, value, "Property")</c></item>
+             </list>
+             </example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.ContractAnnotationAttribute">
+            <summary>
+            Describes dependency between method input and output.
+            </summary>
+            <syntax>
+            <p>Function Definition Table syntax:</p>
+            <list>
+            <item>FDT      ::= FDTRow [;FDTRow]*</item>
+            <item>FDTRow   ::= Input =&gt; Output | Output &lt;= Input</item>
+            <item>Input    ::= ParameterName: Value [, Input]*</item>
+            <item>Output   ::= [ParameterName: Value]* {halt|stop|void|nothing|Value}</item>
+            <item>Value    ::= true | false | null | notnull | canbenull</item>
+            </list>
+            If method has single input parameter, it's name could be omitted.<br/>
+            Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same) for method output
+            means that the methos doesn't return normally (throws or terminates the process).<br/>
+            Value <c>canbenull</c> is only applicable for output parameters.<br/>
+            You can use multiple <c>[ContractAnnotation]</c> for each FDT row, or use single attribute
+            with rows separated by semicolon. There is no notion of order rows, all rows are checked
+            for applicability and applied per each program state tracked by R# analysis.<br/>
+            </syntax>
+            <examples><list>
+            <item><code>
+            [ContractAnnotation("=&gt; halt")]
+            public void TerminationMethod()
+            </code></item>
+            <item><code>
+            [ContractAnnotation("halt &lt;= condition: false")]
+            public void Assert(bool condition, string text) // regular assertion method
+            </code></item>
+            <item><code>
+            [ContractAnnotation("s:null =&gt; true")]
+            public bool IsNullOrEmpty(string s) // string.IsNullOrEmpty()
+            </code></item>
+            <item><code>
+            // A method that returns null if the parameter is null,
+            // and not null if the parameter is not null
+            [ContractAnnotation("null =&gt; null; notnull =&gt; notnull")]
+            public object Transform(object data) 
+            </code></item>
+            <item><code>
+            [ContractAnnotation("=&gt; true, result: notnull; =&gt; false, result: null")]
+            public bool TryParse(string s, out Person result)
+            </code></item>
+            </list></examples>
+        </member>
+        <member name="T:AdventureLandCore.Properties.LocalizationRequiredAttribute">
+            <summary>
+            Indicates that marked element should be localized or not.
+            </summary>
+            <example><code>
+            [LocalizationRequiredAttribute(true)]
+            class Foo {
+              string str = "my string"; // Warning: Localizable string
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.CannotApplyEqualityOperatorAttribute">
+            <summary>
+            Indicates that the value of the marked type (or its derivatives)
+            cannot be compared using '==' or '!=' operators and <c>Equals()</c>
+            should be used instead. However, using '==' or '!=' for comparison
+            with <c>null</c> is always permitted.
+            </summary>
+            <example><code>
+            [CannotApplyEqualityOperator]
+            class NoEquality { }
+            
+            class UsesNoEquality {
+              void Test() {
+                var ca1 = new NoEquality();
+                var ca2 = new NoEquality();
+                if (ca1 != null) { // OK
+                  bool condition = ca1 == ca2; // Warning
+                }
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.BaseTypeRequiredAttribute">
+            <summary>
+            When applied to a target attribute, specifies a requirement for any type marked
+            with the target attribute to implement or inherit specific type or types.
+            </summary>
+            <example><code>
+            [BaseTypeRequired(typeof(IComponent)] // Specify requirement
+            class ComponentAttribute : Attribute { }
+            
+            [Component] // ComponentAttribute requires implementing IComponent interface
+            class MyComponent : IComponent { }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.UsedImplicitlyAttribute">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+            so this symbol will not be marked as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.MeansImplicitUseAttribute">
+            <summary>
+            Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes
+            as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.ImplicitUseKindFlags.Access">
+            <summary>Only entity marked with attribute considered used.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.ImplicitUseKindFlags.Assign">
+            <summary>Indicates implicit assignment to a member.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.ImplicitUseKindFlags.InstantiatedWithFixedConstructorSignature">
+            <summary>
+            Indicates implicit instantiation of a type with fixed constructor signature.
+            That means any unused constructor parameters won't be reported as such.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature">
+            <summary>Indicates implicit instantiation of a type.</summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.ImplicitUseTargetFlags">
+            <summary>
+            Specify what is considered used implicitly when marked
+            with <see cref="T:AdventureLandCore.Properties.MeansImplicitUseAttribute"/> or <see cref="T:AdventureLandCore.Properties.UsedImplicitlyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.ImplicitUseTargetFlags.Members">
+            <summary>Members of entity marked with attribute are considered used.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.ImplicitUseTargetFlags.WithMembers">
+            <summary>Entity marked with attribute and all its members considered used.</summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.PublicAPIAttribute">
+            <summary>
+            This attribute is intended to mark publicly available API
+            which should not be removed and so is treated as used.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.InstantHandleAttribute">
+            <summary>
+            Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
+            If the parameter is a delegate, indicates that delegate is executed while the method is executed.
+            If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.PureAttribute">
+            <summary>
+            Indicates that a method does not make any observable state changes.
+            The same as <c>System.Diagnostics.Contracts.PureAttribute</c>.
+            </summary>
+            <example><code>
+            [Pure] int Multiply(int x, int y) => x * y;
+            
+            void M() {
+              Multiply(123, 42); // Waring: Return value of pure method is not used
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.MustUseReturnValueAttribute">
+            <summary>
+            Indicates that the return value of method invocation must be used.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.ProvidesContextAttribute">
+            <summary>
+            Indicates the type member or parameter of some type, that should be used instead of all other ways
+            to get the value that type. This annotation is useful when you have some "context" value evaluated
+            and stored somewhere, meaning that all other ways to get this value must be consolidated with existing one.
+            </summary>
+            <example><code>
+            class Foo {
+              [ProvidesContext] IBarService _barService = ...;
+            
+              void ProcessNode(INode node) {
+                DoSomething(node, node.GetGlobalServices().Bar);
+                //              ^ Warning: use value of '_barService' field
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.PathReferenceAttribute">
+            <summary>
+            Indicates that a parameter is a path to a file or a folder within a web project.
+            Path can be relative or absolute, starting from web root (~).
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.SourceTemplateAttribute">
+            <summary>
+            An extension method marked with this attribute is processed by ReSharper code completion
+            as a 'Source Template'. When extension method is completed over some expression, it's source code
+            is automatically expanded like a template at call site.
+            </summary>
+            <remarks>
+            Template method body can contain valid source code and/or special comments starting with '$'.
+            Text inside these comments is added as source code when the template is applied. Template parameters
+            can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
+            Use the <see cref="T:AdventureLandCore.Properties.MacroAttribute"/> attribute to specify macros for parameters.
+            </remarks>
+            <example>
+            In this example, the 'forEach' method is a source template available over all values
+            of enumerable types, producing ordinary C# 'foreach' statement and placing caret inside block:
+            <code>
+            [SourceTemplate]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; xs) {
+              foreach (var x in xs) {
+                 //$ $END$
+              }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.MacroAttribute">
+            <summary>
+            Allows specifying a macro for a parameter of a <see cref="T:AdventureLandCore.Properties.SourceTemplateAttribute">source template</see>.
+            </summary>
+            <remarks>
+            You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
+            is defined in the <see cref="P:AdventureLandCore.Properties.MacroAttribute.Expression"/> property. When applied on a method, the target
+            template parameter is defined in the <see cref="P:AdventureLandCore.Properties.MacroAttribute.Target"/> property. To apply the macro silently
+            for the parameter, set the <see cref="P:AdventureLandCore.Properties.MacroAttribute.Editable"/> property value = -1.
+            </remarks>
+            <example>
+            Applying the attribute on a source template method:
+            <code>
+            [SourceTemplate, Macro(Target = "item", Expression = "suggestVariableName()")]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; collection) {
+              foreach (var item in collection) {
+                //$ $END$
+              }
+            }
+            </code>
+            Applying the attribute on a template method parameter:
+            <code>
+            [SourceTemplate]
+            public static void something(this Entity x, [Macro(Expression = "guid()", Editable = -1)] string newguid) {
+              /*$ var $x$Id = "$newguid$" + x.ToString();
+              x.DoSomething($x$Id); */
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:AdventureLandCore.Properties.MacroAttribute.Expression">
+            <summary>
+            Allows specifying a macro that will be executed for a <see cref="T:AdventureLandCore.Properties.SourceTemplateAttribute">source template</see>
+            parameter when the template is expanded.
+            </summary>
+        </member>
+        <member name="P:AdventureLandCore.Properties.MacroAttribute.Editable">
+            <summary>
+            Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
+            </summary>
+            <remarks>
+            If the target parameter is used several times in the template, only one occurrence becomes editable;
+            other occurrences are changed synchronously. To specify the zero-based index of the editable occurrence,
+            use values >= 0. To make the parameter non-editable when the template is expanded, use -1.
+            </remarks>>
+        </member>
+        <member name="P:AdventureLandCore.Properties.MacroAttribute.Target">
+            <summary>
+            Identifies the target parameter of a <see cref="T:AdventureLandCore.Properties.SourceTemplateAttribute">source template</see> if the
+            <see cref="T:AdventureLandCore.Properties.MacroAttribute"/> is applied on a template method.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcActionAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC action. If applied to a method, the MVC action name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcAreaAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcControllerAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
+            an MVC controller. If applied to a method, the MVC controller name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcMasterAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC Master. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcModelTypeAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcPartialViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
+            partial view. If applied to a method, the MVC partial view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcSuppressViewErrorAttribute">
+            <summary>
+            ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcDisplayTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
+            Use this attribute for custom wrappers similar to 
+            <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcEditorTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
+            Use this attribute for custom wrappers similar to
+            <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view component. If applied to a method, the MVC view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Controller.View(Object)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcViewComponentAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view component name.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcViewComponentViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view component view. If applied to a method, the MVC view component view name is default.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AspMvcActionSelectorAttribute">
+            <summary>
+            ASP.NET MVC attribute. When applied to a parameter of an attribute,
+            indicates that this parameter is an MVC action name.
+            </summary>
+            <example><code>
+            [ActionName("Foo")]
+            public ActionResult Login(string returnUrl) {
+              ViewBag.ReturnUrl = Url.Action("Foo"); // OK
+              return RedirectToAction("Bar"); // Error: Cannot resolve action
+            }
+            </code></example>
+        </member>
+        <member name="T:AdventureLandCore.Properties.RazorSectionAttribute">
+            <summary>
+            Razor attribute. Indicates that a parameter or a method is a Razor section.
+            Use this attribute for custom wrappers similar to 
+            <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.CollectionAccessAttribute">
+            <summary>
+            Indicates how method, constructor invocation or property access
+            over collection type affects content of the collection.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.CollectionAccessType.None">
+            <summary>Method does not use or modify content of the collection.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.CollectionAccessType.Read">
+            <summary>Method only reads content of the collection but does not modify it.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.CollectionAccessType.ModifyExistingContent">
+            <summary>Method can change content of the collection but does not add new elements.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.CollectionAccessType.UpdatedContent">
+            <summary>Method can add new elements to the collection.</summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AssertionMethodAttribute">
+            <summary>
+            Indicates that the marked method is assertion method, i.e. it halts control flow if
+            one of the conditions is satisfied. To set the condition, mark one of the parameters with 
+            <see cref="T:AdventureLandCore.Properties.AssertionConditionAttribute"/> attribute.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AssertionConditionAttribute">
+            <summary>
+            Indicates the condition parameter of the assertion method. The method itself should be
+            marked by <see cref="T:AdventureLandCore.Properties.AssertionMethodAttribute"/> attribute. The mandatory argument of
+            the attribute is the assertion type.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.AssertionConditionType">
+            <summary>
+            Specifies assertion type. If the assertion method argument satisfies the condition,
+            then the execution continues. Otherwise, execution is assumed to be halted.
+            </summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.AssertionConditionType.IS_TRUE">
+            <summary>Marked parameter should be evaluated to true.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.AssertionConditionType.IS_FALSE">
+            <summary>Marked parameter should be evaluated to false.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.AssertionConditionType.IS_NULL">
+            <summary>Marked parameter should be evaluated to null value.</summary>
+        </member>
+        <member name="F:AdventureLandCore.Properties.AssertionConditionType.IS_NOT_NULL">
+            <summary>Marked parameter should be evaluated to not null value.</summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.TerminatesProgramAttribute">
+            <summary>
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.LinqTunnelAttribute">
+            <summary>
+            Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
+            .Where). This annotation allows inference of [InstantHandle] annotation for parameters
+            of delegate type by analyzing LINQ method chains.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.NoEnumerationAttribute">
+            <summary>
+            Indicates that IEnumerable, passed as parameter, is not enumerated.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.RegexPatternAttribute">
+            <summary>
+            Indicates that parameter is regular expression pattern.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.NoReorderAttribute">
+            <summary>
+            Prevents the Member Reordering feature from tossing members of the marked class.
+            </summary>
+            <remarks>
+            The attribute must be mentioned in your member reordering patterns
+            </remarks>
+        </member>
+        <member name="T:AdventureLandCore.Properties.XamlItemsControlAttribute">
+            <summary>
+            XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
+            as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
+            </summary>
+        </member>
+        <member name="T:AdventureLandCore.Properties.XamlItemBindingOfItemsControlAttribute">
+            <summary>
+            XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that
+            is used to bind some item of <c>ItemsControl</c>-derived type. This annotation will
+            enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
+            </summary>
+            <remarks>
+            Property should have the tree ancestor of the <c>ItemsControl</c> type or
+            marked with the <see cref="T:AdventureLandCore.Properties.XamlItemsControlAttribute"/> attribute.
+            </remarks>
+        </member>
+    </members>
+</doc>

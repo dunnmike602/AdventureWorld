@@ -1,0 +1,102 @@
+# The TAKE command allows the player to pick up objects.
+
+# Loop through each object and process as appropriate
+	
+def ProcessObjectList(validObjects):
+	
+	for nextObject in validObjects:
+	
+		# Give the chance for customisations to run and bail out of default actions if required.
+		preProcessResult = Preprocess(nextObject)
+			
+		if preProcessResult:
+						
+			itemIsAvailable = AWApi.IsItemAvailableToExamine(nextObject)
+		
+			if not itemIsAvailable:
+				ConsoleApi.FormattedWrite("{0}: You can't see that here.".format(nextObject.Name))
+			
+			elif nextObject.Fixed:
+				ConsoleApi.FormattedWrite("{0}: Cannot be moved.".format(nextObject.Name))
+				
+			elif nextObject.IsHeld:
+				ConsoleApi.FormattedWrite("{0}: You already have it.".format(nextObject.Name))
+			
+			else:
+				# Can we add this to our inventory
+				if AWApi.GameData.EnableInventorySize and (AWApi.GetInventory().Count + 1) > AWApi.GameData.InventorySize:
+					ConsoleApi.FormattedWrite("You can't carry anything else!!")
+					return True
+				
+				# We can take the object
+				AWApi.Take(nextObject)
+					
+				ConsoleApi.FormattedWrite("{0}: Taken.".format(nextObject.Name))
+			
+	return True
+		
+def Execute(adventureCommand):
+	global originalCommandWord
+	
+	originalCommandWord = adventureCommand.ParsedCommand.OriginalWord.upper()
+
+	# No parameter supplied ask the question
+	if adventureCommand.Parameters.Count == 0:
+		ConsoleApi.FormattedWrite("What do you want to {0}?".format(originalCommandWord))
+		return False
+		
+	# If the room is dark you certainly can't pick anything up
+	if CurrentLocation.IsDark:
+		ConsoleApi.FormattedWrite(IsDarkText)
+		return True
+		
+	# Do we match any objects
+	parametersToCheck = wildcardGameWordList if adventureCommand.Parameters[0].Word.lower() in everythingWords else adventureCommand.GetParametersWithoutStopWords()
+	objects = AWApi.GetObjectsFromNames(parametersToCheck, 70.0, False)
+	
+	# Check for words we don't understand
+	invalidObjects = list(filter(lambda object: not object.IsValid, objects))
+	validObjects = list(filter(lambda object: object.IsValid, objects))
+	
+	if any(invalidObjects):
+		ConsoleApi.FormattedWrite("I don't know the word \"{0}\".".format(invalidObjects[0].Name.upper()))
+		return False
+		
+	# Valid Take Object phrases
+	currentTakeObjectsPhrases = []
+	
+	# Build phrases for objects to be taken based on the word that matched them
+	phrase1 = originalCommandWord + " "
+	phrase2 = originalCommandWord + " "
+	
+	for i in range(len(validObjects)):
+		actualAndWord = andWord if i < len(validObjects) - 1 else ""
+		phrase1 = phrase1 + '{} {} '.format(validObjects[i].WordThatMatchedThis, actualAndWord)
+		phrase2 = phrase2 + '{} {} {} '.format(theWord, validObjects[i].WordThatMatchedThis, actualAndWord)
+
+	currentTakeObjectsPhrases.extend([ phrase1.strip(), phrase2.strip()])
+	
+	# Build phrases for objects to be taken based on their actual names
+	phrase1 = originalCommandWord + " "
+	phrase2 = originalCommandWord + " "
+		
+	for i in range(len(validObjects)):
+		actualAndWord = andWord if i < len(validObjects) - 1 else ""
+		phrase1 = '{} {} '.format(originalCommandWord, validObjects[i].Name, actualAndWord).strip()
+		phrase2 = '{} {} {} '.format(originalCommandWord, theWord, validObjects[i].Name, actualAndWord).strip()
+			
+	currentTakeObjectsPhrases.extend([ phrase1.strip(), phrase2.strip()])
+		
+	# Add "all" words to support TAKE ALL
+	for word in everythingWords:
+		currentTakeObjectsPhrases.extend(['{} {}'.format(originalCommandWord, word)])
+	
+	if LanguageApi.CheckSentenceAgainstList(adventureCommand.JoinOriginalWordAndParameters(), currentTakeObjectsPhrases):
+		# We can't take anything
+		if validObjects.Count == 0:
+			ConsoleApi.FormattedWrite("There isn't anything to take!")
+			return True
+	
+		return ProcessObjectList(validObjects)
+	
+	return SentenceNotRecognised()	

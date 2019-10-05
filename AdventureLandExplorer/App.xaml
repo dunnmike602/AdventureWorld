@@ -1,0 +1,25 @@
+﻿<Application x:Class="AdventureLandExplorer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:AdventureLandExplorer.Converters"
+             StartupUri="GameExplorer.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SharedControls;component/Shared.xaml" />
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/Shared.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/Button.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/ToolBar.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/slider.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/GroupBox.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/AltGroupBox.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/Expander.xaml"/>
+                <ResourceDictionary Source="/SharedControls;component/Resources/Styles/ScrollBar.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:ExitTextConverter x:Key="ExitTextConverter" />
+            <converters:ExitVisibilityConverter x:Key="ExitVisibilityConverter" />
+            <converters:ExitCommandParameterConverter x:Key="ExitCommandParameterConverter" />
+            <converters:InvisibleIfNotRoomConverter x:Key="InvisibleIfNotRoomConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

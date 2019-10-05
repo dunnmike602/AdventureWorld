@@ -1,0 +1,1156 @@
+﻿<Window x:Class="DiagramDesigner.AdventureDesigner" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DiagramDesigner.AdventureWorld.Domain"
+        WindowStartupLocation="CenterScreen" xmlns:conv="clr-namespace:DiagramDesigner"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:controls="clr-namespace:DiagramDesigner.Controls"
+        xmlns:symbols="clr-namespace:DiagramDesigner.Symbols"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:sys="clr-namespace:System.Drawing;assembly=System.Drawing"
+        x:Name="MainWindow"
+        Height="800" Width="1400" Icon="Resources/Images/maze.png" Closing="AdventureDesignerOnClosing"
+        Loaded="MainWindowLoaded" Closed="MainWindowClosed">
+    <Window.Resources>
+        <Storyboard x:Key="WaitStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="WaitSpinner"
+                Storyboard.TargetProperty="(TextBlock.RenderTransform).(RotateTransform.Angle)"
+                From="0"
+                To="360"
+                Duration="0:0:2"
+                RepeatBehavior="Forever" />
+        </Storyboard>
+        <ContextMenu x:Key="DesignerCanvasContextMenu">
+            <MenuItem Header="Paste" Command="{x:Static ApplicationCommands.Paste}">
+                <MenuItem.Icon>
+                    <Image Source="Resources/Images/Paste.png" Width="16"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Select All" Command="{Binding }"/>
+        </ContextMenu>
+    </Window.Resources>
+
+    <Grid Margin="10" x:Name="RootWindow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="142"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Background="{StaticResource ToolbarBrush}" Name="MainMenu" Padding="0 5 0 5">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New"  >
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/GenericDocument.png" Width="16"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Blank Project"  CommandTarget="{Binding ElementName=MainWindow}"
+                              Command="{x:Static ApplicationCommands.New}" ToolTip="Create a new blank project">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/GenericDocument.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Game Wizard" ToolTip="Run the game wizard" Command="{Binding WizardCommand}"  CommandTarget="{Binding ElementName=MainWindow}">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="Magic"  Width="16" Height="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Open" CommandTarget="{Binding ElementName=MainWindow}" Command="{x:Static ApplicationCommands.Open}"  ToolTip="Open Project">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/OpenFolder.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Save" Command="{x:Static ApplicationCommands.Save}" CommandTarget="{Binding ElementName=MainWindow}" ToolTip="Save the current project">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/Save.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save As" Command="{x:Static ApplicationCommands.SaveAs}" CommandTarget="{Binding ElementName=MainWindow}" ToolTip="Save the current project with a new name">
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="O_ptions" Command="{Binding OptionsCommand}" 
+                          CommandTarget="{Binding ElementName=MainWindow}" ToolTip="View Project Options">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/options.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Print" ToolTip="Print the current project designers and details"
+                           Command="{x:Static ApplicationCommands.Print}" CommandTarget="{Binding ElementName=MainWindow}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/Print.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Recent Files" ItemsSource="{Binding RecentFiles}" Click="RecentFilesItemOnClick">
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Exit" Command="{Binding ExitCommand}"  ToolTip="Exit the application" CommandTarget="{Binding ElementName=MainWindow}">
+                    <MenuItem.Icon>
+                        <fa:ImageAwesome Icon="SignOut"  Foreground="Red"  Opacity=".7" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="E_dit">
+                <MenuItem Header="Cut"  Command="{x:Static ApplicationCommands.Cut}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/Cut.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Paste"  Command="{x:Static ApplicationCommands.Paste}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/PasteBig.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Copy"  Command="{x:Static ApplicationCommands.Copy}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/Copy.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Delete"  Command="{x:Static ApplicationCommands.Delete}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/Delete.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="Game Properties"  Command="{Binding PropertiesCommand}" ToolTip="Show Game Properties">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/Properties.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Check Model"  Command="{Binding CheckCommand}" ToolTip="Check the current game model">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/check.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Run" ItemsSource="{Binding Clients}" Click="RunMenuItemOnClick">
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Label}" ToolTip="{Binding ToolTip}" />
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/exec.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Format">
+                <MenuItem Header="_Alignment">
+                    <MenuItem Header="Align Left" ToolTip="Align objects at the left" Command="{x:Static symbols:DesignerCanvas.AlignLeft}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/AlignObjectsLeft.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Centers Horizontally" ToolTip="Align Objects at centres horizontally" Command="{x:Static symbols:DesignerCanvas.AlignHorizontalCenters}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/AlignObjectsCenteredHorizontal.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Right" ToolTip="Align Objects Right" Command="{x:Static symbols:DesignerCanvas.AlignRight}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/AlignObjectsRight.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Top" ToolTip="Align objects at the top" Command="{x:Static symbols:DesignerCanvas.AlignTop}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/AlignObjectsTop.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Centers Vertically" ToolTip="Align objects at the centres vertically" Command="{x:Static symbols:DesignerCanvas.AlignTop}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/AlignObjectsCenteredVertical.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Align Bottom" ToolTip="Align objects at the top" Command="{x:Static symbols:DesignerCanvas.AlignBottom}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/AlignObjectsBottom.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Distr_ibute &amp; Size">
+                    <MenuItem Header="Distribute Horizontally" ToolTip="Distribute shapes Horizontally" Command="{x:Static symbols:DesignerCanvas.DistributeHorizontal}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/DistributeObjectsHorizontal.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Distribute Vertically" ToolTip="Distribute shapes Vertically" Command="{x:Static symbols:DesignerCanvas.DistributeVertical}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/DistributeObjectsVertical.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Same Widths" ToolTip="Make Objects Same Widths" Command="{x:Static symbols:DesignerCanvas.SameWidth}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="ArrowsH"  Width="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Same Heights" ToolTip="Make Objects Same Heights" Command="{x:Static symbols:DesignerCanvas.SameHeight}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="ArrowsV"  Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Same Size" ToolTip="Make Objects Same Size" Command="{x:Static symbols:DesignerCanvas.SameSize}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="ArrowsAlt"  Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Arran_ge">
+                    <MenuItem Header="Group" ToolTip="Group shapes together" Command="{x:Static symbols:DesignerCanvas.Group}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/Group.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Ungroup" ToolTip="Ungroup shapes" Command="{x:Static symbols:DesignerCanvas.Ungroup}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/Ungroup.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Bring Forward" ToolTip="Bring shapes forward" Command="{x:Static symbols:DesignerCanvas.BringForward}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/BringForward.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Send Backward" ToolTip="Send shapes backward" Command="{x:Static symbols:DesignerCanvas.SendBackward}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/SendBackward.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Bring To Front" ToolTip="Bring Shapes to Front" Command="{x:Static symbols:DesignerCanvas.BringToFront}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/BringToFront.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Send to Back" ToolTip="Send Shapes to Back" Command="{x:Static symbols:DesignerCanvas.SendToBack}" CommandTarget="{Binding ElementName=RoomDesigner}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/SendToBack.png" Width="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="About Adventure Designer" Command="{Binding AboutCommand}">
+
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+
+        <ContentControl Grid.Row="1">
+            <ToolBar Margin="0,5,0,0">
+                <!--File-->
+                <GroupBox Header="File" Style="{StaticResource ToolbarGroup}" Margin="0,3" Width="221">
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="0,2,0,2">
+                            <syncfusion:SplitButtonAdv  Margin="1" Padding="2"  HorizontalContentAlignment="Left"  Height="28" ToolTip="{Binding SelectedClient.ToolTip}" Label="{Binding SelectedOption.Label}" 
+                                                        CommandTarget="{Binding ElementName=MainWindow}"  Command="{x:Static ApplicationCommands.New}"  SmallIcon="/Resources/Images/GenericDocument.png" 
+                                                        Width="100">
+                                <syncfusion:DropDownMenuGroup ItemsSource="{Binding NewOptions}">
+                                    <syncfusion:DropDownMenuGroup.ItemTemplate>
+                                        <DataTemplate>
+                                            <syncfusion:DropDownMenuItem Click="NewDropDownClicked" Header="{Binding Label}" IsChecked="{Binding IsChecked}" ToolTip="{Binding ToolTip}">
+                                            </syncfusion:DropDownMenuItem>
+                                        </DataTemplate>
+                                    </syncfusion:DropDownMenuGroup.ItemTemplate>
+                                </syncfusion:DropDownMenuGroup>
+                            </syncfusion:SplitButtonAdv>
+                            <Button Margin="1" Padding="2" HorizontalContentAlignment="Left" Width="100" Height="27"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}" ToolTip="Print Project Information" CommandTarget="{Binding ElementName=MainWindow}"
+                                    Command="{x:Static ApplicationCommands.Print}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Print.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Print" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="1" Padding="2" HorizontalContentAlignment="Left" ToolTip="Save the current project"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}" 
+                                    Command="{x:Static ApplicationCommands.Save}"
+                                    CommandTarget="{Binding ElementName=MainWindow}" Height="27" Width="100">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Save.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Save" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+
+
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,2,0,2" Width="108">
+                            <syncfusion:SplitButtonAdv  Margin="1" Padding="2"  HorizontalContentAlignment="Left" Name="FileOpenButton" Height="27"  CommandTarget="{Binding ElementName=MainWindow}" 
+                                                        Command="{x:Static ApplicationCommands.Open}" Label="Open" SmallIcon="Resources/Images/OpenFolder.png" ToolTip="Open Project"
+                                                        Width="100">
+                                <syncfusion:DropDownMenuGroup ItemsSource="{Binding RecentFiles}">
+
+                                    <syncfusion:DropDownMenuGroup.ItemTemplate>
+                                        <DataTemplate>
+                                            <syncfusion:DropDownMenuItem Header="{Binding}" Click="MenuItemOnClick">
+                                            </syncfusion:DropDownMenuItem>
+                                        </DataTemplate>
+                                    </syncfusion:DropDownMenuGroup.ItemTemplate>
+                                </syncfusion:DropDownMenuGroup>
+                            </syncfusion:SplitButtonAdv>
+
+                            <Button Margin="1" Padding="2" HorizontalContentAlignment="Left" Width="100" Height="27" ToolTip="View Project Options"
+                                Style="{StaticResource ToolBarButtonBaseStyle}" Command="{Binding OptionsCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="Resources/Images/options.png" Width="16"/>
+                                    <TextBlock Margin="3,0,-9,0" Text="Options" VerticalAlignment="Bottom" Grid.Column="1"/>
+                                </Grid>
+                            </Button>
+                            <Button Margin="1" Padding="2" HorizontalContentAlignment="Left" Width="100" ToolTip="Exit Application"  Command="{x:Static ApplicationCommands.Stop}" 
+                                    CommandTarget="{Binding ElementName=MainWindow}" Style="{StaticResource ToolBarButtonBaseStyle}" Height="27">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome Icon="SignOut" Foreground="Red"  Opacity=".7" Width="16" Height="16" ToolTip="Exit the application"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Exit" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!--Edit-->
+                <GroupBox Header="Edit" Style="{StaticResource ToolbarGroup}" Margin="3">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="0,2,0,2">
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left"  Name="CmdCut"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static ApplicationCommands.Cut}"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Cut.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Cut" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdCopy" 
+                            Command="{x:Static ApplicationCommands.Copy}"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Copy.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Copy" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdPaste" 
+                                    Command="{x:Static ApplicationCommands.Paste}"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Paste.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Paste" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,2,0,2">
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left" Name="CmdSelectAll"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.SelectAll}"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome Icon="HandPointerOutline"  Width="14"  ToolTip="Select all objects in current designer"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Select All" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+
+                            <Button Margin="1 1 1 4" Padding="2" HorizontalContentAlignment="Left" Name="CmdDelete"
+                                    Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static ApplicationCommands.Delete}"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Delete.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Delete" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Tool Box" Style="{StaticResource ToolbarGroup}"  Margin="0,3" HorizontalContentAlignment="Center"
+                          Content="{StaticResource FlowChartStencils}" Width="332"/>
+
+                <!--Game Tools-->
+                <GroupBox Header="Tools" Style="{StaticResource ToolbarGroup}" Margin="0,3" Width="200">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,-10,0">
+                        <Button Margin="3,3,3,2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}" ToolTip="Show Game Properties"
+                                Command="{Binding PropertiesCommand}">
+                            <Button.Content>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Source="Resources/Images/properties.png" Width="32" Height="32"/>
+                                    <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Run>Game</Run>
+                                        <LineBreak></LineBreak>
+                                        <Run>Properties</Run>
+                                    </TextBlock>
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                        <StackPanel Orientation="Vertical" Margin="0,2,0,2">
+                            <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"  ToolTip="Check the current game model"
+                            Style="{StaticResource ToolBarButtonBaseStyle}" x:Name="CheckModelButton"
+                            Command="{Binding CheckCommand}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/check.png" Width="16"/>
+                                        <TextBlock Margin="3,0,3,0" Text="Validate Model" VerticalAlignment="Center"  Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+
+                            <syncfusion:SplitButtonAdv  Margin="1" Padding="2"  HorizontalContentAlignment="Left"  Height="28" ToolTip="{Binding SelectedClient.ToolTip}" Label="{Binding SelectedClient.Label}" 
+                                                        CommandTarget="{Binding ElementName=MainWindow}"  Command="{Binding RunCommand}"  SmallIcon="/Resources/Images/exec.png" 
+                                                        Width="123">
+                                <syncfusion:DropDownMenuGroup ItemsSource="{Binding Clients}">
+                                    <syncfusion:DropDownMenuGroup.ItemTemplate>
+                                        <DataTemplate>
+                                            <syncfusion:DropDownMenuItem Click="ClientDropDownClicked" Header="{Binding Label}" IsChecked="{Binding IsChecked}" ToolTip="{Binding ToolTip}">
+                                            </syncfusion:DropDownMenuItem>
+                                        </DataTemplate>
+                                    </syncfusion:DropDownMenuGroup.ItemTemplate>
+                                </syncfusion:DropDownMenuGroup>
+                            </syncfusion:SplitButtonAdv>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!--Alignment-->
+                <GroupBox Header="Alignment" Style="{StaticResource ToolbarGroup}" Margin="3">
+
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignLeft}" Name="CmdAlignHorizontalCenters" 
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                    <Button.Content>
+                                        <Image Source="Resources/Images/AlignObjectsLeft.png" Width="16" ToolTip="Align objects at the left"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdAlignObjectsCenteredHorizontal" ToolTip="Align Objects at centres horizontally"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignHorizontalCenters}"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                    <Button.Content>
+                                        <Image Source="Resources/Images/AlignObjectsCenteredHorizontal.png"  Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdAlignObjectsRight"  ToolTip="Align Objects Right"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignRight}"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                    <Button.Content>
+                                        <Image Source="Resources/Images/AlignObjectsRight.png" Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                        <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignTop}"
+                                    Name="CmdAlignObjectsTop"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                    <Button.Content>
+                                        <Image Source="Resources/Images/AlignObjectsTop.png" Width="16" ToolTip="Align objects at the top"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignVerticalCenters}"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}"  Name="CmdAlignObjectsCenteredVertical">
+                                    <Button.Content>
+                                        <Image Source="Resources/Images/AlignObjectsCenteredVertical.png" ToolTip="Align objects at the centres vertically" Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
+                                    Command="{x:Static symbols:DesignerCanvas.AlignBottom}"
+                                    Name="CmdAlignObjectsBottom"
+                                    CommandTarget="{Binding ElementName=RoomDesigner}">
+                                    <Button.Content>
+                                        <Image Source="Resources/Images/AlignObjectsBottom.png" ToolTip="Align objects at the bottom" Width="16"/>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Size -->
+                <GroupBox Header="Distribute &amp; Size" Style="{StaticResource ToolbarGroup}" Margin="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5,0,0,0">
+                            <Button Margin="3" Padding="5" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Name="CmdDistributeHorizontal"
+                            Command="{x:Static symbols:DesignerCanvas.DistributeHorizontal}" ToolTip="Distribute shapes Horizontally"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/DistributeObjectsHorizontal.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Horizontal" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.DistributeVertical}"
+                            Name="CmdDistributeVertical"
+                            CommandTarget="{Binding ElementName=RoomDesigner}" ToolTip="Distribute shapes Vertically.">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/DistributeObjectsVertical.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Vertical" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5 0 0 0">
+                            <Button Margin="2" Padding="0" Style="{StaticResource ToolBarButtonBaseStyle}"  Name="CmdMakeSameWidths"
+                                Command="{x:Static symbols:DesignerCanvas.SameWidth}"
+                                CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <fa:ImageAwesome Icon="ArrowsH"  Width="18" Height="18" ToolTip="Make Objects Same Widths"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="2" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdMakeSameHeight"
+                                Command="{x:Static symbols:DesignerCanvas.SameHeight}"
+                                CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <fa:ImageAwesome Icon="ArrowsV"  Width="18" Height="18" ToolTip="Make Objects Same Heights"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Padding="2" Style="{StaticResource ToolBarButtonBaseStyle}" Name="CmdMakeSameSize"
+                                Command="{x:Static symbols:DesignerCanvas.SameSize}"
+                                CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <fa:ImageAwesome Icon="ArrowsAlt"  Width="18" Height="18" ToolTip="Make Objects Same Size"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Arrange" Style="{StaticResource ToolbarGroup}" Margin="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel >
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.Group}"
+                            Name="CmdGroup"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Group.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Group" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.Ungroup}"
+                            Name="CmdUnGroup"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/Ungroup.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Ungroup" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="7,0,0,0">
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.BringForward}"
+                            Name="CmdForward"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/BringForward.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Forward" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.BringToFront}"
+                            Name="CmdToFront"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/BringToFront.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="To Front" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <Line Stroke="{StaticResource ToolbarBorderBrush}" 
+                      StrokeThickness="1" X1="0" Y1="0" X2="0" Y2="20" 
+                      Stretch="Fill" HorizontalAlignment="Left"
+                      Grid.Column="1" Margin="3,0,0,0"/>
+                        <StackPanel Grid.Column="2">
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Name="CmdBackward"        
+                            Command="{x:Static symbols:DesignerCanvas.SendBackward}"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/SendBackward.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="Backward" VerticalAlignment="Center"  Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Margin="0,3,0,3" Padding="3" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Command="{x:Static symbols:DesignerCanvas.SendToBack}"
+                            Name="CmdToBack"
+                            CommandTarget="{Binding ElementName=RoomDesigner}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Resources/Images/SendToBack.png" Width="16"/>
+                                        <TextBlock Margin="3" Text="To Back" VerticalAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </ToolBar>
+        </ContentControl>
+
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="2.8*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"  Background="Transparent"/>
+            <Grid Grid.Column="0" Margin="0,0,5,1" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+
+                <syncfusion:TabControlExt  AllowDrop="False" x:Name="ProjectExplorerTab" Margin="0 0 0 0" VerticalAlignment="Stretch" 
+                                           HorizontalAlignment="Stretch" IsNewButtonEnabled="False"
+                      EnableLabelEdit="False" CloseButtonType="Hide" Background="Transparent">
+                    <syncfusion:TabItemExt Header="Explorer">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TreeView x:Name="Explorer" Margin="0" Grid.Column="0" Grid.Row="0" BorderBrush="Black" TreeViewItem.Selected="ExplorerSelected"
+                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <TreeViewItem x:Name="GameExplorer" Header="{Binding Path=GameName}" BorderBrush="Transparent">
+                                    <TreeViewItem ItemsSource="{Binding Rooms}">
+                                        <TreeViewItem.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type local:Room}" ItemsSource="{Binding Exits}">
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <TextBlock Text="{Binding Path=BaseName}" ToolTip="{Binding Path=CurrentDescription}"/>
+                                                </StackPanel>
+                                            </HierarchicalDataTemplate>
+                                            <DataTemplate DataType="{x:Type local:Exit}">
+                                                <TextBlock Text="{Binding Path=Description}"/>
+                                            </DataTemplate>
+                                        </TreeViewItem.Resources>
+                                        <TreeViewItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="0 3 0 3" Height="18" Width="18" Source="/Resources/Images/New-Room.png" />
+                                                <TextBlock Margin="5 3 0 3" Text="Rooms (and Exits)"/>
+                                            </StackPanel>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+                                    <TreeViewItem ItemsSource="{Binding Rooms}">
+                                        <TreeViewItem.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type local:Room}" ItemsSource="{Binding PlaceableObjects}">
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <TextBlock Text="{Binding Path=BaseName}" ToolTip="{Binding Path=CurrentDescription}"/>
+                                                </StackPanel>
+                                            </HierarchicalDataTemplate>
+                                            <DataTemplate DataType="{x:Type local:PlaceableObject}">
+                                                <TextBlock Text="{Binding Path=BaseName}" ToolTip="{Binding Path=CurrentDescription}"/>
+                                            </DataTemplate>
+                                        </TreeViewItem.Resources>
+                                        <TreeViewItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="0 3 0 3" Height="18" Width="18" Source="/Resources/Images/New-Room.png" />
+                                                <TextBlock Margin="5 3 0 3" Text="Rooms (and Objects)"/>
+                                            </StackPanel>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem ItemsSource="{Binding NpcsOnly}" >
+                                        <TreeViewItem.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type local:PlaceableObject}" ItemsSource="{Binding PlaceableObjects}">
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <TextBlock Text="{Binding Path=BaseName}" ToolTip="{Binding Path=CurrentDescription}"/>
+                                                </StackPanel>
+                                            </HierarchicalDataTemplate>
+                                        </TreeViewItem.Resources>
+                                        <TreeViewItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="0 3 0 3" Height="18" Width="18" Source="/Resources/Images/npc.png" />
+                                                <TextBlock Margin="5 3 0 3" Text="NPCs"/>
+                                            </StackPanel>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem ItemsSource="{Binding ContainersOnly}" >
+                                        <TreeViewItem.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type local:PlaceableObject}" ItemsSource="{Binding PlaceableObjects}">
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <TextBlock Text="{Binding Path=BaseName}" ToolTip="{Binding Path=CurrentDescription}"/>
+                                                </StackPanel>
+                                            </HierarchicalDataTemplate>
+                                        </TreeViewItem.Resources>
+                                        <TreeViewItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="0 3 0 3" Height="18" Width="18" Source="/Resources/Images/maze.png" />
+                                                <TextBlock Margin="5 3 0 3" Text="Containers"/>
+                                            </StackPanel>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+
+
+                                    <TreeViewItem ItemsSource="{Binding PlaceableObjectsOnly}" >
+                                        <TreeViewItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="0 3 0 3" Height="18" Width="18" Source="/Resources/Images/Key-icon.png" />
+                                                <TextBlock Margin="5 3 0 3" Text="Placeable Objects"/>
+                                            </StackPanel>
+                                        </TreeViewItem.Header>
+                                        <TreeViewItem.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <TextBlock Text="{Binding Path=BaseName}" ToolTip="{Binding Path=CurrentDescription}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </TreeViewItem.ItemTemplate>
+                                    </TreeViewItem>
+
+                                    <TreeViewItem ItemsSource="{Binding Exits}">
+                                        <TreeViewItem.Resources>
+                                            <DataTemplate DataType="{x:Type local:Exit}">
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <TextBlock Text="{Binding Path=FriendlyDescription}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </TreeViewItem.Resources>
+                                        <TreeViewItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="0 3 0 3" Height="18" Width="18" Source="/Resources/Images/exit.png" />
+                                                <TextBlock Margin="5 3 0 3" Text="Exits"/>
+                                            </StackPanel>
+                                        </TreeViewItem.Header>
+                                    </TreeViewItem>
+                                </TreeViewItem>
+                            </TreeView>
+
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <Button Padding="2" Style="{StaticResource ToolBarButtonBaseStyle}" ToolTip="Expand All"  Name="CmdExpand" Click="CmdExpandClick">
+                                    <Button.Content>
+                                        <fa:ImageAwesome Icon="PlusSquare"  VerticalAlignment="Center" Height="16" Width="16" HorizontalAlignment="Center" />
+                                    </Button.Content>
+                                </Button>
+                                <Button Padding="2" Style="{StaticResource ToolBarButtonBaseStyle}" ToolTip="Collapse All"  Name="CmdCollapse" Click="CmdCollapseClick">
+                                    <Button.Content>
+                                        <fa:ImageAwesome Icon="MinusSquare"  VerticalAlignment="Center" Height="16" Width="16" HorizontalAlignment="Center" />
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+
+                            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"  Background="Transparent"/>
+
+                            <Grid Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <xctk:PropertyGrid  x:Name="GameProperties"  ShowSummary="True" ShowSortOptions ="False" ShowAdvancedOptions="False" ShowTitle="True"
+                                                   ShowSearchBox="True" IsCategorized="True" ShowPreview="False"  BorderBrush="Black" 
+                                                   AutoGenerateProperties="true" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FilterWatermark="">
+                                  
+                                </xctk:PropertyGrid>
+                            </Grid>
+
+                        </Grid>
+                    </syncfusion:TabItemExt>
+                    <syncfusion:TabItemExt Header="Options">
+                        <xctk:PropertyGrid   x:Name="OptionsProperties"  ShowSummary="True" ShowSortOptions ="False" ShowAdvancedOptions="False"
+                                             ShowSearchBox="True" IsCategorized="True" ShowPreview="False" BorderBrush="Transparent"
+                                             AutoGenerateProperties="true" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FilterWatermark="" >
+                        </xctk:PropertyGrid>
+                    </syncfusion:TabItemExt>
+                    <syncfusion:TabItemExt Header="Commands">
+                        <Grid>
+                            <Grid.Resources>
+                                <CollectionViewSource Source="{Binding AdventureCommandMappings}" x:Key="CommandsSource">
+                                    <CollectionViewSource.SortDescriptions>
+                                        <componentModel:SortDescription PropertyName="IsEnabled" Direction="Descending"/>
+                                        <componentModel:SortDescription PropertyName="VerbName" Direction="Ascending"/>
+                                    </CollectionViewSource.SortDescriptions>
+                                </CollectionViewSource>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <WrapPanel Orientation="Horizontal">
+                                <syncfusion:ComboBoxAdv Name="AdventureCommandList" HorizontalAlignment="Left" Width="175"
+                                                        Background="Transparent" 
+                                      Margin="2 2 2 10" ItemsSource="{Binding Source={StaticResource CommandsSource}}" 
+                                      SelectedItem="{Binding SelectedCommand, Mode=TwoWay}">
+                                    <syncfusion:ComboBoxAdv.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Width="16" Height="16" Margin="0 0 5 0"  Source="Resources/Images/maze.png" ToolTip="This is a built-in command"
+                                                   Visibility="{Binding IsBuiltInCommand, Converter={StaticResource VisibilityHiddenConverter}, FallbackValue=Hidden}"/>
+                                                <TextBlock TextDecorations="Strikethrough" Text="{Binding VerbName}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanVisibilityConverter}, ConverterParameter=INVERT}"></TextBlock>
+                                                <TextBlock  Text="{Binding VerbName}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanVisibilityConverter}}"></TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </syncfusion:ComboBoxAdv.ItemTemplate>
+                                </syncfusion:ComboBoxAdv>
+                                <Button x:Name="CmdAddCommand"  Style="{StaticResource AppButtonStyle}" VerticalAlignment="Center" Margin="5 2 2 10"  Width="45" MinWidth="0" Content="Add" 
+                                        Height="20" Click="AddNewCommand" />
+                                <Button x:Name="CmdDeleteCommand" VerticalAlignment="Center"  Style="{StaticResource AppButtonStyle}" Margin="5 2 2 10"  Width="45" MinWidth="0" Content="Delete" IsEnabled="{Binding SelectedCommand.IsBuiltInCommand, Converter={StaticResource ReverseBooleanConverter}, FallbackValue=false}"
+                                        Height="20" Click="DeleteCommand" />
+                                <Button x:Name="CmdResetCommand"  Style="{StaticResource AppButtonStyle}" VerticalAlignment="Center" Margin="5 2 2 10"  Width="45" MinWidth="0" Content="Reset" IsEnabled="{Binding SelectedCommand.IsBuiltInCommand, FallbackValue=false}" Height="20" Click="ResetCommand" />
+                            </WrapPanel>
+                            <xctk:PropertyGrid Grid.Row="1"  Name="AdventureCommandProperties"  ShowSummary="True" ShowSortOptions ="False" ShowAdvancedOptions="False"
+                                                 ShowSearchBox="False" IsCategorized="True" ShowPreview="False" BorderBrush="Transparent" SelectedObject="{Binding SelectedCommand,Mode=TwoWay}" 
+                                                 AutoGenerateProperties="true" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FilterWatermark="">
+                            </xctk:PropertyGrid>
+                        </Grid>
+                    </syncfusion:TabItemExt>
+                    <syncfusion:TabItemExt Header="Errors">
+                        <DataGrid x:Name="ErrorList" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" BorderBrush="Blue" HorizontalContentAlignment="Left"
+                        CanUserSortColumns="True"   RowHeaderWidth="0"  CanUserReorderColumns="False" CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"
+                          ItemsSource="{Binding ValidationItems,Mode=OneWay}"  VerticalAlignment="Stretch"  SelectionMode="Single" CanUserResizeColumns="False">
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseLeftButtonUp" Handler="ValidationGridClick"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="30" IsReadOnly="True" CanUserSort="True" SortMemberPath="Severity" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Width="18" ToolTip="{Binding Severity}" Source="{Binding SeverityImage,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="240" IsReadOnly="True"  CanUserSort="True" SortMemberPath="Description" Header="Description">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock ToolTip="{Binding Description}" Text="{Binding Description,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" IsReadOnly="True"  CanUserSort="True" SortMemberPath="ValidationCategory" Header="Type">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock ToolTip="{Binding ValidationCategory}" Text="{Binding ValidationCategory,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" IsReadOnly="True"  CanUserSort="True" SortMemberPath="Name" Header="Name">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock ToolTip="{Binding Name}" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </syncfusion:TabItemExt>
+                </syncfusion:TabControlExt>
+
+            </Grid>
+            <syncfusion:TabControlExt Grid.Column="2" x:Name="MainScreenTabs" Margin="0 0 0 0" HorizontalAlignment="Stretch"  Background="Transparent"
+                                      SelectedIndexChanged="MainScreenTabsOnSelectedIndexChanged" 
+                       VerticalAlignment="Stretch" EnableLabelEdit="False" IsNewButtonEnabled="False"  CloseButtonType="Hide" >
+                <syncfusion:TabItemExt Header="Game Designer" BorderBrush="Transparent">
+                    <Grid Margin="0,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.75*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"  Background="Transparent"/>
+                        <!-- Designer -->
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <GroupBox Header="Map"  x:Name="MapGroup" Margin="0,0,0,0" Grid.Row="0" BorderBrush="Transparent">
+                                <Grid>
+                                    <Image Grid.Row="0" Source="/Resources/Images/compassglyph.jpg" Margin="10 10 0 0"  Opacity=".15" VerticalAlignment="Top" 
+                                           HorizontalAlignment="Left" Height="80" Width="80"></Image>
+                                    <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" x:Name="ScrollRooms"  BorderBrush="Transparent"
+                      VerticalScrollBarVisibility="Auto">
+                                    <symbols:DesignerCanvas Focusable="true" x:Name="RoomDesigner" CanHaveConnectors="true" 
+                                                            Background="{StaticResource SnappingGridBrush_Ponits}"
+                            Margin="10" FocusVisualStyle="{x:Null}"
+                            ContextMenu="{StaticResource DesignerCanvasContextMenu}">
+
+                                        <symbols:DesignerCanvas.LayoutTransform>
+                                            <ScaleTransform  ScaleX="{Binding ElementName=MainWindow, Path=RoomScale}" 
+                                             ScaleY="{Binding ElementName=MainWindow, Path=RoomScale}" />
+                                        </symbols:DesignerCanvas.LayoutTransform>
+                                    </symbols:DesignerCanvas>
+                                </ScrollViewer>
+                                </Grid>
+                            </GroupBox>
+                            <Grid Width="{Binding ActualWidth, ElementName=MapGroup}"   Grid.Row="1"  Background="AliceBlue">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20 5 5 5" HorizontalAlignment="Right">
+                                    <Button Padding="3" ToolTip="Arrange All Rooms in a square to fill available space." 
+                                            Style="{StaticResource ToolBarButtonBaseStyleAlt}" Click="ArrangeAllRoomObjectsClick" Margin="0 0 5 0">
+                                        <Button.Content>
+                                            <fa:ImageAwesome Icon="Th" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                        </Button.Content>
+                                    </Button>
+                                    <Button Padding="3" Style="{StaticResource ToolBarButtonBaseStyleAlt}" Click="SortRooms" Margin="0 0 5 0" 
+                                            ToolTip="Arrange and Sort all Rooms by name. Toggles between ascending and descending.">
+                                        <Button.Content>
+                                            <fa:ImageAwesome Icon="SortAlphaAsc" Name="SortRoomByNameImage" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5" >
+                                    <RepeatButton Cursor="Hand"  HorizontalAlignment="Left" ToolTip="Zoom In" Background="Transparent" VerticalAlignment="Center" ClickMode="Press" Click="ZoomOutClick">
+                                        <fa:ImageAwesome Icon="SearchPlus" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                    </RepeatButton>
+                                    <RepeatButton Cursor="Hand" Margin="5 0 0 0" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Left" ToolTip="Zoom Out" Click="ZoomInClick">
+                                        <fa:ImageAwesome Icon="SearchMinus" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                    </RepeatButton>
+                                    <Button Cursor="Hand"  x:Name="CmdZoomRoomsDefault" Style="{StaticResource AppButtonStyle}" VerticalAlignment="Center" Margin="5 0 0 0"  Width="50" MinWidth="0" Content="100%"  Height="20" Click="CmdZoomRoomsDefaultClick" />
+                                    <Button Cursor="Hand"  x:Name="CmdZoomToFit" Style="{StaticResource AppButtonStyle}" VerticalAlignment="Center" Margin="5 0 5 0"  Width="50" MinWidth="0" Content="Fit"  Height="20" Click="ZoomToFit" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <GroupBox x:Name="ObjectGroup"  Header="Placeables" Margin="3,0,0,0">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" x:Name="ScrollObjects"
+                      VerticalScrollBarVisibility="Auto">
+                                    <symbols:DesignerCanvas Focusable="true" x:Name="ObjectDesigner" Background="{StaticResource SnappingGridBrush_Ponits}"
+                            Margin="10" FocusVisualStyle="{x:Null}"
+                            ContextMenu="{StaticResource DesignerCanvasContextMenu}">
+                                        <symbols:DesignerCanvas.LayoutTransform>
+                                            <ScaleTransform  ScaleX="{Binding ElementName=MainWindow, Path=ObjectScale}" 
+                                             ScaleY="{Binding ElementName=MainWindow, Path=ObjectScale}" />
+                                        </symbols:DesignerCanvas.LayoutTransform>
+
+                                    </symbols:DesignerCanvas>
+                                </ScrollViewer>
+                            </GroupBox>
+                            <Grid Grid.Row="1" Width="{Binding ActualWidth, ElementName=ObjectGroup}" Background="AliceBlue">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20 5 5 5" HorizontalAlignment="Right">
+                                    <Button Padding="3" ToolTip="Arrange All Objects in a square to fill available space." Style="{StaticResource ToolBarButtonBaseStyleAlt}" Click="ArrangeAllObjectsClick" Margin="0 0 5 0">
+                                        <Button.Content>
+                                            <fa:ImageAwesome Icon="Th" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                        </Button.Content>
+                                    </Button>
+                                    <Button Padding="3" Style="{StaticResource ToolBarButtonBaseStyleAlt}" Click="SortObjects" Margin="0 0 5 0" ToolTip="Arrange and Sort all Objects by name. Toggles between ascending and descending.">
+                                        <Button.Content>
+                                            <fa:ImageAwesome Icon="SortAlphaAsc" Name="SortByNameImage" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                        </Button.Content>
+                                    </Button>
+                                    <Button Padding="3" Style="{StaticResource ToolBarButtonBaseStyleAlt}" Click="SortObjectsByName" ToolTip="Arrange and Sort all Objects by name of the room or container they are located in. Toggles between ascending and descending.">
+                                        <Button.Content>
+                                            <Grid>
+                                                <fa:ImageAwesome  Icon="SortAlphaAsc" Name="SortByRoomNameImage"  VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                                <fa:ImageAwesome Icon="Home" Opacity=".55"  VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5" HorizontalAlignment="Left">
+                                    <RepeatButton Cursor="Hand"   HorizontalAlignment="Left" ToolTip="Zoom In" VerticalAlignment="Center" ClickMode="Press" Background="Transparent" Click="ObjectZoomOutClick">
+                                        <fa:ImageAwesome Icon="SearchPlus" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                    </RepeatButton>
+                                    <RepeatButton Cursor="Hand"  Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent" ToolTip="Zoom Out" Click="ObjectZoomInClick">
+                                        <fa:ImageAwesome Icon="SearchMinus" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" />
+                                    </RepeatButton>
+                                    <Button Cursor="Hand"  x:Name="CmdZoomObjectDefault"  Style="{StaticResource AppButtonStyle}"  VerticalAlignment="Center" Margin="5 0 0 0" 
+                                            Width="50" MinWidth="0" Content="100%"  Height="20" Click="CmdZoomObjectDefaultClick" />
+                                    <Button Cursor="Hand"  x:Name="CmdZoomObjectToFit"   Style="{StaticResource AppButtonStyle}" VerticalAlignment="Center" Margin="5 0 5 0"  Width="50" MinWidth="0" Content="Fit"  Height="20" Click="ZoomObjectsToFit" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt Header="Script Designer">
+                    <controls:ScriptWindow x:Name="ScriptExplorer" SaveCommand="{Binding ElementName=MainWindow, Path= DataContext.SaveCurrentProjectCommand}"  UpdateContract="MainScriptContract"></controls:ScriptWindow>
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt Header="Room Explorer">
+                    <controls:EntityExplorer x:Name="EntityExplorer" ContainerNavigateCommand="{Binding ContainerNavigateCommand}"  PreviousRoomCommand="{Binding PreviousRoomCommand}" NextRoomCommand="{Binding NextRoomCommand}"  CurrentContainer="{Binding CurrentContainer}"  OpenContainerCommand="{Binding OpenContainerCommand}" ExitClickedCommand="{Binding ExitClickedCommand}" 
+                        EntityClickedCommand="{Binding EntityClickedCommand}"  CurrentRoom="{Binding CurrentRoom}"></controls:EntityExplorer>
+                </syncfusion:TabItemExt>
+            </syncfusion:TabControlExt>
+        </Grid>
+
+        <syncfusion:RibbonStatusBar Grid.Row="3" Padding="0 10 10 0">
+            <StackPanel Orientation="Horizontal"  VerticalAlignment="Stretch" Margin="10 0 0 0">
+                <TextBlock Margin="0 0 5 0" FontWeight="Bold" VerticalAlignment="Center">STATUS:</TextBlock>
+                <TextBlock Margin="0 0 10 0" x:Name="Status" VerticalAlignment="Center"></TextBlock>
+                <fa:ImageAwesome Icon="Spinner" Visibility="Collapsed" Margin="0 0 10 0" x:Name="WaitSpinner" VerticalAlignment="Center" Width="16" HorizontalAlignment="Center" RenderTransformOrigin="0.5, 0.5">
+                    <fa:ImageAwesome.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </fa:ImageAwesome.RenderTransform>
+                </fa:ImageAwesome>
+            </StackPanel>
+        </syncfusion:RibbonStatusBar>
+    </Grid>
+</Window>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <RoomDesigner>
+    <DesignerItems />
+    <Connections />
+  </RoomDesigner>
+  <ObjectDesigner>
+    <DesignerItems />
+    <Connections />
+  </ObjectDesigner>
+  <AdventureGame>&lt;AdventureGameDesignerApi xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/DiagramDesigner.AdventureWorld.Domain"&gt;&lt;Exits /&gt;&lt;GameDescription i:nil="true" /&gt;&lt;GameLoopPostProcessCode xmlns:d2p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d2p1:Id&gt;de16516f-cea0-4198-a378-a292f466c2ac&lt;/d2p1:Id&gt;&lt;d2p1:Language&gt;Python&lt;/d2p1:Language&gt;&lt;d2p1:Source /&gt;&lt;/GameLoopPostProcessCode&gt;&lt;GameLoopPreProcessCode xmlns:d2p1="http://schemas.datacontract.org/2004/07/AdventureLandCore.Domain"&gt;&lt;d2p1:Id&gt;b0718c87-39ce-4b2f-951d-ff82820c34b3&lt;/d2p1:Id&gt;&lt;d2p1:Language&gt;Python&lt;/d2p1:Language&gt;&lt;d2p1:Source&gt;print&lt;/d2p1:Source&gt;&lt;/GameLoopPreProcessCode&gt;&lt;GameName i:nil="true" /&gt;&lt;Id&gt;baca5d0c-341a-442d-b625-317edf6eccb3&lt;/Id&gt;&lt;Introduction i:nil="true" /&gt;&lt;MaxScore&gt;0&lt;/MaxScore&gt;&lt;MaximumInventorySize&gt;0&lt;/MaximumInventorySize&gt;&lt;PlaceableObjects /&gt;&lt;Rooms /&gt;&lt;StartRoomId i:nil="true" /&gt;&lt;Title i:nil="true" /&gt;&lt;WonGame i:nil="true" /&gt;&lt;/AdventureGameDesignerApi&gt;</AdventureGame>
+</Root>

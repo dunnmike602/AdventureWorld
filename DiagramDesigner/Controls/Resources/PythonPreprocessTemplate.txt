@@ -1,0 +1,18 @@
+﻿# This is a template for an AdventureObject pre-process command. AdventureObjects are Rooms, Exits, Containers and PlaceableObjects. Whenever a command is run against 
+# one of these types types, this script is executed. It can be used to perform custom actions whenever the player interacts with something. 
+
+# The commented out code below illustrates how to use this for a room object to switch between dark and light descriptions.
+def Execute(adventureObject, adventureCommand):
+	## Pre-requisite ensure the rooms has 2 descriptions, the first one for a lit condition, the second for a dark condition
+	## You can set them up in the game designer or code them directly here
+
+	##if adventureCommand.CommandMapping.VerbName == "LOOK":
+	#	if adventureObject.IsDark:
+	#		adventureObject.CurrentDescription = adventureObject.Descriptions[1]
+	#	else:
+	#		adventureObject.CurrentDescription = adventureObject.Descriptions[0]
+	#
+	## We want processing to continue whatever happens so set the flag to True (False ensures no further processing is done by the game engine)
+
+	return True
+	

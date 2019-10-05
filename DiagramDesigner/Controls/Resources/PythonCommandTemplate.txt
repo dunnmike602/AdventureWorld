@@ -1,0 +1,5 @@
+﻿# This is a template for a Adventure command that can used to perform an action based on text input by the user
+def Execute(adventureCommand):
+	# TODO Replace the code below with the implementation code for the command
+	ConsoleApi.FormattedWrite("{0} currently has no implementation").format(adventureCommand.OriginalWord.lower())
+	return False

@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DiagramDesigner</RootNamespace>
+    <AssemblyName>AdventureWorldDesigner</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DiagramDesigner.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdventureWorld\Domain\ConversationItemsSource.cs" />
+    <Compile Include="AdventureWorld\Domain\Conversation.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationObjectBase.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationResponse.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationText.cs" />
+    <Compile Include="AdventureWorld\Domain\ConversationTree.cs" />
+    <Compile Include="AdventureWorld\Domain\DropDownItem.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationResponseMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationTextMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ConversationTreeMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\NpcMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Npc.cs" />
+    <Compile Include="Controls\ConversationEditor.xaml.cs">
+      <DependentUpon>ConversationEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BitmapEditor.xaml.cs">
+      <DependentUpon>BitmapEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EntityExplorer.xaml.cs">
+      <DependentUpon>EntityExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConversationScriptEditor.xaml.cs">
+      <DependentUpon>ConversationScriptEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Helpers\ConversationHelper.cs" />
+    <Compile Include="ConversationDesigner\ConversationDesigner.xaml.cs">
+      <DependentUpon>ConversationDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConversationDesigner\Helpers\ConversationExplorerTabIndexes.cs" />
+    <Compile Include="ConversationDesigner\Helpers\ConversationObjectExplorerTabIndexes.cs" />
+    <Compile Include="Converters\ContainerToBrushConverter.cs" />
+    <Compile Include="Converters\ExitCommandParameterConverter.cs" />
+    <Compile Include="Converters\ExitTextConverter.cs" />
+    <Compile Include="Converters\ExitVisibilityConverter.cs" />
+    <Compile Include="Converters\MakeVisibleWhenConversationConverter.cs" />
+    <Compile Include="Converters\MakeVisibleWhenDesignerConverter.cs" />
+    <Compile Include="Converters\ObjectToBrushConverter.cs" />
+    <Compile Include="Helpers\DependancyObjectHelper.cs" />
+    <Compile Include="Extensions\DesignerCanvasExtensions.cs" />
+    <Compile Include="Helpers\MessageBusContractConstants.cs" />
+    <Compile Include="Helpers\GlobalUiConstants.cs" />
+    <Compile Include="Helpers\MainScreenTabIndexes.cs" />
+    <Compile Include="Helpers\ProjectExplorerTabIndexes.cs" />
+    <Compile Include="Interfaces\IStatusMessageProvider.cs" />
+    <Compile Include="Symbols\Helpers\CanvasType.cs" />
+    <Compile Include="Symbols\Helpers\ConnectionLinkerHelper.cs" />
+    <Compile Include="Symbols\Helpers\ObjectClass.cs" />
+    <Compile Include="Symbols\RoundedCornersPolygon.cs" />
+    <Compile Include="Wizards\AdventureObjectViewModel.cs" />
+    <Compile Include="Wizards\Attributes\RequiredIfAttribute.cs" />
+    <Compile Include="Wizards\Attributes\RequiredStringCollectionAttribute.cs" />
+    <Compile Include="Wizards\NpcViewModel.cs" />
+    <Compile Include="Wizards\NpcsViewModel.cs" />
+    <Compile Include="Wizards\ContainerViewModel.cs" />
+    <Compile Include="Wizards\GameFeaturesViewModel.cs" />
+    <Compile Include="Wizards\GameWizardBasicViewModel.cs" />
+    <Compile Include="Wizards\GameWizardViewModel.cs" />
+    <Compile Include="Wizards\GameWizardView.xaml.cs">
+      <DependentUpon>GameWizardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\ContainersViewModel.cs" />
+    <Compile Include="Wizards\PlaceableObjectsViewModel.cs" />
+    <Compile Include="Wizards\PlaceableObjectViewModel.cs" />
+    <Compile Include="Wizards\RoomsViewModel.cs" />
+    <Compile Include="Wizards\RoomViewModel.cs" />
+    <Compile Include="Wizards\ValidatableViewModelBase.cs" />
+    <Compile Include="AdventureWorld\CustomCollections\ObservableItemCollection.cs" />
+    <Compile Include="AdventureWorld\Domain\AdventureGameDesignerViewModel.cs" />
+    <Compile Include="AdventureWorld\Domain\AdventureObjectBase.cs" />
+    <Compile Include="AdventureWorld\Domain\ChangedEventArgs.cs" />
+    <Compile Include="AdventureWorld\Domain\Client.cs" />
+    <Compile Include="AdventureWorld\Domain\ClientType.cs" />
+    <Compile Include="AdventureWorld\Domain\AdventureCommandMapping.cs" />
+    <Compile Include="AdventureWorld\Domain\Container.cs" />
+    <Compile Include="AdventureWorld\Domain\DirectionItemsSource.cs" />
+    <Compile Include="AdventureWorld\Domain\Encryptor.cs" />
+    <Compile Include="AdventureWorld\Domain\Exit.cs" />
+    <Compile Include="AdventureWorld\Domain\GameRoot.cs" />
+    <Compile Include="AdventureWorld\Domain\IdentifableObjectBase.cs" />
+    <Compile Include="AdventureWorld\Domain\Interfaces\IAdventureGameApi.cs" />
+    <Compile Include="AdventureWorld\Domain\Interfaces\IFilterableAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ContainerMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\ExitMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\PlaceableObjectMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\Mappers\RoomMapper.cs" />
+    <Compile Include="AdventureWorld\Domain\NonEmptyCollectionAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\NoneZeroAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\NotNullAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\Options.cs" />
+    <Compile Include="AdventureWorld\Domain\PlaceableObject.cs" />
+    <Compile Include="AdventureWorld\Domain\Room.cs" />
+    <Compile Include="AdventureWorld\Domain\RoomItemsSource.cs" />
+    <Compile Include="AdventureWorld\Domain\ScriptContainer.cs" />
+    <Compile Include="AdventureWorld\Domain\ScriptContainerHeader.cs" />
+    <Compile Include="AdventureWorld\Domain\ScriptTypes.cs" />
+    <Compile Include="AdventureWorld\Domain\Severities.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationCategories.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationItemAttribute.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationItemHelper.cs" />
+    <Compile Include="AdventureWorld\Domain\ValidationTypes.cs" />
+    <Compile Include="AdventureWorld\Extensions\ArrayExtensions.cs" />
+    <Compile Include="AdventureWorld\Extensions\ObservableCollectionExtensions.cs" />
+    <Compile Include="AdventureWorld\Extensions\SerializationExtensions.cs" />
+    <Compile Include="AdventureWorld\GameExecution\ConsoleExecutor.cs" />
+    <Compile Include="AdventureWorld\GameExecution\ConsoleGameInformation.cs" />
+    <Compile Include="AdventureWorld\GameExecution\ExecutorFactory.cs" />
+    <Compile Include="AdventureWorld\GameExecution\GameInformation.cs" />
+    <Compile Include="AdventureWorld\GameExecution\Interfaces\IGameExecutor.cs" />
+    <Compile Include="AdventureWorld\GameExecution\WpfExecutor.cs" />
+    <Compile Include="ApiExplorer.xaml.cs">
+      <DependentUpon>ApiExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AdventureDesigner.xaml.cs">
+      <DependentUpon>AdventureDesigner.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\AboutBox\AboutAssemblyDataProvider.cs" />
+    <Compile Include="Controls\AboutBox\AboutBoxSimple.xaml.cs">
+      <DependentUpon>AboutBoxSimple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AboutBox\IAboutDataProvider.cs" />
+    <Compile Include="Controls\Behaviours\TreeViewItemBehavior.cs" />
+    <Compile Include="Controls\CompassEditor.xaml.cs">
+      <DependentUpon>CompassEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ParentObjectEditor.xaml.cs">
+      <DependentUpon>ParentObjectEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RadialGrid.cs" />
+    <Compile Include="Controls\CompassWindow.xaml.cs">
+      <DependentUpon>CompassWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextOnlyTextBox.cs" />
+    <Compile Include="Services\CommandServices.cs" />
+    <Compile Include="Symbols\ArrowSymbol.cs" />
+    <Compile Include="Symbols\Connection.cs" />
+    <Compile Include="Symbols\ConnectionAdorner.cs" />
+    <Compile Include="Symbols\Connector.cs" />
+    <Compile Include="Symbols\ConnectorAdorner.cs" />
+    <Compile Include="Controls\DirectoryEditor.xaml.cs">
+      <DependentUpon>DirectoryEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\StencilHelpers.cs" />
+    <Compile Include="Extensions\TreeViewExtensions.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Scripting\PythonHandler.cs" />
+    <Compile Include="Scripting\Interfaces\IScriptHandler.cs" />
+    <Compile Include="Controls\ScriptEditor.xaml.cs">
+      <DependentUpon>ScriptEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FileEditor.xaml.cs">
+      <DependentUpon>FileEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RichTextEditor.xaml.cs">
+      <DependentUpon>RichTextEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scripting\ScriptHandlerBase.cs" />
+    <Compile Include="Controls\ScriptWindow.xaml.cs">
+      <DependentUpon>ScriptWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextEditor.xaml.cs">
+      <DependentUpon>TextEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragThumb.cs" />
+    <Compile Include="Controls\RelativePositionPanel.cs" />
+    <Compile Include="Controls\ResizeThumb.cs" />
+    <Compile Include="Symbols\ConnectorInfo.cs" />
+    <Compile Include="Symbols\ConnectorOrientation.cs" />
+    <Compile Include="Symbols\DesignerCanvas.Commands.cs" />
+    <Compile Include="Symbols\DesignerCanvas.cs" />
+    <Compile Include="Symbols\DesignerItem.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\DesignerItemExtensions.cs" />
+    <Compile Include="Extensions\PropertyInfoExtensions.cs" />
+    <Compile Include="Interfaces\IGroupable.cs" />
+    <Compile Include="Interfaces\ISelectable.cs" />
+    <Compile Include="Symbols\Helpers\AdventureObjectHelper.cs" />
+    <Compile Include="Symbols\Helpers\ObjectTypes.cs" />
+    <Compile Include="Symbols\OrthogonalPathFinder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Symbols\RubberbandAdorner.cs" />
+    <Compile Include="Symbols\SelectionService.cs" />
+    <Compile Include="ToolboxImpl\DragObject.cs" />
+    <Compile Include="ToolboxImpl\Toolbox.cs" />
+    <Compile Include="ToolboxImpl\ToolboxItem.cs" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Resources\ICSharpCode.PythonBinding.Resources.Python.xshd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdventureLandCore\AdventureLandCore.csproj">
+      <Project>{b447aa90-f2ee-4992-b7c5-7a6df1b09153}</Project>
+      <Name>AdventureLandCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectBrowser\ObjectBrowser.csproj">
+      <Project>{87179a00-8b6a-4671-8dc5-70fe55a312e3}</Project>
+      <Name>ObjectBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReflectionHelper\ReflectionHelper.csproj">
+      <Project>{7a33d8f0-4f24-4af4-a19a-4d9d86f02cce}</Project>
+      <Name>ReflectionHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedControls\SharedControls.csproj">
+      <Project>{4062c172-430f-40c6-a916-5638e9dd695d}</Project>
+      <Name>SharedControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameClients\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="packages\Microsoft.CodeAnalysis.Analyzers.2.6.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Resources\PythonCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonCommonCodeTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonDeleteCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonDropCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonHelpCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonListCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonLoadCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonSaveCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonScoreCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonLookCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonTakeCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonWaitCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonQuitCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonWalkCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonSwimCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonCrawlCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonRunCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonInventoryCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonThrowCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonUseCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonSwitchCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonPreprocessTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonGetControlCodeTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonUnlockCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonOpenCommandTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonConversationTemplate.txt" />
+    <EmbeddedResource Include="Controls\Resources\PythonTalkCommandTemplate.txt" />
+    <Content Include="XmlDocumentation\AdventureLandCore.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="XmlDocumentation\mscorlib.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="C:\Repos\Adventure World\AdventureLandCore\bin\Debug\AdventureLandCore.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\packages\AvalonWizard.1.2.0\lib\net40\AvalonWizard.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Colorful.Console.1.2.9\lib\net461\Colorful.Console.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\IronPython.2.7.8.1\lib\net45\IronPython.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\IronPython.2.7.8.1\lib\net45\IronPython.Modules.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\IronPython.2.7.8.1\lib\net45\IronPython.SQLite.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\IronPython.2.7.8.1\lib\net45\IronPython.Wpf.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Microsoft.CodeAnalysis.CSharp.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Microsoft.CodeAnalysis.CSharp.Scripting.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Microsoft.CodeAnalysis.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Microsoft.CodeAnalysis.Scripting.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.Scripting.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Dynamic.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Scripting.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Scripting.Metadata.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\Microsoft.Win32.Primitives.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\ObjectBrowser\bin\Debug\MLDComputing.ObjectBrowser.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\netfx.force.conflicts.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\netstandard.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\PhilosophicalMonkey.1.4.0\lib\net451\PhilosophicalMonkey.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.Aero.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\ReachFramework.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\reactiveui-core.7.4.0\lib\Net45\ReactiveUI.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\ReflectionHelper\bin\Debug\ReflectionHelper.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\SharedControls\bin\Debug\SharedControls.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Splat.1.4.0\lib\Net45\Splat.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Syncfusion\Essential Studio\15.4.0.17\Assemblies\4.6\Syncfusion.Data.WPF.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Syncfusion\Essential Studio\15.4.0.17\Assemblies\4.6\Syncfusion.SfGrid.WPF.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Syncfusion\Essential Studio\15.4.0.17\Assemblies\4.6\Syncfusion.Shared.Wpf.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Syncfusion\Essential Studio\15.4.0.17\Assemblies\4.6\Syncfusion.Tools.WPF.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.AppContext.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Collections.Concurrent.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Collections.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Collections.NonGeneric.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Collections.Specialized.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.ComponentModel.Composition.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.ComponentModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.ComponentModel.EventBasedAsync.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.ComponentModel.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.ComponentModel.TypeConverter.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Console.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Data.Common.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.Contracts.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.Debug.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.FileVersionInfo.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.Process.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.StackTrace.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.TextWriterTraceListener.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.Tools.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.TraceSource.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Diagnostics.Tracing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Drawing.Design.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Drawing.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Dynamic.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Globalization.Calendars.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Globalization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Globalization.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.Compression.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.Compression.ZipFile.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.FileSystem.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.FileSystem.DriveInfo.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.FileSystem.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.FileSystem.Watcher.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.IsolatedStorage.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.MemoryMappedFiles.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.Pipes.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.IO.UnmanagedMemoryStream.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Linq.Expressions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Linq.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Linq.Queryable.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.NameResolution.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.NetworkInformation.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.Ping.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.Requests.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.Security.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.Sockets.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.WebHeaderCollection.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.WebSockets.Client.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Net.WebSockets.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Numerics.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.ObjectModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Printing.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Reflection.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Reflection.Extensions.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\System.Reflection.Metadata.1.5.0\lib\netstandard2.0\System.Reflection.Metadata.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Reflection.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Resources.Reader.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Resources.ResourceManager.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Resources.Writer.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.CompilerServices.VisualC.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.Handles.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.InteropServices.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.Numerics.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.Serialization.Formatters.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.Serialization.Json.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.Serialization.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Runtime.Serialization.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.Claims.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.Cryptography.Algorithms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.Cryptography.Csp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.Cryptography.Encoding.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.Cryptography.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.Cryptography.X509Certificates.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.Principal.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Security.SecureString.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Speech.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\System.Text.Encoding.CodePages.4.4.0\lib\net461\System.Text.Encoding.CodePages.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Text.Encoding.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Text.Encoding.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Text.RegularExpressions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Threading.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Threading.Overlapped.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Threading.Tasks.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Threading.Tasks.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Threading.Thread.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Threading.ThreadPool.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Threading.Timer.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.ValueTuple.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Windows.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.0\Libraries\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Xml.ReaderWriter.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Xml.XDocument.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Xml.XmlDocument.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Xml.XmlSerializer.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Xml.XPath.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\net461\lib\System.Xml.XPath.XDocument.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\WPFTaskDialog.1.7.1\lib\net40-Client\TaskDialog.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\packages\ToggleSwitch.1.1.2\lib\net40-client\ToggleSwitch.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\UIAutomationProvider.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\UIAutomationTypes.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsFormsIntegration.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.DataGrid.dll" />
+    <ReferencePath Include="C:\Repos\Adventure World\DiagramDesigner\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.ComponentModel.Annotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.Reflection.Emit.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.Reflection.Emit.ILGeneration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.Reflection.Emit.Lightweight.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.Runtime.InteropServices.WindowsRuntime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.ServiceModel.Duplex.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.ServiceModel.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.ServiceModel.NetTcp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.ServiceModel.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.ServiceModel.Security.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\ApiExplorer.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\AboutBox\AboutBoxSimple.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\ConversationEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\BitmapEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\CompassEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\EntityExplorer.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\ParentObjectEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\DirectoryEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\CompassWindow.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\ConversationScriptEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\ScriptEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\FileEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\RichTextEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\ScriptWindow.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Controls\TextEditor.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\AdventureDesigner.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\ConversationDesigner\ConversationDesigner.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\Wizards\GameWizardView.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\App.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\AdventureWorldDesigner_Content.g.cs" />
+    <Compile Include="C:\Repos\Adventure World\DiagramDesigner\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:toolboxImpl="clr-namespace:DiagramDesigner.ToolboxImpl">
+
+
+
+    <toolboxImpl:Toolbox x:Key="ConversationStencils" ItemSize="130,90" SnapsToDevicePixels="True" Margin="0 -10 0 0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+        <ItemsControl.Items>
+            <Grid ToolTip="ConversationStart" Name="StartGrid" IsHitTestVisible="False">
+                <Border BorderThickness="1" BorderBrush="Black" >
+                    <Grid Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="2.7*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="Blue" >
+                            <TextBlock Margin="2" FontWeight="Bold" Text="Start" HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top" TextWrapping="Wrap" Foreground="White"  TextTrimming="WordEllipsis" />
+                        </Border>
+                        <TextBlock Grid.Row="1" Margin="2"  Text="{Binding ConversationId}" x:Name="StartText" HorizontalAlignment="Left" 
+                           VerticalAlignment="Top" TextWrapping="Wrap" Foreground="Black"  TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid ToolTip="ConversationText" Name="TextGrid" IsHitTestVisible="False">
+                <Border BorderThickness="1" BorderBrush="Black" >
+                    <Grid Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="2.7*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="Crimson">
+                            <TextBlock Margin="2" FontWeight="Bold" Text="NPC Speaks" HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top" TextWrapping="Wrap" Foreground="White"  TextTrimming="WordEllipsis" />
+                        </Border>
+                        <TextBlock Grid.Row="1" Margin="2"  Text="{Binding Text}" x:Name="Text" HorizontalAlignment="Left" 
+                               VerticalAlignment="Top" TextWrapping="Wrap" Foreground="Black"  TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid ToolTip="ConversationResponse" Name="ResponseGrid" IsHitTestVisible="False">
+                <Border BorderThickness="1" BorderBrush="Black"  >
+                    <Grid Background="Cornsilk">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="2.7*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="DarkSlateGray">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                 <TextBlock Margin="2" Grid.Column="0" FontWeight="Bold" Text="Player Responds" HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top" TextWrapping="Wrap" Foreground="White"  TextTrimming="WordEllipsis" />
+                                <Border Grid.Column="1" Background="White" BorderThickness="1" BorderBrush="Black" Padding="2">
+                                    <TextBlock Grid.Row="1"  Text="{Binding Response}" Name="SortOrder" HorizontalAlignment="Center"  ToolTip="Sort Order"
+                                               VerticalAlignment="Center"  Foreground="Black"  />
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=SortOrder, Path=Text}" Value="">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=SortOrder, Path=Text}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <TextBlock Grid.Row="1" Margin="2"  Text="{Binding Response}" Name="Response" HorizontalAlignment="Left" 
+                               VerticalAlignment="Top" TextWrapping="Wrap" Foreground="Black"  TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </ItemsControl.Items>
+    </toolboxImpl:Toolbox>
+</ResourceDictionary>

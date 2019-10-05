@@ -1,0 +1,192 @@
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\SharedControls.dll.config
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\SharedControls.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\SharedControls.pdb
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\AdventureLandCore.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\FontAwesome.WPF.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Syncfusion.Shared.WPF.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Syncfusion.Tools.WPF.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\TaskDialog.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Xceed.Wpf.Toolkit.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\MLDComputing.ObjectBrowser.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Alba.CsConsoleFormat.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Microsoft.Scripting.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\System.Reactive.Core.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Colorful.Console.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\IronPython.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\ReflectionHelper.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\System.ValueTuple.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\System.Reactive.Interfaces.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Microsoft.Dynamic.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\PhilosophicalMonkey.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Microsoft.Scripting.Metadata.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\AdventureLandCore.pdb
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\AdventureLandCore.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\AdventureLandCore.dll.config
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\FontAwesome.WPF.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Syncfusion.Shared.WPF.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Syncfusion.Tools.WPF.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\TaskDialog.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Xceed.Wpf.Toolkit.pdb
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\MLDComputing.ObjectBrowser.pdb
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Microsoft.Scripting.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\System.Reactive.Core.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\IronPython.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\ReflectionHelper.pdb
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\System.Reactive.Interfaces.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Microsoft.Dynamic.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\bin\Debug\Microsoft.Scripting.Metadata.xml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls.csprojResolveAssemblyReference.cache
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\CollectionEditor.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\MultiTextEditor.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\AltGroupBox.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\button.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\Expander.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\GroupBox.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\ScrollBar.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\Shared.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\slider.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Resources\Styles\ToolBar.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\TextView.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\CollectionEditor.g.cs
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\MultiTextEditor.g.cs
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\TextView.g.cs
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls_MarkupCompile.cache
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls_MarkupCompile.lref
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\Shared.baml
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls.g.resources
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls.Properties.Resources.resources
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls.csproj.GenerateResource.Cache
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls.csproj.CoreCompileInputs.cache
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls.dll
+E:\GAME DEV\AdventureGames\CORE1\SharedControls\obj\Debug\SharedControls.pdb
+C:\Repos\Adventure World\SharedControls\bin\Debug\SharedControls.dll.config
+C:\Repos\Adventure World\SharedControls\bin\Debug\SharedControls.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\SharedControls.pdb
+C:\Repos\Adventure World\SharedControls\bin\Debug\AdventureLandCore.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\FontAwesome.WPF.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Syncfusion.Shared.WPF.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Syncfusion.Tools.WPF.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\TaskDialog.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\WindowsInput.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\MLDComputing.ObjectBrowser.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Alba.CsConsoleFormat.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Microsoft.Scripting.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\System.Reactive.Core.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Colorful.Console.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\IronPython.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\ReflectionHelper.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\System.ValueTuple.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\System.Reactive.Interfaces.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Microsoft.Dynamic.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\PhilosophicalMonkey.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Repos\Adventure World\SharedControls\bin\Debug\AdventureLandCore.pdb
+C:\Repos\Adventure World\SharedControls\bin\Debug\AdventureLandCore.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\AdventureLandCore.dll.config
+C:\Repos\Adventure World\SharedControls\bin\Debug\FontAwesome.WPF.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\Syncfusion.Shared.WPF.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\Syncfusion.Tools.WPF.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\TaskDialog.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\WindowsInput.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\Xceed.Wpf.Toolkit.pdb
+C:\Repos\Adventure World\SharedControls\bin\Debug\MLDComputing.ObjectBrowser.pdb
+C:\Repos\Adventure World\SharedControls\bin\Debug\Microsoft.Scripting.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\System.Reactive.Core.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\IronPython.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\ReflectionHelper.pdb
+C:\Repos\Adventure World\SharedControls\bin\Debug\System.Reactive.Interfaces.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\Microsoft.Dynamic.xml
+C:\Repos\Adventure World\SharedControls\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.csprojAssemblyReference.cache
+C:\Repos\Adventure World\SharedControls\obj\Debug\CollectionEditor.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\MultiTextEditor.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\AltGroupBox.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\button.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\Expander.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\GroupBox.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\ScrollBar.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\Shared.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\slider.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\Resources\Styles\ToolBar.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\TextView.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\CollectionEditor.g.cs
+C:\Repos\Adventure World\SharedControls\obj\Debug\MultiTextEditor.g.cs
+C:\Repos\Adventure World\SharedControls\obj\Debug\TextView.g.cs
+C:\Repos\Adventure World\SharedControls\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls_MarkupCompile.cache
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls_MarkupCompile.lref
+C:\Repos\Adventure World\SharedControls\obj\Debug\Shared.baml
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.g.resources
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.Properties.Resources.resources
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.csproj.GenerateResource.cache
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.csproj.CoreCompileInputs.cache
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.csproj.CopyComplete
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.dll
+C:\Repos\Adventure World\SharedControls\obj\Debug\SharedControls.pdb
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\SharedControls.dll.config
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\SharedControls.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\SharedControls.pdb
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\AdventureLandCore.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\FontAwesome.WPF.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Syncfusion.Shared.WPF.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Syncfusion.Tools.WPF.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\TaskDialog.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\WindowsInput.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\MLDComputing.ObjectBrowser.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Alba.CsConsoleFormat.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Microsoft.Scripting.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\System.Reactive.Core.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Colorful.Console.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\IronPython.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\ReflectionHelper.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\System.ValueTuple.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\System.Reactive.Interfaces.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\PhilosophicalMonkey.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\AdventureLandCore.pdb
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\AdventureLandCore.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\AdventureLandCore.dll.config
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\FontAwesome.WPF.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Syncfusion.Shared.WPF.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Syncfusion.Tools.WPF.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\TaskDialog.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\WindowsInput.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Xceed.Wpf.Toolkit.pdb
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\MLDComputing.ObjectBrowser.pdb
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Microsoft.Scripting.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\System.Reactive.Core.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\IronPython.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\ReflectionHelper.pdb
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\System.Reactive.Interfaces.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.csprojAssemblyReference.cache
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\CollectionEditor.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\MultiTextEditor.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\AltGroupBox.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\button.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\Expander.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\GroupBox.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\ScrollBar.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\Shared.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\slider.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Resources\Styles\ToolBar.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\TextView.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\CollectionEditor.g.cs
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\MultiTextEditor.g.cs
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\TextView.g.cs
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls_MarkupCompile.cache
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls_MarkupCompile.lref
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\Shared.baml
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.g.resources
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.Properties.Resources.resources
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.csproj.GenerateResource.cache
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.csproj.CoreCompileInputs.cache
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.csproj.CopyComplete
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.dll
+C:\Users\dunnm\OneDrive\Documents\GitHub\AdventureWorld\SharedControls\obj\Debug\SharedControls.pdb
